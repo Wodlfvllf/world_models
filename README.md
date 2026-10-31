@@ -4,6 +4,8 @@
 
 ## Run on your Linux GPU VM
 
+For notebook-managed Google Drive snapshots, see [BACKUP.md](BACKUP.md).
+
 Copy this project **without** the local virtual environment. From the project directory:
 
 ```bash
