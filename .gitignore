@@ -1,0 +1,13 @@
+.venv/
+.bootstrap-venv/
+.bootstrap-cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+cache/
+data/
+runs/
+build/
+dist/
+.DS_Store

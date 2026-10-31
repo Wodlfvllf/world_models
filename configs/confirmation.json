@@ -1,0 +1,17 @@
+{
+  "name": "draft-confirmation-review-before-lock",
+  "counts": {"editor": 2000, "scorer": 600, "validation": 256, "pilot": 128, "confirmation": 400},
+  "horizon": 8,
+  "candidates": 8,
+  "horizons": [1, 4, 8],
+  "scales": [32, 32, 32, 32, 0.25, 0.25],
+  "editors": ["inverse", "ridge", "mlp", "rollout"],
+  "rank": 8,
+  "steps": 200,
+  "batch_size": 4,
+  "seed": 0,
+  "bootstrap_resamples": 5000,
+  "native_margin": 0.05,
+  "readout_margin": 0.05,
+  "regret_margin": 0.02
+}

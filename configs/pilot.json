@@ -1,0 +1,17 @@
+{
+  "name": "exploratory-pilot",
+  "counts": {"editor": 256, "scorer": 128, "validation": 64, "pilot": 128, "confirmation": 0},
+  "horizon": 8,
+  "candidates": 8,
+  "horizons": [1, 4, 8],
+  "scales": [32, 32, 32, 32, 0.25, 0.25],
+  "editors": ["inverse", "ridge", "mlp", "rollout"],
+  "rank": 8,
+  "steps": 200,
+  "batch_size": 4,
+  "seed": 0,
+  "bootstrap_resamples": 5000,
+  "native_margin": 0.05,
+  "readout_margin": 0.05,
+  "regret_margin": 0.02
+}

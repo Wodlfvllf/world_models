@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "End-to-end real model verification",
+			"type": "shell",
+			"command": "bash scripts/run_experiment.sh --device cpu --output runs/smoke-$(date +%Y%m%d-%H%M%S) --trust-checkpoint",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Unit and real artifact tests",
+			"type": "shell",
+			"command": "OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 WM_AUDIT_MODEL_CACHE=\"$PWD/cache\" WM_AUDIT_POINT_ROOT=\"$PWD/cache/sources/point/stable-worldmodel\" WM_AUDIT_TRUST_DINOWM=1 .venv/bin/python -m pytest -q --junitxml=runs/verification-tests.xml",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}
