@@ -106,7 +106,7 @@ class Workflow:
     def _run(self, argv):
         self.commands.append(argv)
         self._write_plan()
-        env = dict(os.environ, PYTHONUNBUFFERED="1", WM_AUDIT_PROGRESS="1",
+        env = dict(os.environ, PYTHONUNBUFFERED="1", PYTHONDONTWRITEBYTECODE="1", WM_AUDIT_PROGRESS="1",
                    OMP_NUM_THREADS="4", MKL_NUM_THREADS="4")
         lines = queue.Queue()
         begin = time.monotonic()

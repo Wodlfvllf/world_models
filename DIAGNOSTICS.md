@@ -66,6 +66,14 @@ the fixed config seed. Windows never cross episode boundaries or use terminal
 NaN actions. Both models receive the same episode/start selection. No learned
 readout or interpretation of unspecified HDF5 state coordinates is used.
 
+The authenticated original H5 has **finite terminal action labels** and some
+relative controls outside the simulator's nominal `[-1,1]` box. Recorded mode
+preserves these controls exactly, normalizes once using the released model
+statistics, and never uses any terminal row as an outgoing transition. No
+clipping, deletion of out-of-box windows, or recomputation of model normalization
+is performed. Partial terminal NaNs/Inf and any nonfinite interior control remain
+errors. Reports include the action schema and out-of-box control counts.
+
 Recorded data is evaluated at **original appearance only**: the recording has no
 validated semantic masks for faithful object/background rerendering. Generated
 paired data supplies the exact color/background comparisons. The released H5 is

@@ -114,6 +114,40 @@ def test_bad_actions_fail_instead_of_truncating_or_filling(h5_path, row, value, 
         dataset_info(h5_path, chunk_rows=4)
 
 
+def test_recorded_schema_preserves_finite_terminal_and_unclipped_controls(h5_path):
+    import h5py
+
+    with h5py.File(h5_path, "r+") as f:
+        f["action"][0] = (2.0426698, -1.4947076)
+        f["action"][15] = (9.0, -9.0)  # Must never enter an outgoing window.
+        f["action"][33] = (0.05, -0.04)
+        raw = f["action"][:]
+    info = dataset_info(h5_path, action_schema="recorded", chunk_rows=3)
+    stats = info["action_stats"]
+    assert stats["terminal_rows_finite"] == 2 and stats["terminal_rows_excluded"] == 0
+    assert stats["count"] == len(raw) and stats["nonterminal_rows_outside_unit_box"] == 1
+    np.testing.assert_allclose(stats["action_mean"], raw.astype(np.float64).mean(0), atol=1e-14)
+    np.testing.assert_allclose(stats["action_std"], raw.astype(np.float64).std(0), atol=1e-14)
+    with H5Windows(h5_path, horizon=1, action_schema="recorded") as windows:
+        np.testing.assert_array_equal(windows.window(0)["actions"].reshape(-1, 2), raw[:15])
+        np.testing.assert_array_equal(windows.episode(0)["actions"], raw[:15])
+        assert windows.window(0)["actions"].max() < 9
+    with pytest.raises(ValueError, match="terminal|native"):
+        dataset_info(h5_path)  # Strict generated-data defaults are not weakened.
+
+
+@pytest.mark.parametrize("row,value", [(15, [np.nan, 0]), (33, [np.inf, 0]), (7, [np.nan, np.nan]), (4, [np.inf, 0])])
+def test_recorded_schema_still_rejects_invalid_actions(h5_path, row, value):
+    import h5py
+
+    with h5py.File(h5_path, "r+") as f:
+        f["action"][row] = value
+    with pytest.raises(ValueError, match="terminal|Nonterminal"):
+        dataset_info(h5_path, action_schema="recorded")
+    with pytest.raises(ValueError, match="action_schema"):
+        dataset_info(h5_path, action_schema="guess")
+
+
 @pytest.mark.parametrize("column,values", [
     ("ep_offset", [1, 16]), ("ep_offset", [0, 15]), ("ep_offset", [0, 17]),
     ("ep_len", [16, 17]), ("ep_len", [16, 19]), ("ep_len", [0, 34]),
@@ -351,6 +385,51 @@ def test_extractors_refuse_destination_symlinks(tmp_path):
         with pytest.raises(FileExistsError):
             extract(tmp_path / "not-even-read.zst", target)
     assert not (tmp_path / "absent").exists()
+
+
+def test_recorded_h5_eight_mib_window_is_supported(h5_path, tmp_path):
+    import zstandard as zstd
+
+    # Match the actual pinned release's 8 MiB window, without a 46 GB fixture.
+    payload = h5_path.read_bytes() + b"\0" * (9 << 20)
+    parameters = zstd.ZstdCompressionParameters.from_level(1, window_log=23, write_checksum=1)
+    compressed = zstd.ZstdCompressor(compression_params=parameters).compress(payload)
+    assert zstd.get_frame_parameters(compressed).window_size == 8 << 20
+    archive = tmp_path / "recorded.h5.zst"
+    archive.write_bytes(compressed)
+    destination = tmp_path / "restored.h5"
+    record = artifacts.extract_h5_zst(archive, destination)
+    assert record == {"sha256": _sha(payload), "size_bytes": len(payload)}
+    assert dataset_info(destination)["episodes"] == 2
+
+
+def test_tar_window_larger_than_128_kib_is_supported(tmp_path):
+    import zstandard as zstd
+
+    payload = b"x" * (9 << 20)
+    archive = _tar_zst(tmp_path / "larger.tar.zst", [("data", tarfile.REGTYPE, payload)])
+    assert zstd.get_frame_parameters(archive.read_bytes()).window_size > 128 << 10
+    result = artifacts.safe_extract_tar_zst(archive, tmp_path / "out")
+    assert result["files"]["data"] == {"sha256": _sha(payload), "size_bytes": len(payload)}
+
+
+def test_zstd_window_remains_bounded_and_unpublished(tmp_path):
+    import zstandard as zstd
+
+    # Valid Zstandard header with a 256 MiB window and an empty final block.
+    # No large allocation or fixture is needed to exercise the rejection path.
+    compressed = bytes.fromhex("28 b5 2f fd 00 90 01 00 00")
+    assert zstd.get_frame_parameters(compressed).window_size == 256 << 20
+    archive = tmp_path / "oversized.zst"
+    archive.write_bytes(compressed)
+    with pytest.raises(artifacts.ArtifactError, match="window memory limit"):
+        artifacts.extract_h5_zst(archive, tmp_path / "blocked.h5")
+    assert not (tmp_path / "blocked.h5").exists()
+    assert not list(tmp_path.glob(".h5-*"))
+    with pytest.raises(zstd.ZstdError, match="too much memory"):
+        artifacts.safe_extract_tar_zst(archive, tmp_path / "blocked-tar")
+    assert not (tmp_path / "blocked-tar").exists()
+    assert not list(tmp_path.glob(".extract-*"))
 
 
 def _git(root, *args):

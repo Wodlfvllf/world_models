@@ -362,7 +362,9 @@ class WorldModelAdapter(nn.Module):
             raise ValueError(f"{label} must be finite.")
         return value
 
-    def _rollout_inputs(self, history, actions) -> tuple[torch.Tensor, torch.Tensor]:
+    def _rollout_inputs(self, history, actions, *, recorded_actions: bool = False) -> tuple[torch.Tensor, torch.Tensor]:
+        if type(recorded_actions) is not bool:
+            raise TypeError("recorded_actions must be an explicit boolean.")
         history = self._latent(history, "history", history=True)
         if isinstance(actions, np.ndarray):
             if actions.dtype.kind not in "fiu":
@@ -375,8 +377,11 @@ class WorldModelAdapter(nn.Module):
                 or actions.shape[1] < 3 or actions.shape[2] != 10):
             raise ValueError("actions must have shape [N,2+H,10], with H >= 1 and matching N.")
         actions = actions.to(device=self.device, dtype=torch.float32)
-        if not torch.isfinite(actions).all() or (actions.abs() > 1).any():
-            raise ValueError("actions must be finite native relative XY controls in [-1,1], NOT z-scored.")
+        if not torch.isfinite(actions).all():
+            raise ValueError("actions must be finite raw relative XY controls, NOT z-scored.")
+        if not recorded_actions and (actions.abs() > 1).any():
+            raise ValueError("actions must be native relative XY controls in [-1,1], NOT z-scored. "
+                             "Use recorded_actions=True only for unclipped recorded demonstrations.")
         return history, (actions - self.action_mean) / self.action_std
 
     def goal_cost(self, pred: torch.Tensor, goal: torch.Tensor) -> torch.Tensor:
@@ -399,8 +404,9 @@ class LeWMAdapter(WorldModelAdapter):
         image = self._pixels(pixels, (0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
         return self.model.encode({"pixels": image})["emb"]
 
-    def rollout(self, history: torch.Tensor, actions: torch.Tensor | np.ndarray) -> torch.Tensor:
-        history, actions = self._rollout_inputs(history, actions)
+    def rollout(self, history: torch.Tensor, actions: torch.Tensor | np.ndarray, *,
+                recorded_actions: bool = False) -> torch.Tensor:
+        history, actions = self._rollout_inputs(history, actions, recorded_actions=recorded_actions)
         predictions = []
         for step in range(actions.shape[1] - 2):
             # Match JEPA's growing action prefix, then truncate BOTH streams to 3.
@@ -426,8 +432,9 @@ class DinoWMAdapter(WorldModelAdapter):
     def _tile(value: torch.Tensor, repeats: int) -> torch.Tensor:
         return value.unsqueeze(2).expand(-1, -1, 196, -1).repeat(1, 1, 1, repeats)
 
-    def rollout(self, history: torch.Tensor, actions: torch.Tensor | np.ndarray) -> torch.Tensor:
-        history, actions = self._rollout_inputs(history, actions)
+    def rollout(self, history: torch.Tensor, actions: torch.Tensor | np.ndarray, *,
+                recorded_actions: bool = False) -> torch.Tensor:
+        history, actions = self._rollout_inputs(history, actions, recorded_actions=recorded_actions)
         wm = self.model
         prop = wm.encode_proprio(history.new_zeros(history.shape[0], 3, 1))
         z = torch.cat((history, self._tile(prop, wm.num_proprio_repeat),

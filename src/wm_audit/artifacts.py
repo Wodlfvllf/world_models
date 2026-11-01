@@ -42,6 +42,9 @@ DATASET_SHA256 = "7cfbd6d90fa2f27876379a5ff169715a36ed82edbda64f9e5b5bfa34d212f3
 DATASET_SIZE = 13_136_247_974
 DATASET_URL = f"https://huggingface.co/datasets/{DATASET_REPO}/resolve/{DATASET_REVISION}/{DATASET_ARCHIVE}"
 _MAX_EXTRACTED_BYTES = 64 << 30
+# python-zstandard 0.25's decoder bound is in bytes. 128 << 10 was only
+# 128 KiB and rejected the pinned PushT frame's 8 MiB history window.
+_MAX_ZSTD_WINDOW_BYTES = 128 << 20
 _BUFFER = 1 << 20
 _H5_MAGIC = b"\x89HDF\r\n\x1a\n"
 
@@ -202,7 +205,7 @@ def safe_extract_tar_zst(archive: str | Path, destination: str | Path, *,
         stage = Path(temporary) / "content"
         stage.mkdir()
         with Path(archive).open("rb") as compressed:
-            with zstd.ZstdDecompressor(max_window_size=128 << 10).stream_reader(compressed, read_across_frames=True) as stream:
+            with zstd.ZstdDecompressor(max_window_size=_MAX_ZSTD_WINDOW_BYTES).stream_reader(compressed, read_across_frames=True) as stream:
                 reader = _BudgetReader(stream, max_bytes + (max_members + 1) * 10240)
                 with tarfile.open(fileobj=reader, mode="r|") as bundle:
                     for member in bundle:
@@ -260,13 +263,15 @@ def extract_h5_zst(archive: str | Path, destination: str | Path, *,
     try:
         with os.fdopen(fd, "wb") as output, Path(archive).open("rb") as compressed:
             parameters = zstd.get_frame_parameters(compressed.read(18))
+            if parameters.window_size > _MAX_ZSTD_WINDOW_BYTES:
+                raise ArtifactError("HDF5 frame exceeds the configured Zstandard window memory limit.")
             expected = parameters.content_size
             if expected in (zstd.CONTENTSIZE_UNKNOWN, zstd.CONTENTSIZE_ERROR):
                 expected = None
             if expected is not None and expected > max_bytes:
                 raise ArtifactError("HDF5 frame exceeds the configured byte limit.")
             compressed.seek(0)
-            with zstd.ZstdDecompressor(max_window_size=128 << 10).stream_reader(compressed, read_across_frames=True) as source:
+            with zstd.ZstdDecompressor(max_window_size=_MAX_ZSTD_WINDOW_BYTES).stream_reader(compressed, read_across_frames=True) as source:
                 record = _copy_stream(source, output, max_bytes, expected=expected)
         with temporary.open("rb") as stream:
             if stream.read(8) != _H5_MAGIC:
@@ -282,7 +287,7 @@ def extract_h5_zst(archive: str | Path, destination: str | Path, *,
 def _dataset_summary(path: Path) -> dict[str, Any]:
     from .offline_data import dataset_info
 
-    info = dataset_info(path)
+    info = dataset_info(path, action_schema="recorded")
     return {"rows": info["rows"], "episodes": info["episodes"], "image_shape": info["image_shape"],
             "action_stats": {key: value for key, value in info["action_stats"].items() if key != "source"}}
 

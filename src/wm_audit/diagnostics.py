@@ -297,15 +297,16 @@ def _finish(output, kind, config, model_metadata, input_hashes, **results):
 
 
 @torch.no_grad()
-def _prediction_rows(model, history, actual, actions, horizons, identity, appearance, branch, candidate):
+def _prediction_rows(model, history, actual, actions, horizons, identity, appearance, branch, candidate,
+                     *, recorded_actions=False):
     """Only future controls are zeroed; the two observed-history chunks stay intact."""
     shape = tuple(model.latent_shape)
     actions = np.asarray(actions, dtype=np.float32)
     zero = actions.copy()
     zero[2:] = 0
-    outputs = {"native": _rollout(model, history[None], actions[None], shape)[0],
+    outputs = {"native": _rollout(model, history[None], actions[None], shape, recorded_actions=recorded_actions)[0],
                "persistence": history[-1:].expand(len(actions) - 2, *shape),
-               "zero_future_actions": _rollout(model, history[None], zero[None], shape)[0]}
+               "zero_future_actions": _rollout(model, history[None], zero[None], shape, recorded_actions=recorded_actions)[0]}
     rows = []
     for index, horizon in enumerate(horizons):
         target = actual[index]
@@ -313,7 +314,9 @@ def _prediction_rows(model, history, actual, actions, horizons, identity, appear
         if not all(math.isfinite(value) for value in errors.values()):
             raise ValueError("Nonfinite prediction error; cannot omit this sample")
         rows.append({"cluster": identity, "appearance": appearance, "branch": branch, "candidate": candidate,
-                     "horizon": horizon, **errors})
+                     "horizon": horizon, **errors,
+                     "raw_action_min": float(actions.min()), "raw_action_max": float(actions.max()),
+                     "raw_controls_outside_unit_box": int((np.abs(actions.reshape(-1, 2)) > 1).any(axis=1).sum())})
     return rows
 
 
@@ -341,7 +344,7 @@ def prediction_diagnostic(config, output, model, *, data=None, h5=None, episodes
     config = _configuration(config)
     shape, device, metadata = _model_spec(model)
     output = _new_output(output)
-    rows, input_hashes, selection = [], {}, []
+    rows, input_hashes, selection, recorded_info = [], {}, [], None
     steps = np.asarray(config["horizons"]) - 1
     with _frozen(model):
         if data is not None:
@@ -364,7 +367,8 @@ def prediction_diagnostic(config, output, model, *, data=None, h5=None, episodes
             with stage("hash recorded H5 (CPU/disk; no model training)"):
                 input_hashes[str(h5)] = digest(h5)
             with stage("validate recorded H5 schema and action boundaries"):
-                windows = H5Windows(h5, horizon=config["horizon"])
+                windows = H5Windows(h5, horizon=config["horizon"], action_schema="recorded")
+                recorded_info = windows.info
             with windows:
                 eligible = np.flatnonzero(windows.ep_len > windows.span)
                 if len(eligible) < episodes:
@@ -379,7 +383,7 @@ def prediction_diagnostic(config, output, model, *, data=None, h5=None, episodes
                     history = _encode(model, window["context"], shape, config["batch_size"])
                     actual = _encode(model, window["future"][steps], shape, config["batch_size"])
                     rows.extend(_prediction_rows(model, history, actual, window["actions"], config["horizons"],
-                                                 str(item["episode"]), "original", 0, 0))
+                                                 str(item["episode"]), "original", 0, 0, recorded_actions=True))
             if stamp != (h5.stat().st_size, h5.stat().st_mtime_ns):
                 raise ValueError("Recorded H5 changed during diagnostics")
             source = "recorded_h5_original_only"
@@ -387,10 +391,11 @@ def prediction_diagnostic(config, output, model, *, data=None, h5=None, episodes
         from .diagnostic_plots import prediction_plots
         prediction_plots(output, summary)
     return _finish(output, "frozen_prediction", config, metadata, input_hashes,
-                   source=source, records=rows, summary=summary, windows=selection,
+                   source=source, records=rows, summary=summary, windows=selection, recorded_h5_info=recorded_info,
                    protocol={"metric": "MSE over latent coordinates, within-model only",
                              "controls": "persistence and zero FUTURE native XY actions; original two prefix chunks preserved",
                              "normalization": "raw actions passed to adapter, normalized once by released stats",
+                             "recorded_actions": "Finite recorded controls are preserved even outside [-1,1]; no clipping or window exclusion. Terminal rows never become outgoing transitions.",
                              "sampling": "all generated pilot roots/branches/candidates or one metadata-selected window per recorded episode",
                              "uncertainty": "equal-weight root/episode bootstrap, paired contrasts; negative native-minus-control is better",
                              "recorded_limit": "Original appearance only; no semantic masks for faithful rerendering. Available release is pretraining data, not held-out world-model generalization.",

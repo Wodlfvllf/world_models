@@ -184,12 +184,14 @@ class SyntheticAdapter(nn.Module):
             z = z + torch.arange(count, device=self.device).reshape(1, 1, count, 1) * 0.001
         return z
 
-    def rollout(self, history, actions):
+    def rollout(self, history, actions, *, recorded_actions=False):
         assert actions.shape == (len(history), actions.shape[1], 10) and actions.shape[1] > 2
-        assert actions.abs().max() <= 1
+        assert torch.isfinite(actions).all()
+        assert recorded_actions or actions.abs().max() <= 1
         self.rollout_calls.append({"history": history.detach().cpu().clone(), "actions": actions.detach().cpu().clone(),
                                    "grad_enabled": torch.is_grad_enabled(), "requires_grad": history.requires_grad,
-                                   "frozen": not self.gain.requires_grad, "training": self.training})
+                                   "frozen": not self.gain.requires_grad, "training": self.training,
+                                   "recorded_actions": recorded_actions})
         if history.requires_grad:
             history.register_hook(lambda grad: self.history_gradients.append(float(grad.abs().sum())))
         h = actions.shape[1] - 2

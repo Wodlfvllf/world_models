@@ -159,10 +159,11 @@ def _encode(model, pixels, shape, batch_size):
     return torch.cat(chunks).reshape(*prefix, *shape)
 
 
-def _rollout(model, history, actions, shape):
+def _rollout(model, history, actions, shape, *, recorded_actions=False):
     actions = torch.as_tensor(actions, dtype=torch.float32, device=history.device)
     expected = (len(history), actions.shape[1] - 2, *shape)
-    return _checked_tensor(model.rollout(history, actions), expected, "model.rollout output")
+    kwargs = {"recorded_actions": True} if recorded_actions else {}
+    return _checked_tensor(model.rollout(history, actions, **kwargs), expected, "model.rollout output")
 
 
 def _cost(model, endpoints, goal):

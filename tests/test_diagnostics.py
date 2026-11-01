@@ -152,7 +152,8 @@ def test_prediction_roster_raw_actions_and_prefix(paired, tmp_path):
     assert report["protocol"]["readout_used"] is False
 
 
-def test_recorded_windows_episode_sampling_and_terminal_safety(tmp_path):
+@pytest.mark.parametrize("finite_terminal", [False, True])
+def test_recorded_windows_episode_sampling_and_terminal_safety(tmp_path, finite_terminal):
     import h5py
     config = _config()
     config.update(bootstrap_resamples=20)
@@ -162,7 +163,9 @@ def test_recorded_windows_episode_sampling_and_terminal_safety(tmp_path):
     states[:, :4] = np.arange(len(states))[:, None]
     states[:, 5] = 1
     actions = np.full((len(states), 2), .1, dtype=np.float32)
-    actions[length-1::length] = np.nan
+    if finite_terminal:
+        actions[:, 0] = 1.25
+    actions[length-1::length] = 9 if finite_terminal else np.nan
     with h5py.File(path, "w") as f:
         f["pixels"] = _pixels(states, 0, 0, 0)
         f["action"] = actions
@@ -176,6 +179,11 @@ def test_recorded_windows_episode_sampling_and_terminal_safety(tmp_path):
     assert all(w["start"] + 5*(3+config["horizon"]-1) < length for w in report["windows"])
     assert all(r["appearance"] == "original" for r in report["records"])
     assert all(torch.isfinite(c["actions"]).all() for c in model.rollout_calls)
+    assert all(c["recorded_actions"] for c in model.rollout_calls)
+    if finite_terminal:
+        assert all(c["actions"].max() == 1.25 for c in model.rollout_calls)
+        assert all(r["raw_action_max"] == 1.25 for r in report["records"])
+    assert report["recorded_h5_info"]["action_stats"]["action_schema"] == "recorded"
     with pytest.raises(ValueError, match="only 4"):
         d.prediction_diagnostic(config, tmp_path / "too-many", SyntheticAdapter(), h5=path, episodes=5)
     assert not (tmp_path / "too-many/report.json").exists()

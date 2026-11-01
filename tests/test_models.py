@@ -130,6 +130,27 @@ def test_synthetic_native_actions_use_alternating_xy_stats(synthetic_adapter):
     torch.testing.assert_close(actions.grad, (1 / std).repeat(5).expand_as(actions))
 
 
+def test_recorded_action_opt_in_preserves_values_and_normalizes_once(synthetic_adapter):
+    adapter = synthetic_adapter
+    history = torch.zeros(1, 3, *adapter.latent_shape)
+    actions = torch.linspace(-1.5, 2.05, 40).reshape(1, 4, 10)
+    before = actions.clone()
+    with pytest.raises(ValueError, match="recorded_actions"):
+        adapter.rollout(history, actions)
+    _, normalized = adapter._rollout_inputs(history, actions, recorded_actions=True)
+    torch.testing.assert_close(normalized, (actions - adapter.action_mean) / adapter.action_std)
+    assert torch.isfinite(adapter.rollout(history, actions, recorded_actions=True)).all()
+    torch.testing.assert_close(before, actions, rtol=0, atol=0)
+    bounded = actions.clamp(-1, 1)
+    torch.testing.assert_close(adapter.rollout(history, bounded),
+                               adapter.rollout(history, bounded, recorded_actions=True), rtol=0, atol=0)
+    with pytest.raises(TypeError, match="boolean"):
+        adapter.rollout(history, actions, recorded_actions=1)
+    actions[0, 0, 0] = float("inf")
+    with pytest.raises(ValueError, match="finite"):
+        adapter.rollout(history, actions, recorded_actions=True)
+
+
 @pytest.mark.parametrize("horizon", [1, 2, 5])
 def test_synthetic_lewm_temporal_indexing(horizon):
     adapter = LeWMAdapter(_ToyLeWM(), SYNTHETIC_STATS)
@@ -422,11 +443,14 @@ def _native_actions(cache, actions):
     return ((xy - torch.tensor(stats["action_mean"])) / torch.tensor(stats["action_std"])).flatten(2)
 
 
+@pytest.mark.parametrize("recorded", [False, True])
 @pytest.mark.parametrize("horizon", [1, 3])
-def test_real_lewm_encoder_and_every_rollout_step_match_upstream(real_lewm, real_cache, horizon):
+def test_real_lewm_encoder_and_every_rollout_step_match_upstream(real_lewm, real_cache, horizon, recorded):
     adapter = real_lewm
     pixels = _deterministic_pixels(n=2)
     actions = torch.linspace(-0.65, 0.65, 2 * (horizon + 2) * 10).reshape(2, horizon + 2, 10)
+    if recorded:
+        actions *= 3.2  # Demonstration values outside the simulator action box.
     native_pixels = _native_pixels(pixels, (0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     with torch.no_grad():
         native_z = adapter.model.encode({"pixels": native_pixels})["emb"]
@@ -436,7 +460,7 @@ def test_real_lewm_encoder_and_every_rollout_step_match_upstream(real_lewm, real
         assert not torch.allclose(encoded.flatten(0, 1), raw_cls)
         native = adapter.model.rollout({"pixels": native_pixels[:, None]},
                                        _native_actions(real_cache, actions)[:, None])["predicted_emb"][:, 0, 3:]
-        actual = adapter.rollout(encoded, actions)
+        actual = adapter.rollout(encoded, actions, recorded_actions=recorded)
     assert native.shape == actual.shape == (2, horizon, 192)
     torch.testing.assert_close(actual, native, rtol=1e-6, atol=1e-6)
     goal = native_z[:, -1]
@@ -447,11 +471,14 @@ def test_real_lewm_encoder_and_every_rollout_step_match_upstream(real_lewm, real
     assert adapter.model.encoder.config.intermediate_size == 768
 
 
+@pytest.mark.parametrize("recorded", [False, True])
 @pytest.mark.parametrize("horizon", [1, 3])
-def test_real_dino_encoder_and_every_rollout_step_match_upstream(real_dinowm, real_cache, horizon):
+def test_real_dino_encoder_and_every_rollout_step_match_upstream(real_dinowm, real_cache, horizon, recorded):
     adapter = real_dinowm
     pixels = _deterministic_pixels()
     actions = torch.linspace(-0.7, 0.7, (horizon + 2) * 10).reshape(1, horizon + 2, 10)
+    if recorded:
+        actions *= 3
     image = _native_pixels(pixels, (0.5,) * 3, (0.5,) * 3)
     observation = {"visual": image, "proprio": torch.zeros(1, 3, 1)}
     with torch.no_grad():
@@ -460,7 +487,7 @@ def test_real_dino_encoder_and_every_rollout_step_match_upstream(real_dinowm, re
         encoded = adapter.encode(pixels)
         torch.testing.assert_close(encoded, native_z, rtol=0, atol=0)
         native, _ = adapter.model.rollout(observation, _native_actions(real_cache, actions))
-        actual = adapter.rollout(encoded, actions)
+        actual = adapter.rollout(encoded, actions, recorded_actions=recorded)
     assert actual.shape == (1, horizon, 196, 384)
     assert adapter.model.encoder_image_size == 196
     torch.testing.assert_close(actual, native["visual"][:, 3:], rtol=1e-6, atol=1e-6)

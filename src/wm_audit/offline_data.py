@@ -17,6 +17,11 @@ with primitive ``actions[L-1,2]`` and no terminal NaN in the returned controls.
 Only episode metadata and chunked action statistics are read during indexing.
 Pixels use contiguous window reads, not whole-file loads or slow H5 strides.
 h5py/hdf5plugin are imported lazily; each worker opens its own read-only handle.
+``action_schema='recorded'`` accepts the authenticated LeWM release's finite
+terminal rows and unclipped relative controls outside [-1,1]. It never includes
+a terminal row as an outgoing transition. Population statistics include finite
+terminal rows, matching the released column normalizer; terminal NaNs are skipped.
+The default ``'native'`` keeps the strict bounded-controls/NaN-terminal contract.
 This loader validates the native schema, not camera provenance: use artifacts'
 pinned original archive to establish provenance. Logged state is NOT a complete
 simulator snapshot and must not be used to restore moving counterfactuals.
@@ -76,7 +81,7 @@ def _layout(handle) -> tuple[int, np.ndarray, np.ndarray]:
         raise ValueError("pixels must be original uint8 [N,224,224,3] RGB; no automatic resizing.")
     rows = int(pixels.shape[0])
     if rows < 1 or actions.shape != (rows, 2) or actions.dtype.kind != "f":
-        raise ValueError("action must be floating [N,2] with N > 0 and terminal NaNs.")
+        raise ValueError("action must be floating [N,2] with N > 0.")
     offsets, lengths = _column(handle, "ep_offset"), _column(handle, "ep_len")
     if (offsets.ndim != 1 or lengths.ndim != 1 or offsets.shape != lengths.shape
             or not len(lengths) or offsets.dtype.kind not in "iu" or lengths.dtype.kind not in "iu"):
@@ -99,10 +104,12 @@ def _layout(handle) -> tuple[int, np.ndarray, np.ndarray]:
     return rows, offsets.astype(np.int64), lengths.astype(np.int64)
 
 
-def _scan_actions(handle, offsets: np.ndarray, lengths: np.ndarray, chunk_rows: int) -> dict[str, Any]:
+def _scan_actions(handle, offsets: np.ndarray, lengths: np.ndarray, chunk_rows: int,
+                  action_schema: str = "native") -> dict[str, Any]:
     column = handle["action"]
     terminals = offsets + lengths - 1
     count = 0
+    terminal_nan_rows, terminal_finite_rows, outside_rows = 0, 0, 0
     mean, m2 = np.zeros(2, dtype=np.float64), np.zeros(2, dtype=np.float64)
     minimum, maximum = np.full(2, np.inf), np.full(2, -np.inf)
     for lo in range(0, len(column), chunk_rows):
@@ -111,13 +118,24 @@ def _scan_actions(handle, offsets: np.ndarray, lengths: np.ndarray, chunk_rows: 
         terminal_mask = np.zeros(hi - lo, dtype=bool)
         left, right = np.searchsorted(terminals, (lo, hi))
         terminal_mask[terminals[left:right] - lo] = True
-        if not np.isnan(block[terminal_mask]).all():
+        last = block[terminal_mask]
+        terminal_nan = np.isnan(last).all(axis=1)
+        terminal_finite = np.isfinite(last).all(axis=1)
+        if action_schema == "native" and not terminal_nan.all():
             raise ValueError("Every episode's terminal action must be exactly two NaNs (no outgoing control).")
-        values = block[~terminal_mask]
-        if not np.isfinite(values).all():
+        if not (terminal_nan | terminal_finite).all():
+            raise ValueError("Recorded terminal actions must be either two finite values or two NaNs; no partial NaN/Inf.")
+        nonterminal = block[~terminal_mask]
+        if not np.isfinite(nonterminal).all():
             raise ValueError("Nonterminal actions must be finite: interior NaNs/Inf cannot be dropped or zero-filled.")
-        if np.any(np.abs(values) > 1):
+        if action_schema == "native" and np.any(np.abs(nonterminal) > 1):
             raise ValueError("Expected raw native relative XY actions in [-1,1], not z-scored/absolute actions.")
+        terminal_nan_rows += int(terminal_nan.sum())
+        terminal_finite_rows += int(terminal_finite.sum())
+        outside_rows += int((np.abs(nonterminal) > 1).any(axis=1).sum())
+        # Recorded finite terminal labels participate in column statistics only,
+        # never in H5Windows' outgoing controls. No interior row is dropped.
+        values = block[~(terminal_mask & np.isnan(block).all(axis=1))]
         size = len(values)
         if not size:
             continue
@@ -138,22 +156,28 @@ def _scan_actions(handle, offsets: np.ndarray, lengths: np.ndarray, chunk_rows: 
         "action_key": "action", "action_mean": mean.tolist(), "action_std": scale.tolist(),
         "action_population_std": population_std.tolist(), "action_min": minimum.tolist(),
         "action_max": maximum.tolist(), "count": count, "ddof": 0,
-        "terminal_rows_excluded": len(terminals),
+        "terminal_rows_excluded": terminal_nan_rows,
+        "terminal_rows_finite": terminal_finite_rows,
+        "nonterminal_rows_outside_unit_box": outside_rows,
+        "action_schema": action_schema,
     }
 
 
-def dataset_info(path: str | Path, *, chunk_rows: int = _CHUNK_ROWS) -> dict[str, Any]:
+def dataset_info(path: str | Path, *, chunk_rows: int = _CHUNK_ROWS,
+                 action_schema: str = "native") -> dict[str, Any]:
     """JSON-serializable native schema, episode boundaries, and full-file stats.
 
     Scan actions, NOT pixels. Reject any malformed episode/terminal action;
     never silently shorten an episode, remove interior NaNs, or cross boundaries.
     """
     chunk_rows = _integer(chunk_rows, "chunk_rows", 1)
+    if action_schema not in ("native", "recorded"):
+        raise ValueError("action_schema must be 'native' or 'recorded'.")
     path = Path(path).expanduser().resolve(strict=True)
     before = _fingerprint(path)
     with _h5py().File(path, "r") as handle:
         rows, offsets, lengths = _layout(handle)
-        stats = _scan_actions(handle, offsets, lengths, chunk_rows)
+        stats = _scan_actions(handle, offsets, lengths, chunk_rows, action_schema)
         stats["source"] = str(path)
         result = {
             "schema": "wm_audit.pusht.h5.v1", "path": str(path), "size_bytes": before[2],
@@ -167,9 +191,10 @@ def dataset_info(path: str | Path, *, chunk_rows: int = _CHUNK_ROWS) -> dict[str
     return result
 
 
-def compute_action_stats(path: str | Path, *, chunk_rows: int = _CHUNK_ROWS) -> dict[str, Any]:
+def compute_action_stats(path: str | Path, *, chunk_rows: int = _CHUNK_ROWS,
+                         action_schema: str = "native") -> dict[str, Any]:
     """Finite full-file population statistics; only validated terminal NaNs are excluded."""
-    return dataset_info(path, chunk_rows=chunk_rows)["action_stats"]
+    return dataset_info(path, chunk_rows=chunk_rows, action_schema=action_schema)["action_stats"]
 
 
 class H5Windows(Sequence):
@@ -183,7 +208,7 @@ class H5Windows(Sequence):
 
     def __init__(self, path: str | Path, horizon: int = 8, *, episodes=None, stride: int = 1,
                  normalize_actions: bool = False, stats: Mapping[str, Any] | None = None,
-                 context: int = CONTEXT, frameskip: int = FRAMESKIP):
+                 context: int = CONTEXT, frameskip: int = FRAMESKIP, action_schema: str = "native"):
         self.horizon = _integer(horizon, "horizon", 1)
         self.context = _integer(context, "context", 1)
         self.frameskip = _integer(frameskip, "frameskip", 1)
@@ -194,7 +219,8 @@ class H5Windows(Sequence):
             raise ValueError("normalize_actions must be a boolean.")
         self.normalize_actions = normalize_actions
         self.path = Path(path).expanduser().resolve(strict=True)
-        self.info = dataset_info(self.path)
+        self.info = dataset_info(self.path, action_schema=action_schema)
+        self.action_schema = action_schema
         self._identity = _fingerprint(self.path)
         self.ep_offset = np.asarray(self.info["episode_offsets"], dtype=np.int64)
         self.ep_len = np.asarray(self.info["episode_lengths"], dtype=np.int64)
@@ -271,7 +297,7 @@ class H5Windows(Sequence):
         hi = lo + self.span
         pixels = np.ascontiguousarray(handle["pixels"][lo:hi + 1][::self.frameskip])
         actions = np.asarray(handle["action"][lo:hi], dtype=np.float32)
-        if not np.isfinite(actions).all() or np.any(np.abs(actions) > 1):
+        if not np.isfinite(actions).all() or (self.action_schema == "native" and np.any(np.abs(actions) > 1)):
             raise ValueError("Window contains invalid native actions; data changed after indexing.")
         result = {
             "pixels": pixels, "context": pixels[:self.context], "future": pixels[self.context:],
