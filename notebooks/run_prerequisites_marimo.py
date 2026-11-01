@@ -77,7 +77,7 @@ def deploy(EXECUTE, PROJECT, SOURCE_ZIP, mo):
         import subprocess
 
         _repo = "https://github.com/Wodlfvllf/world_models.git"
-        _commit = "275cdadd8130178112c607649b4dcf471637871b"
+        _commit = "864974efee26a5d09edf24d67f9e8aa3ed4f30b3"
         if PROJECT.is_symlink():
             raise FileExistsError("PROJECT must not be a symlink")
         if not PROJECT.exists():

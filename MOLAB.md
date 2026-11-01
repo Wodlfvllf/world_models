@@ -4,9 +4,12 @@
 
 Open/import the latest `notebooks/run_prerequisites_marimo.py` from GitHub in
 your **GPU Molab session**. Leave `SOURCE_ZIP=None`: the notebook fetches the
-published commit `275cdadd8130178112c607649b4dcf471637871b` and verifies the checkout.
+published commit `864974efee26a5d09edf24d67f9e8aa3ed4f30b3` and verifies the checkout.
 **No source ZIP or receipt upload is needed.** The source is intentionally pinned
 rather than silently following changes to main.
+This pin includes the real recorded-data action schema and bounded Zstandard
+decoder fix, validated during the 2026-11-01 Molab run. Existing checkouts at an
+older pin must be preserved; use a new project directory instead of resetting them.
 
 Optional offline mode: set `SOURCE_ZIP` to an uploaded source bundle and upload
 its matching `.zip.sha256` receipt beside it. A missing receipt is an error,

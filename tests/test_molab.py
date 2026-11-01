@@ -81,7 +81,7 @@ def test_missing_receipt_has_actionable_error(tmp_path, format):
 @pytest.mark.parametrize("format", ["json", "marimo"])
 def test_git_deployment_pinned_and_non_destructive(tmp_path, monkeypatch, format):
     project = tmp_path / "remote"
-    pinned = "275cdadd8130178112c607649b4dcf471637871b"
+    pinned = "864974efee26a5d09edf24d67f9e8aa3ed4f30b3"
     commands = []
     def fake_run(argv, **kwargs):
         commands.append(argv)
