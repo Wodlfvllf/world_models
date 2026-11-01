@@ -58,6 +58,7 @@ import math
 import os
 from pathlib import Path
 import tempfile
+from .progress import progress
 from typing import Any
 
 import numpy as np
@@ -669,7 +670,7 @@ def generate_splits(output_dir: str | Path, *, counts: Mapping[str, int] = DEFAU
         return roster
     simulator = simulator or PushTSimulator()
     for split in SPLITS:
-        for index, path in enumerate(roster[split]):
+        for index, path in enumerate(progress(roster[split], desc=f"Generate {split} (CPU)", unit="root")):
             root = generate_root(split_seed=seeds[split], root_index=index, split=split,
                                  config=config, simulator=simulator)
             if qualify:

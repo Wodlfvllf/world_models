@@ -26,6 +26,8 @@ dependencies = [
     "hdf5plugin==6.0.0",
     "zstandard==0.25.0",
     "huggingface-hub==0.36.2",
+    "tqdm==4.67.1",
+    "matplotlib==3.10.7",
 ]
 
 [project.optional-dependencies]

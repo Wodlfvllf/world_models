@@ -68,6 +68,12 @@ active states. `stop()` takes effect after any current backup finishes.
 
 ## What is protected
 
+- Completed prerequisite diagnostics under each model's `readout`,
+  `prediction-paired`, and `prediction-recorded` directories: the final report,
+  hash-listed plots, selection/window metadata, readout checkpoint and scatter
+  arrays. A diagnostic without its final report is incomplete and is excluded.
+  This requires the updated helper in a new notebook backup session; an existing
+  worker does not reload changed Python source automatically.
 - All run directories under the project's runs directory.
 - Completed, atomically published root NPZ archives, **even when generation was
   interrupted before the final split manifest**. ZIP CRC is checked; this is not

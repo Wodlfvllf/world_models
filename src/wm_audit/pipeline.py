@@ -44,6 +44,7 @@ from torch import nn
 from .data import load_root, validate_split_disjointness
 from .fitting import PhysicalReadout, fit_editor, load_editor, matched_random, save_editor
 from .statistics import APPEARANCES, candidate_regret, circular_error_deg, physical_effect_loss
+from .progress import note, progress, stage
 
 
 __all__ = ["fit", "evaluate"]
@@ -203,7 +204,7 @@ def _scan(roster, config):
 
     def roots():
         for split, paths in roster.items():
-            for path in paths:
+            for path in progress(paths, desc=f"Validate {split} archives (CPU)", unit="root"):
                 root = _root(path, split, config)
                 identities[split].append(_identity(root))
                 yield root
@@ -298,7 +299,8 @@ def _fit_scorer(paths, identities, config, model, shape):
         surfaces[cursor:cursor + count] = surface
         cursor += count
 
-    for path, identity in zip(paths, identities):
+    for path, identity in progress(zip(paths, identities), total=len(paths),
+                                   desc="Extract physical readout features", unit="root"):
         root = _root(path, "scorer", config)
         if _identity(root) != identity:
             raise ValueError("Scorer root identity changed after validation.")
@@ -317,7 +319,8 @@ def _fit_scorer(paths, identities, config, model, shape):
             del actual
     if cursor != len(features):
         raise RuntimeError("Incomplete physical scorer feature roster.")
-    scorer.fit_features(features, labels)
+    with stage("fit physical readout ridge (CPU)"):
+        scorer.fit_features(features, labels)
     predicted = (((features - scorer.input_mean) / scorer.input_std) @ scorer.weight + scorer.bias) * scorer.output_scale
     predicted, actual = predicted.double().numpy(), labels.numpy()
     scales = np.asarray(config["scales"], dtype=np.float64)
@@ -361,7 +364,9 @@ def fit(config: dict, data_dir: Path, run_dir: Path, model, *, seed=0) -> dict:
     logs = {}
     with _frozen(model):
         with torch.no_grad():
-            for index, (path, identity) in enumerate(zip(roster["editor"], identities["editor"])):
+            for index, (path, identity) in enumerate(progress(
+                    zip(roster["editor"], identities["editor"]), total=n,
+                    desc=f"Encode editor pairs on {device}", unit="root")):
                 root = _root(path, "editor", config)
                 if _identity(root) != identity:
                     raise ValueError("Editor root identity changed after validation.")
@@ -380,6 +385,7 @@ def fit(config: dict, data_dir: Path, run_dir: Path, model, *, seed=0) -> dict:
         options = {key: config[key] for key in ("lr", "basis_samples", "context_dim", "hidden_dim", "ridge", "rollout_weight")
                    if key in config}
         for name in config["editors"]:
+            note(f"Fit editor {name}: CPU basis/linear initialization; gradient updates on {device} if applicable")
             extra = {"model": model, "actions": actions} if name == "rollout" else {}
             if name == "inverse":
                 extra["anchor_y"] = anchors
@@ -546,7 +552,9 @@ def evaluate(config, data_dir, run_dir, model, split="validation", *, primary_me
     scales = np.asarray(config["scales"], dtype=np.float64)
     records = []
     with _frozen(model):
-        for path, identity in zip(paths, identities):
+        note(f"Evaluate {split} on {device}: {len(paths)} roots x {len(APPEARANCES)} appearances; no training")
+        for path, identity in progress(zip(paths, identities), total=len(paths),
+                                       desc=f"Evaluate {split} on {device}", unit="root"):
             root = _root(path, split, config)
             if _identity(root) != identity:
                 raise ValueError("Evaluation root identity changed after validation.")
@@ -558,6 +566,7 @@ def evaluate(config, data_dir, run_dir, model, split="validation", *, primary_me
                 "offset_effect_loss": physical_effect_loss(zeros, offset, tf, tc, scales, config["horizons"]),
             }
             for appearance_index, appearance in enumerate(APPEARANCES):
+                note(f"{split} root {identity['root_index']} / {appearance}: encode, readout and candidate rollouts")
                 histories = _encode(model, root.context[appearance_index], shape, config["batch_size"])
                 goal = _encode(model, root.goal_pixels[appearance_index:appearance_index + 1], shape, config["batch_size"])[0]
                 request = torch.as_tensor(root.request, dtype=histories.dtype, device=device).unsqueeze(0)

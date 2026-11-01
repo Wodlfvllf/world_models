@@ -12,6 +12,7 @@ import torch
 
 from .provenance import (create_lock, digest, read_config, runtime, select_primary,
                          verify_lock, write_json)
+from .progress import note, progress, stage
 
 
 def parser():
@@ -41,6 +42,20 @@ def parser():
     q.add_argument("--model", choices=("lewm", "dinowm"), required=True)
     q.add_argument("--root", type=Path, required=True)
     q.add_argument("--output", type=Path, required=True)
+    for command in ("diagnose-readout", "diagnose-prediction"):
+        q = sub.add_parser(command, help="Exploratory prerequisite diagnostic; no world-model training")
+        q.add_argument("--config", type=Path, required=True)
+        q.add_argument("--model", choices=("lewm", "dinowm"), required=True)
+        q.add_argument("--output", type=Path, required=True, help="New diagnostic directory; never overwrite a pilot")
+        if command == "diagnose-readout":
+            q.add_argument("--data", type=Path, required=True)
+            q.add_argument("--grids", type=int, nargs="+", default=[2, 4])
+            q.add_argument("--alphas", type=float, nargs="+", default=[.01, 1., 100., 10000.])
+        else:
+            source = q.add_mutually_exclusive_group(required=True)
+            source.add_argument("--data", type=Path)
+            source.add_argument("--h5", type=Path)
+            q.add_argument("--episodes", type=int, default=128, help="Number of recorded episodes; one window each")
     for command in ("fit", "evaluate", "lock", "analyze"):
         q = sub.add_parser(command)
         q.add_argument("--config", type=Path, required=True)
@@ -57,7 +72,10 @@ def parser():
 
 def _model(args):
     from .models import load_model
-    return load_model(args.model, args.cache, device=args.device, trust_checkpoint=args.trust_checkpoint)
+    with stage(f"load {args.model} on {args.device}"):
+        model = load_model(args.model, args.cache, device=args.device, trust_checkpoint=args.trust_checkpoint)
+    note(f"Model ready on {args.device}; pretrained weights frozen")
+    return model
 
 
 def _sim(args):
@@ -92,9 +110,10 @@ def preflight(args):
     root = generate_root(split="pilot", split_seed=987654321, root_index=0,
                          config=GenerationConfig(horizon=2, candidates=2), simulator=sim)
     report["simulator"] = qualify_root(root, sim)
-    for name in args.models:
+    for name in progress(args.models, desc="Preflight models", unit="model"):
         begin = time.perf_counter()
-        model = load_model(name, args.cache, device=args.device, trust_checkpoint=args.trust_checkpoint)
+        with stage(f"preflight load {name} on {args.device}"):
+            model = load_model(name, args.cache, device=args.device, trust_checkpoint=args.trust_checkpoint)
         with torch.no_grad():
             history = model.encode(root.context[0])
             future = model.rollout(history, torch.tensor(np.repeat(root.actions[:1], 2, axis=0), device=args.device))
@@ -136,12 +155,13 @@ def execute(args):
         root = load_root(args.root)
         model = _model(args)
         with torch.no_grad():
+            note("Inference: encoding original-appearance histories and goal")
             histories = model.encode(root.context[0])
             goals = model.encode(root.goal_pixels[0][None, None])[:, 0]
             output = []
             for branch in range(2):
                 costs = []
-                for action in root.actions:
+                for action in progress(root.actions, desc=f"Inference branch {branch} on {args.device}", unit="candidate"):
                     future = model.rollout(histories[branch:branch + 1], torch.tensor(action[None], device=args.device))
                     costs.append(model.goal_cost(future[:, -1], goals).item())
                 output.append({"branch": branch, "latent_goal_costs": costs,
@@ -151,6 +171,14 @@ def execute(args):
         write_json(args.output, value)
         return value
     config = read_config(args.config)
+    if args.command in ("diagnose-readout", "diagnose-prediction"):
+        from .diagnostics import readout_diagnostic, prediction_diagnostic
+        if args.output.exists() or args.output.is_symlink():
+            raise FileExistsError(args.output)
+        model = _model(args)
+        if args.command == "diagnose-readout":
+            return readout_diagnostic(config, args.data, args.output, model, grids=args.grids, alphas=args.alphas)
+        return prediction_diagnostic(config, args.output, model, data=args.data, h5=args.h5, episodes=args.episodes)
     if args.command == "generate":
         from .data import DEFAULT_SPLIT_SEEDS, GenerationConfig, generate_splits
         counts = dict(config["counts"])
@@ -210,7 +238,11 @@ def execute(args):
 def main(argv=None):
     args = parser().parse_args(argv)
     try:
-        result = execute(args)
+        label = " ".join(str(value) for value in (
+            args.command, getattr(args, "model", ""), getattr(args, "split", "")) if value)
+        with stage(label):
+            note(f"Requested model device: {args.device}; simulation, file validation and some algebraic fits use CPU")
+            result = execute(args)
     except (ValueError, RuntimeError, FileNotFoundError, FileExistsError, PermissionError) as error:
         raise SystemExit(f"wm-audit: {error}") from error
     print(json.dumps(result, indent=2, allow_nan=False, default=str))

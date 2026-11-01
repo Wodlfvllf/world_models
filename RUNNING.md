@@ -1,5 +1,35 @@
 # Portable VM execution
 
+For post-pilot actual-image readout and frozen-prediction checks, see
+[DIAGNOSTICS.md](DIAGNOSTICS.md). These reuse existing data without refitting
+editors or retraining world models and produce live progress plus offline plots.
+
+## Live progress (enabled by default)
+
+New processes show stage start/completion/failure, requested model device,
+elapsed time, and progress bars with completed counts and estimated remaining
+time. Generation and archive validation count roots; fitting shows encoding,
+readout extraction, CPU algebraic initialization, optimizer steps and loss
+snapshots; inference counts candidates; evaluation counts roots and names the
+current appearance. Recovery distinguishes its printed plan from executing stages.
+
+Interactive terminals use updating bars. Notebook/subprocess output and redirected
+logs use readable newline snapshots (at most every five seconds per counter,
+plus start/end). CLI commands emit a heartbeat every 30 seconds during long
+operations, including loading, downloads and analysis. **A heartbeat means the
+reporting thread is alive, not proof that computation is advancing.** ETA is
+based on completed units and remains unavailable before the first completion.
+
+Progress goes to **stderr**, while CLI result JSON stays on stdout (upstream
+models may still print initialization messages to stdout). Capture both streams
+when saving a combined log. Set `WM_AUDIT_PROGRESS=0` to disable project progress.
+This changes logging only, not seeds, numerical settings, checkpoints or metrics.
+It does not add checkpoint resume or keep the remote container alive.
+
+Deploy the updated code/environment to the GPU machine before the **next** run.
+Already-running Python processes do not acquire these changes; do not interrupt
+an active experiment just to obtain progress bars.
+
 ## 1. Copy and install
 
 Target: Linux x86-64, NVIDIA GPU/working driver (`nvidia-smi`), internet, Git,

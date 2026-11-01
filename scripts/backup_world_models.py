@@ -74,6 +74,7 @@ def capture(root, destination):
     if (root / "runs").is_symlink():
         raise ValueError("Linked runs directory refused")
     files, json_files, manifests, skipped = set(), {}, [], []
+    diagnostic_references = {}
     counts = {}
 
     def add_json(path):
@@ -107,7 +108,7 @@ def capture(root, destination):
                     _regular(root, path)
                     files.add(path)
                     counts[run.name][split] += 1
-        for name in ("preflight.json", "replay.json"):
+        for name in ("preflight.json", "replay.json", "diagnostics-plan.json"):
             add_json(run / name)
         for model in ("lewm", "dinowm"):
             directory = run / model
@@ -125,6 +126,28 @@ def capture(root, destination):
             for name in MODEL_JSON:
                 if name != "training.json":
                     add_json(directory / name)
+            for kind in ("readout", "prediction-paired", "prediction-recorded"):
+                diagnostic = directory / kind
+                if diagnostic.is_symlink():
+                    raise ValueError("Linked diagnostic directory refused")
+                report_path = diagnostic / "report.json"
+                if not add_json(report_path):
+                    continue  # Incomplete diagnostics are deliberately not published.
+                report = json.loads(json_files[report_path])
+                if report.get("schema") != "wm_audit.diagnostic.v1" or not isinstance(report.get("artifacts"), dict):
+                    raise ValueError("Invalid diagnostic completion report")
+                for name, expected in report["artifacts"].items():
+                    if (not isinstance(name, str) or Path(name).name != name or "\\" in name
+                            or name.startswith(".") or name == "report.json"
+                            or Path(name).suffix not in (".json", ".pt", ".npz", ".png", ".html")):
+                        raise ValueError("Invalid diagnostic artifact path")
+                    path = diagnostic / name
+                    _regular(root, path)
+                    with path.open("rb") as stream:
+                        if stream_digest(stream) != expected:
+                            raise ValueError("Diagnostic artifact checksum mismatch")
+                    diagnostic_references[path.relative_to(root).as_posix()] = expected
+                    files.add(path)
         # Logs are optional, but never silently claim a live log is consistent.
         log = run / "console.log"
         if log.exists():
@@ -133,7 +156,7 @@ def capture(root, destination):
 
     # Only explicit project recovery material; never crawl arbitrary files.
     for pattern in ("configs/*.json", "src/wm_audit/*.py", "scripts/*.py", "scripts/*.sh",
-                    "pyproject.toml", "README.md", "RUNNING.md", "BACKUP.md", ".gitignore"):
+                    "pyproject.toml", "README.md", "RUNNING.md", "BACKUP.md", "DIAGNOSTICS.md", ".gitignore"):
         for path in root.glob(pattern):
             _regular(root, path)
             files.add(path)
@@ -168,6 +191,9 @@ def capture(root, destination):
             if _stamp(before) != _stamp(path.stat()) or size != before.st_size:
                 raise ValueError("Artifact changed during capture")
             inventory[name] = {"sha256": digest.hexdigest(), "size_bytes": size}
+        for name, expected in diagnostic_references.items():
+            if inventory[name]["sha256"] != expected:
+                raise ValueError("Diagnostic artifact changed between verification and capture")
         for data_dir, manifest in manifests:
             for split, references in manifest["files"].items():
                 if split not in SPLITS:

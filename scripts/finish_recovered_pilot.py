@@ -12,6 +12,7 @@ import subprocess
 import sys
 
 from wm_audit.provenance import digest, read_config, select_primary
+from wm_audit.progress import progress, stage
 
 
 def plan(source, config_path, output, cache, device):
@@ -27,7 +28,8 @@ def plan(source, config_path, output, cache, device):
         raise ValueError("Config differs from generated data")
     for split in ("editor", "scorer", "validation", "pilot"):
         paths = sorted((data / split).glob("*.npz"))
-        actual = {p.relative_to(data).as_posix(): digest(p) for p in paths}
+        actual = {p.relative_to(data).as_posix(): digest(p)
+              for p in progress(paths, desc=f"Verify recovered {split} hashes", unit="file")}
         if len(paths) != config["counts"][split] or actual != manifest["files"][split]:
             raise ValueError(f"Incomplete or changed {split} data")
     training = json.loads((source / "lewm/training.json").read_text())
@@ -68,6 +70,7 @@ if __name__ == "__main__":
     parser.add_argument("--trust-checkpoint", action="store_true", help="Authorize the pinned DINO release pickle")
     args = parser.parse_args()
     commands = plan(args.source, args.config, args.output, args.cache, args.device)
+    print("PLAN (commands below have not run yet):", flush=True)
     for command in commands:
         print(shlex.join(command), flush=True)
     if args.execute:
@@ -82,6 +85,7 @@ if __name__ == "__main__":
             "source": str(args.source.resolve()), "config": str(args.config.resolve()),
             "commands": commands, "note": "Reuses data and LeWM results; DINO fit starts fresh",
         }, indent=2))
-        for command in commands:
-            subprocess.run(command, check=True)
+        for index, command in enumerate(commands, 1):
+            with stage(f"continuation stage {index}/{len(commands)}: {shlex.join(command)}"):
+                subprocess.run(command, check=True)
         print("DONE: DINO report at", args.output / "dinowm/report-pilot.json")

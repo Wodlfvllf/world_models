@@ -47,6 +47,7 @@ from typing import Any
 import torch
 from torch import nn
 from torch.nn import functional as F
+from .progress import note, progress, stage
 
 
 __all__ = ["PhysicalReadout", "make_editor", "fit_editor", "save_editor",
@@ -502,7 +503,7 @@ def fit_editor(name, histories, requests, targets, *, rank=8, seed=0, steps=200,
         actions, future_targets = _rollout_data(model, actions, future_targets, n,
                                                editor.latent_shape, device, batch_size)
 
-    with torch.no_grad():
+    with torch.no_grad(), stage(f"initialize {editor.name} basis and algebraic fit (CPU)"):
         used = 0 if editor.name == "identity" else _fit_basis(editor, histories, targets, basis_samples, batch_size)
         context = None if editor.name in ("identity", "inverse") else _fit_context(editor, histories, batch_size)
         coefficients, residuals = _project_targets(editor, histories, targets, batch_size)
@@ -534,7 +535,7 @@ def fit_editor(name, histories, requests, targets, *, rank=8, seed=0, steps=200,
         frozen = _frozen(model) if editor.name == "rollout" else nullcontext()
         width = editor.basis[0].numel()
         with frozen:
-            for step in range(1, steps + 1):
+            for step in progress(range(1, steps + 1), desc=f"Train {editor.name} on {device}", unit="step"):
                 index = torch.randperm(n, generator=generator)[:batch_size]
                 optimizer.zero_grad(set_to_none=True)
                 predicted = editor._coefficients(_batch(design, index, device))
@@ -567,8 +568,11 @@ def fit_editor(name, histories, requests, targets, *, rank=8, seed=0, steps=200,
                 history_mse = history_loss.detach().item()
                 log["losses"].append({"step": step, "loss": history_mse + rollout_weight * rollout_loss,
                                       "history_mse": history_mse, "rollout_mse": rollout_loss})
+                if step == 1 or step % 20 == 0 or step == steps:
+                    note(f"{editor.name} step {step}/{steps} | history MSE {history_mse:.6g} | rollout MSE {rollout_loss:.6g}")
         log["final_history_mse"] = _history_mse(editor, design, coefficients, residuals, batch_size)
     editor.fitted.fill_(True)
+    note(f"Editor {editor.name} fitted | final training history MSE {log['final_history_mse']:.6g}")
     return editor.eval(), log
 
 
