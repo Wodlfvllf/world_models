@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import runpy
 import sys
+import subprocess
 import zipfile
 
 import pytest
@@ -67,6 +68,51 @@ def test_deployment_and_safe_reexecution(tmp_path, format):
     (project / "scripts/molab_setup.py").write_text("changed")
     with pytest.raises(ValueError, match="changed"):
         deploy(format, archive, project)
+
+
+@pytest.mark.parametrize("format", ["json", "marimo"])
+def test_missing_receipt_has_actionable_error(tmp_path, format):
+    archive = bundle(tmp_path)
+    archive.with_suffix(".zip.sha256").unlink()
+    with pytest.raises(FileNotFoundError, match="SOURCE_ZIP=None"):
+        deploy(format, archive, tmp_path / "remote")
+
+
+@pytest.mark.parametrize("format", ["json", "marimo"])
+def test_git_deployment_pinned_and_non_destructive(tmp_path, monkeypatch, format):
+    project = tmp_path / "remote"
+    pinned = "275cdadd8130178112c607649b4dcf471637871b"
+    commands = []
+    def fake_run(argv, **kwargs):
+        commands.append(argv)
+        assert kwargs["check"] and kwargs["timeout"] > 0
+        if argv[1] == "init":
+            (project / ".git").mkdir()
+        if "checkout" in argv:
+            (project / "scripts").mkdir()
+            (project / "scripts/molab_setup.py").write_text("# pinned script")
+    dirty = False
+    def fake_output(argv, **kwargs):
+        return (" M tracked.py" if dirty else "") if "status" in argv else pinned + "\n"
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    monkeypatch.setattr(subprocess, "check_output", fake_output)
+    deploy(format, None, project)
+    assert len(commands) == 4
+    assert commands[2][-1] == pinned and "--depth" in commands[2]
+    deploy(format, None, project)
+    assert len(commands) == 4
+    dirty = True
+    with pytest.raises(ValueError, match="changed"):
+        deploy(format, None, project)
+    assert (project / "scripts/molab_setup.py").read_text() == "# pinned script"
+
+
+@pytest.mark.parametrize("format", ["json", "marimo"])
+def test_git_refuses_existing_non_checkout(tmp_path, format):
+    project = tmp_path / "existing"
+    project.mkdir()
+    with pytest.raises(FileExistsError, match="NEW PROJECT"):
+        deploy(format, None, project)
 
 
 @pytest.mark.parametrize("format", ["json", "marimo"])

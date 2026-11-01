@@ -2,11 +2,15 @@
 
 ## Upload and start
 
-Upload these three supplied files to your **GPU Molab session**:
+Open/import the latest `notebooks/run_prerequisites_marimo.py` from GitHub in
+your **GPU Molab session**. Leave `SOURCE_ZIP=None`: the notebook fetches the
+published commit `275cdadd8130178112c607649b4dcf471637871b` and verifies the checkout.
+**No source ZIP or receipt upload is needed.** The source is intentionally pinned
+rather than silently following changes to main.
 
-1. `notebooks/run_prerequisites_marimo.py` — open/import this as the native Marimo notebook.
-2. `dist/world-models-molab-source.zip` — updated project scripts, including unpushed changes.
-3. `dist/world-models-molab-source.zip.sha256` — put beside the uploaded ZIP, with the same basename.
+Optional offline mode: set `SOURCE_ZIP` to an uploaded source bundle and upload
+its matching `.zip.sha256` receipt beside it. A missing receipt is an error,
+not permission to skip verification. The existing pilot **data** is still needed.
 
 Use Molab's upload/file browser and copy the **remote paths** it assigns. The
 default `/marimo/…` paths are examples; change them if your upload lands elsewhere.
@@ -15,7 +19,7 @@ The notebook itself executes the shell scripts and Python commands remotely.
 
 In **Cell 2**:
 
-- `SOURCE_ZIP`: remote path of the source ZIP.
+- `SOURCE_ZIP`: leave `None` for GitHub; only set a path for optional offline ZIP mode.
 - `PROJECT`: a **new remote directory**, default `/marimo/world_models_diagnostics`.
   The previous project, results, and environment are not overwritten.
 - `DATA`: actual remote path to the completed pilot's data, including its generation manifest.
@@ -47,7 +51,7 @@ path when restarting cells.
 
 ## What Run all does, in order
 
-1. Verify and extract the uploaded source (reuses only an identical extraction).
+1. Fetch/verify the pinned GitHub source (or verify/extract the optional source ZIP).
 2. Bootstrap/reuse the hosted environment; optionally restore pilot data.
 3. Install the updated package; validate the original input hashes and configuration.
 4. Download pinned model artifacts; check the GPU/model/simulator setup.

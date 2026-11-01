@@ -10,13 +10,13 @@ def introduction():
     mo.md("""
     # Frozen world-model experiments — sequential GPU notebook
 
-    **Run this notebook on Molab, with the GPU attached.** Upload the supplied
-    `world-models-molab-source.zip` and its `.zip.sha256` receipt to Molab.
-    The notebook installs that code in a NEW hosted project directory, prepares
+    **Run this notebook on Molab, with the GPU attached.** The notebook fetches
+    the published, pinned GitHub commit; no source ZIP or receipt upload is needed.
+    It installs that code in a NEW hosted project directory, prepares
     the remote Python environment, then calls the experiment scripts there.
     No local VS Code interpreter or local filesystem is used.
 
-     1. Review Cell 2: point SOURCE_ZIP at your Molab upload, DATA at the previous
+    1. Review Cell 2: leave SOURCE_ZIP=None, point DATA at the previous
          pilot data, and choose a **new** run ID. All paths are on Molab.
          On a fresh Molab session, supply BACKUP_ZIP plus its checksum receipt to
          restore the saved pilot. No previous pilot needs to be rerun.
@@ -45,7 +45,7 @@ def settings():
     from pathlib import Path
     import importlib.util
 
-    SOURCE_ZIP = Path("/marimo/world-models-molab-source.zip")  # Uploaded bundle.
+    SOURCE_ZIP = None  # Fetch pinned GitHub source; no ZIP/receipt upload required.
     PROJECT = Path("/marimo/world_models_diagnostics")  # NEW directory, preserves the old project.
     DATA = "/marimo/world_models/runs/pilot-gpu-01/data"  # Existing remote pilot data.
     BACKUP_ZIP = None  # Fresh session: absolute path to uploaded backup ZIP + adjacent receipt.
@@ -73,42 +73,76 @@ def deploy(EXECUTE, PROJECT, SOURCE_ZIP, mo):
     import zipfile
     from pathlib import PurePosixPath
 
-    # The source bundle contains the unpushed scripts; cloning old GitHub main is insufficient.
-    _receipt = SOURCE_ZIP.with_suffix(".zip.sha256")
-    _expected = _receipt.read_text().split()[0]
-    with SOURCE_ZIP.open("rb") as _stream:
-        _actual = hashlib.file_digest(_stream, "sha256").hexdigest()
-    if _actual != _expected:
-        raise ValueError("Source ZIP checksum mismatch; re-upload bundle and receipt")
-    with zipfile.ZipFile(SOURCE_ZIP) as _archive:
-        _names = _archive.namelist()
-        if len(set(_names)) != len(_names) or "scripts/molab_setup.py" not in _names:
-            raise ValueError("Invalid source bundle")
-        if sum(_info.file_size for _info in _archive.infolist()) > 50_000_000:
-            raise ValueError("Expected a small source-only bundle, not a data/model backup")
-        for _info in _archive.infolist():
-            _parts = PurePosixPath(_info.filename)
-            if (_parts.is_absolute() or ".." in _parts.parts or "\\" in _info.filename
-                    or ":" in _info.filename or _info.is_dir() or stat.S_ISLNK(_info.external_attr >> 16)
-                    or _parts.parts[0] in {"runs", "cache", ".venv", ".git"}):
-                raise ValueError("Unsafe source archive member")
-        _marker = PROJECT / "MOLAB-SOURCE.sha256"
-        if PROJECT.exists() or PROJECT.is_symlink():
-            if PROJECT.is_symlink() or not _marker.is_file() or _marker.read_text().strip() != _actual:
-                raise FileExistsError("PROJECT must be new, or a previous extraction of this exact bundle")
-            for _name in _names:
-                _target = PROJECT / _name
-                if (_target.is_symlink() or not _target.resolve().is_relative_to(PROJECT.resolve())
-                        or _target.read_bytes() != _archive.read(_name)):
-                    raise ValueError("Hosted source changed; use a new PROJECT directory")
-        else:
+    def _fetch_git():
+        import subprocess
+
+        _repo = "https://github.com/Wodlfvllf/world_models.git"
+        _commit = "275cdadd8130178112c607649b4dcf471637871b"
+        if PROJECT.is_symlink():
+            raise FileExistsError("PROJECT must not be a symlink")
+        if not PROJECT.exists():
             PROJECT.mkdir(parents=True, exist_ok=False)
-            for _name in _names:
-                _target = PROJECT / _name
-                _target.parent.mkdir(parents=True, exist_ok=True)
-                _target.write_bytes(_archive.read(_name))
-            _marker.write_text(_actual + "\n")
-    source_ready = str(PROJECT)
+            print(f"Fetching published source {_commit} into {PROJECT}", flush=True)
+            subprocess.run(["git", "init", str(PROJECT)], check=True, timeout=60)
+            subprocess.run(["git", "-C", str(PROJECT), "remote", "add", "origin", _repo], check=True, timeout=60)
+            subprocess.run(["git", "-C", str(PROJECT), "fetch", "--progress", "--depth", "1", "origin", _commit],
+                           check=True, timeout=300)
+            subprocess.run(["git", "-C", str(PROJECT), "checkout", "--detach", _commit], check=True, timeout=60)
+        if not (PROJECT / ".git").is_dir():
+            raise FileExistsError("Existing PROJECT is not the pinned checkout; choose a NEW PROJECT, do not delete results")
+        _head = subprocess.check_output(["git", "-C", str(PROJECT), "rev-parse", "HEAD"], text=True, timeout=60).strip()
+        _dirty = subprocess.check_output(["git", "-C", str(PROJECT), "status", "--porcelain", "--untracked-files=no"],
+                                         text=True, timeout=60).strip()
+        if _head != _commit or _dirty:
+            raise ValueError("Hosted source revision differs or tracked files changed; use a NEW PROJECT directory")
+        if not (PROJECT / "scripts/molab_setup.py").is_file():
+            raise FileNotFoundError("Pinned checkout is missing the Molab setup script")
+        source_ready = str(PROJECT)
+        print(f"Verified GitHub source: {_head}", flush=True)
+        return (source_ready,)
+
+    def _extract_zip():
+        # Optional offline mode still requires its receipt; never bypass integrity checks.
+        _receipt = SOURCE_ZIP.with_suffix(".zip.sha256")
+        if not SOURCE_ZIP.is_file() or not _receipt.is_file():
+            raise FileNotFoundError("Optional source ZIP/receipt missing. Set SOURCE_ZIP=None to fetch pinned GitHub source, "
+                                    "or upload both the ZIP and matching .zip.sha256 receipt at the configured path.")
+        _expected = _receipt.read_text().split()[0]
+        with SOURCE_ZIP.open("rb") as _stream:
+            _actual = hashlib.file_digest(_stream, "sha256").hexdigest()
+        if _actual != _expected:
+            raise ValueError("Source ZIP checksum mismatch; re-upload bundle and receipt")
+        with zipfile.ZipFile(SOURCE_ZIP) as _archive:
+            _names = _archive.namelist()
+            if len(set(_names)) != len(_names) or "scripts/molab_setup.py" not in _names:
+                raise ValueError("Invalid source bundle")
+            if sum(_info.file_size for _info in _archive.infolist()) > 50_000_000:
+                raise ValueError("Expected a small source-only bundle, not a data/model backup")
+            for _info in _archive.infolist():
+                _parts = PurePosixPath(_info.filename)
+                if (_parts.is_absolute() or ".." in _parts.parts or "\\" in _info.filename
+                        or ":" in _info.filename or _info.is_dir() or stat.S_ISLNK(_info.external_attr >> 16)
+                        or _parts.parts[0] in {"runs", "cache", ".venv", ".git"}):
+                    raise ValueError("Unsafe ZIP member")
+            _marker = PROJECT / "MOLAB-SOURCE.sha256"
+            if PROJECT.exists() or PROJECT.is_symlink():
+                if PROJECT.is_symlink() or not _marker.is_file() or _marker.read_text().strip() != _actual:
+                    raise FileExistsError("PROJECT must be new, or a previous extraction of this exact bundle")
+                for _name in _names:
+                    _target = PROJECT / _name
+                    if (_target.is_symlink() or not _target.resolve().is_relative_to(PROJECT.resolve())
+                            or _target.read_bytes() != _archive.read(_name)):
+                        raise ValueError("Hosted source changed; use a new PROJECT directory")
+            else:
+                PROJECT.mkdir(parents=True, exist_ok=False)
+                for _name in _names:
+                    _target = PROJECT / _name
+                    _target.parent.mkdir(parents=True, exist_ok=True)
+                    _target.write_bytes(_archive.read(_name))
+                _marker.write_text(_actual + "\n")
+        return (str(PROJECT),)
+
+    source_ready = (_fetch_git() if SOURCE_ZIP is None else _extract_zip())[0]
     print(f"Verified source deployed on Molab: {source_ready}", flush=True)
     return (source_ready,)
 
