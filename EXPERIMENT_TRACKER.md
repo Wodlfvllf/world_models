@@ -28,9 +28,9 @@ results remain in [the pilot analysis](PILOT_BACKUP_ANALYSIS.md).
 
 | ID | Study | Budget and controls | Source |
 |---|---|---|---|
-| N01 | LeWM execution-layout numerical audit | First 8 serialized original pilot roots; observed/crossed layouts, unchanged repeats and backend controls | [Numerical protocol](NUMERICAL_AUDIT_PROTOCOL_20261102.md) |
-| N02 | DINO execution-layout numerical audit | Identical fixed roster and controls; isolated from other GPU workers | [Numerical protocol](NUMERICAL_AUDIT_PROTOCOL_20261102.md) |
-| R01 | Fresh-root joint F2/F3/F4 replication | 128 new fixed roots; both models; five primary contrasts, shared 10,000 bootstraps, 99% intervals | [Replication protocol](REPLICATION_PROTOCOL_20261102.md) |
+| N01 | LeWM execution-layout numerical audit | **Completed and independently verified**; first 8 serialized original pilot roots, all applicable controls | [Numerical protocol](NUMERICAL_AUDIT_PROTOCOL_20261102.md) |
+| N02 | DINO execution-layout numerical audit | **Completed and independently verified**; identical fixed roster, isolated GPU execution | [Numerical protocol](NUMERICAL_AUDIT_PROTOCOL_20261102.md) |
+| R01 | Fresh-root joint F2/F3/F4 replication | **Completed and independently verified**; 128 roots, both models, five primary contrasts; four supported, ranking inconclusive | [Replication protocol](REPLICATION_PROTOCOL_20261102.md) |
 
 No fresh F1, recorded-data repeat, editor refit, new world-model training,
 improved candidate bank, or closed-loop experiment is included. Those would be
@@ -68,9 +68,15 @@ as inconclusive. A numerical/parity/integrity failure stops the batch and retain
 the partial attempt. It never authorizes replacing a root, changing the seed,
 omitting a control, or claiming success from partial output.
 
-Download and authenticate each completed archive promptly; the sandbox remains
-ephemeral. The downloaded receipt and final results summary will be linked here
-after actual execution, not before it.
+All three stages ran under published commit
+`36d6c1f4b744d808d1955ed50a3f7bd72280ba31`, run ID
+`paper-studies-20261103-01`, 2026-11-03 07:17:46–07:41:06 UTC. All four ZIPs and
+SHA receipts were downloaded and strictly restored; 610 inventoried entries
+verified. [Results, all primary outcomes and archive ledger](PAPER_STUDIES_RESULTS_20261103.md).
+[Final status](runs/paper-studies-20261103-retrieved/status.json) and
+[completion receipt](runs/paper-studies-20261103-retrieved/complete.json).
+No prescribed pending study remains unrun. Publication-readiness and broader
+scientific questions are separate tasks; completion is not paper acceptance.
 
 ## Current recovery entry point
 

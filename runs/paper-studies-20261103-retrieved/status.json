@@ -1,0 +1,290 @@
+{
+  "schema": "wm_audit.tracked_studies.status.v1",
+  "source_commit": "36d6c1f4b744d808d1955ed50a3f7bd72280ba31",
+  "started_utc": "2026-11-03T07:17:46.035538+00:00",
+  "updated_utc": "2026-11-03T07:41:06.243469+00:00",
+  "completed": true,
+  "state": "completed",
+  "stages": {
+    "numerical-lewm": {
+      "state": "completed",
+      "command": [
+        "/marimo/world_models_restored_20261103/.venv/bin/python",
+        "-u",
+        "/marimo/world_models_restored_20261103/scripts/audit_execution_layout.py",
+        "--config",
+        "/marimo/world_models_restored_20261103/configs/pilot.json",
+        "--spec",
+        "/marimo/world_models_restored_20261103/configs/followup_20261101.json",
+        "--data",
+        "/marimo/world_models_restored_20261103/runs/recovery-20261103/pilot/runs/pilot-gpu-01/data",
+        "--cache",
+        "/marimo/world_models_restored_20261103/cache",
+        "--device",
+        "cuda",
+        "--trust-checkpoint",
+        "--backend-controls",
+        "--model",
+        "lewm",
+        "--output",
+        "/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-lewm"
+      ],
+      "pid": 19119,
+      "started_utc": "2026-11-03T07:17:46.041953+00:00",
+      "line": "{\"report\": \"/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-lewm/report.json\", \"records\": \"/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-lewm/records.csv\", \"roots\": 8, \"comparisons\": 60}",
+      "exit_code": 0,
+      "verified": {
+        "report_sha256": "eea9afca749865d8a89af3391f2de18870f376f935e08d70a95798f058380826",
+        "roots": 8,
+        "csv_records": 7680,
+        "controls": [
+          {
+            "before": "none",
+            "name": "matmul_ieee",
+            "path": "cuda.matmul.fp32_precision",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": "ieee"
+          },
+          {
+            "before": "none",
+            "name": "matmul_tf32",
+            "path": "cuda.matmul.fp32_precision",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": "tf32"
+          },
+          {
+            "before": "tf32",
+            "name": "cudnn_conv_ieee",
+            "path": "cudnn.conv.fp32_precision",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": "ieee"
+          },
+          {
+            "before": false,
+            "name": "cudnn_deterministic",
+            "path": "cudnn.deterministic",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": true
+          },
+          {
+            "before": false,
+            "name": "cudnn_benchmark_off",
+            "path": "cudnn.benchmark",
+            "reason": "already set; no distinct intervention",
+            "status": "skipped",
+            "suites_completed": 0,
+            "value": false
+          }
+        ]
+      },
+      "finished_utc": "2026-11-03T07:18:48.431089+00:00",
+      "archive": {
+        "path": "/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-lewm.zip",
+        "sha256": "d244e69da1a693725b94491612e798bf3091ae8acbb230aa92eed610fafb98ee",
+        "bytes": 967237,
+        "inventory_entries": 65
+      }
+    },
+    "numerical-dinowm": {
+      "state": "completed",
+      "command": [
+        "/marimo/world_models_restored_20261103/.venv/bin/python",
+        "-u",
+        "/marimo/world_models_restored_20261103/scripts/audit_execution_layout.py",
+        "--config",
+        "/marimo/world_models_restored_20261103/configs/pilot.json",
+        "--spec",
+        "/marimo/world_models_restored_20261103/configs/followup_20261101.json",
+        "--data",
+        "/marimo/world_models_restored_20261103/runs/recovery-20261103/pilot/runs/pilot-gpu-01/data",
+        "--cache",
+        "/marimo/world_models_restored_20261103/cache",
+        "--device",
+        "cuda",
+        "--trust-checkpoint",
+        "--backend-controls",
+        "--model",
+        "dinowm",
+        "--output",
+        "/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-dinowm"
+      ],
+      "pid": 19377,
+      "started_utc": "2026-11-03T07:18:48.609830+00:00",
+      "line": "{\"report\": \"/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-dinowm/report.json\", \"records\": \"/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-dinowm/records.csv\", \"roots\": 8, \"comparisons\": 60}",
+      "exit_code": 0,
+      "verified": {
+        "report_sha256": "0b0ca5e17aebb0a962d5d18138f2bc96eb74027ee337fd97f1b34715376e15b6",
+        "roots": 8,
+        "csv_records": 7680,
+        "controls": [
+          {
+            "before": "none",
+            "name": "matmul_ieee",
+            "path": "cuda.matmul.fp32_precision",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": "ieee"
+          },
+          {
+            "before": "none",
+            "name": "matmul_tf32",
+            "path": "cuda.matmul.fp32_precision",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": "tf32"
+          },
+          {
+            "before": "tf32",
+            "name": "cudnn_conv_ieee",
+            "path": "cudnn.conv.fp32_precision",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": "ieee"
+          },
+          {
+            "before": false,
+            "name": "cudnn_deterministic",
+            "path": "cudnn.deterministic",
+            "reason": null,
+            "status": "executed",
+            "suites_completed": 8,
+            "value": true
+          },
+          {
+            "before": false,
+            "name": "cudnn_benchmark_off",
+            "path": "cudnn.benchmark",
+            "reason": "already set; no distinct intervention",
+            "status": "skipped",
+            "suites_completed": 0,
+            "value": false
+          }
+        ]
+      },
+      "finished_utc": "2026-11-03T07:22:10.395404+00:00",
+      "archive": {
+        "path": "/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/numerical-dinowm.zip",
+        "sha256": "4c84faef80b1557a9edfd836cea163c9304326268965ce9a6e05664d0d47c7ea",
+        "bytes": 940404,
+        "inventory_entries": 65
+      }
+    },
+    "replication": {
+      "state": "completed",
+      "command": [
+        "/marimo/world_models_restored_20261103/.venv/bin/python",
+        "-u",
+        "/marimo/world_models_restored_20261103/scripts/run_replication.py",
+        "--config",
+        "/marimo/world_models_restored_20261103/configs/replication_20261102.json",
+        "--original-data",
+        "/marimo/world_models_restored_20261103/runs/recovery-20261103/pilot/runs/pilot-gpu-01/data",
+        "--cache",
+        "/marimo/world_models_restored_20261103/cache",
+        "--output",
+        "/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/replication",
+        "--device",
+        "cuda",
+        "--threads",
+        "4",
+        "--trust-checkpoint",
+        "--execute"
+      ],
+      "pid": 19636,
+      "started_utc": "2026-11-03T07:22:10.560394+00:00",
+      "line": "}",
+      "exit_code": 0,
+      "verified": {
+        "report_sha256": "a9f77137c2480c07420ce2d75458af86b076f8934cb44ad91e4bff2f0e987fbc",
+        "roots": 128,
+        "primary_claims": [
+          {
+            "ci99": [
+              -0.4528803614217845,
+              -0.3034523179510995
+            ],
+            "clusters": 128,
+            "decision": "supports_prespecified_negative_direction",
+            "estimate": -0.37526837215577646,
+            "metric": "effect_error_minus_zero",
+            "model": "lewm"
+          },
+          {
+            "ci99": [
+              -0.5841746909663905,
+              -0.45443216076825804
+            ],
+            "clusters": 128,
+            "decision": "supports_prespecified_negative_direction",
+            "estimate": -0.5179723033434288,
+            "metric": "matched_minus_all_wrong",
+            "model": "lewm"
+          },
+          {
+            "ci99": [
+              -0.28888531245482346,
+              -0.1834152477486305
+            ],
+            "clusters": 128,
+            "decision": "supports_prespecified_negative_direction",
+            "estimate": -0.23640823066581088,
+            "metric": "effect_error_minus_zero",
+            "model": "dinowm"
+          },
+          {
+            "ci99": [
+              -0.5968324330464346,
+              -0.5244943112989223
+            ],
+            "clusters": 128,
+            "decision": "supports_prespecified_negative_direction",
+            "estimate": -0.5604572096861947,
+            "metric": "matched_minus_all_wrong",
+            "model": "dinowm"
+          },
+          {
+            "ci99": [
+              -0.018927620163624048,
+              0.005073283269251032
+            ],
+            "clusters": 128,
+            "decision": "inconclusive",
+            "estimate": -0.007112282905893754,
+            "metric": "forecast_minus_endpoint_regret",
+            "model": "dinowm"
+          }
+        ],
+        "decisions": {
+          "action_fidelity_and_specificity_by_model": {
+            "dinowm": true,
+            "lewm": true
+          },
+          "all_five_supported": false,
+          "dino_forecast_beats_endpoint_ranking": false,
+          "rule": "support only when the entire 99% interval is strictly below zero; touching/crossing zero is inconclusive"
+        }
+      },
+      "finished_utc": "2026-11-03T07:40:57.642538+00:00",
+      "archive": {
+        "path": "/marimo/world_models_restored_20261103/runs/paper-studies-20261103-01/replication.zip",
+        "sha256": "7e4ffb90d484e7fc5f736715d23ebb22e0af9da0ce83d38494a79748a557e27d",
+        "bytes": 350515773,
+        "inventory_entries": 415
+      }
+    }
+  },
+  "active_stage": null,
+  "seconds": 1400.2079346320002,
+  "finished_utc": "2026-11-03T07:41:06.244233+00:00"
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "wm_audit.numerical_independent_verification.compact.v1",
+  "verification_date": "2026-11-03",
+  "passed": true,
+  "failed_checks": [],
+  "cpu_only": true,
+  "interpreter": "/Users/shashank/Deep_Learning/Research_wcm/.venv/bin/python",
+  "python": "3.12.8",
+  "numpy": "2.5.4",
+  "verifier": "runs/paper-studies-20261103-retrieved/numerical-independent-verifier.py",
+  "verifier_sha256": "5244afa2437aff20ea223296f94c4528c3912ae961446748ef47db53dd935550",
+  "method": "Independent csv.DictReader full-identity joins; every summary recomputed using math.fsum, maxima and absolute deltas rather than importing the audit summarizer; complete archive CRC/SHA and restored size/SHA verification; original selected NPZ and source snapshot SHA verification; original pixel/action-array receipt and metadata recomputation. No torch/wm_audit/model/simulator imports or operations. Receipt created with file-creation tools, not terminal file redirection.",
+  "comparison_tolerance": {"relative": 1e-12, "absolute": 1e-15},
+  "counts_per_model": {
+    "rows": 7680,
+    "groups": 60,
+    "records_per_group": 128,
+    "roots_per_group": 8,
+    "branches_per_root": 2,
+    "candidates_per_branch": 8,
+    "horizon": 8,
+    "appearance": "original",
+    "group_matrix": "7 baseline + 5 independent-repeat + 4 executed controls x (7 within-control + 5 backend-only) = 60",
+    "numeric_summary_statistics_checked": 1800,
+    "max_summary_rounding_difference": 1.1102230246251565e-16,
+    "suites": 48,
+    "inventoried_files": 65,
+    "input_files_rehashed": 11,
+    "source_files_rehashed": 17,
+    "input_array_receipts_recomputed": 32
+  },
+  "additional_checks_passed": [
+    "Archive SHA receipts and exact RESTORE marker content agree; every ZIP member CRC, byte count and SHA agrees with BACKUP; archived/restored file sets agree.",
+    "Numerical stage status completed and exit_code=0; stage status report hash agrees with actual report; report selection/records SHA agrees with actual files.",
+    "Selection and report configurations, specifications, backend baseline, input receipts and source receipts agree.",
+    "First eight entries in serialized original manifest order, root indices and ordinals 0-7; manifest SHA fc759e41bd66c48954f3d41568a9e48893ece47ae0a9719229109d08a8086485.",
+    "Every comparison retains the exact 128 root/appearance/branch/candidate/horizon identities without duplicates or exclusions; all numeric records finite; every signed delta exactly rhs-lhs; tensor delta bounds valid.",
+    "Metric values for each phase/variant/full identity agree across every occurrence; both crossed decomposition paths telescope recordwise for all four metrics in all five executed settings.",
+    "All five planned controls agree with completed/skipped metadata; 48 suites have the complete 8-root x 6-phase execution identity set and unchanged model-state receipts.",
+    "Actual backend differences are the sole requested modern property plus explicitly unavailable derived legacy getters; baseline and repeat states agree exactly.",
+    "Each suite records 76 public adapter calls: old encoder batches 4,2 then 16 batches of 3 with 32 rollout calls; new encoder batches 6,1,32,32,32,32 and two public bank calls; 18 bridge calls; bank history stride is 11 times the latent frame coordinate count.",
+    "Baseline/repeat, baseline/matmul_ieee and baseline/cudnn_deterministic tensor hashes agree for all six captured variants and all eight roots; corresponding five compared variants have zero record-level tensor and metric deltas.",
+    "The two models used identical authenticated original input receipts and root metadata."
+  ],
+  "baseline_native_f32_columns": ["lhs_mean", "rhs_mean", "max_abs_delta", "mean_abs_delta", "mean_delta"],
+  "tensor_max_abs_columns": ["context", "future_common", "target_h8", "rollout_all", "rollout_h8"],
+  "controls": [
+    {"name": "matmul_ieee", "path": "cuda.matmul.fp32_precision", "before": "none", "value": "ieee", "planned_status": "planned", "status": "executed", "suites_completed_per_model": 8, "reason": null},
+    {"name": "matmul_tf32", "path": "cuda.matmul.fp32_precision", "before": "none", "value": "tf32", "planned_status": "planned", "status": "executed", "suites_completed_per_model": 8, "reason": null},
+    {"name": "cudnn_conv_ieee", "path": "cudnn.conv.fp32_precision", "before": "tf32", "value": "ieee", "planned_status": "planned", "status": "executed", "suites_completed_per_model": 8, "reason": null},
+    {"name": "cudnn_deterministic", "path": "cudnn.deterministic", "before": false, "value": true, "planned_status": "planned", "status": "executed", "suites_completed_per_model": 8, "reason": null},
+    {"name": "cudnn_benchmark_off", "path": "cudnn.benchmark", "before": false, "value": false, "planned_status": "skipped", "status": "skipped", "suites_completed_per_model": 0, "reason": "already set; no distinct intervention"}
+  ],
+  "models": {
+    "lewm": {
+      "hashes": {
+        "archive_sha256": "d244e69da1a693725b94491612e798bf3091ae8acbb230aa92eed610fafb98ee",
+        "backup_sha256": "f6049880c45d4eafc0435fdd411e372259efab5c69af0f1c4c998fd2f8a32f3b",
+        "restore_marker_sha256": "778762d250c2e3c1de167c2e8fe7fc921451678b546773569fb8da9aacc4b78b",
+        "report.json": "eea9afca749865d8a89af3391f2de18870f376f935e08d70a95798f058380826",
+        "selection.json": "8889e4f84448c7877580a2967b66426f973680aa1c9eddaf0db1d61ea6bf6444",
+        "records.csv": "4e0df66b02419d96c53befa96bb28a50cbbd20ad596de752858564aa6ac7d1e7",
+        "independently_recomputed_summaries_sha256": "56815ec48bb6a00b811c9a03deddd7c9a3f3b1e9232c207e83fc075ef2b4df0e"
+      },
+      "baseline_native_f32": {
+        "observed_paths": [0.3459792693029158, 0.34587108546111267, 0.004895269870758057, 0.00016553497698623687, -0.00010818384180311114],
+        "encoding_at_single": [0.3459792693029158, 0.34587112939334475, 0.004892706871032715, 0.00016548464191146195, -0.0001081399095710367],
+        "encoding_at_bank": [0.3459792774665402, 0.34587108546111267, 0.004894256591796875, 0.00016551639419049025, -0.00010819200542755425],
+        "rollout_at_old_encoding": [0.3459792693029158, 0.3459792774665402, 1.3113021850585938e-06, 1.2088275980204344e-07, 8.163624443113804e-09],
+        "rollout_at_new_encoding": [0.34587112939334475, 0.34587108546111267, 2.562999725341797e-06, 1.23007339425385e-07, -4.3932232074439526e-08],
+        "feedback_vs_public": [0.34587108546111267, 0.34587108546111267, 0.0, 0.0, 0.0],
+        "metric_reduction_only": [0.34587108546111267, 0.34587108546111267, 0.0, 0.0, 0.0]
+      },
+      "baseline_observed_native_f64": [0.34597925667867746, 0.345871075182371, 0.004895289604620379, 0.00016553240377165774, -0.00010818149630645004],
+      "baseline_observed_persistence_f32": [0.5872641416608844, 0.5872798112050212, 0.0011674463748931885, 6.144168039410087e-05, 1.5669544136752267e-05],
+      "baseline_observed_tensor_max_abs": [0.003828883171081543, 2.3245811462402344e-06, 2.3245811462402344e-06, 0.014815807342529297, 0.01174938678741455],
+      "convolution_ieee_observed_native_f32": [0.34637599052803125, 0.3463760136219207, 2.562999725341797e-06, 2.2949825506657362e-07, 2.3093889467418194e-08],
+      "convolution_ieee_observed_native_f64": [0.3463759825030292, 0.3463760079128542, 2.5866457556977807e-06, 2.319648187305563e-07, 2.5409825019746205e-08],
+      "convolution_ieee_observed_persistence_f32": [0.5873444155613569, 0.587344401302302, 5.960464477539062e-07, 8.698589617092704e-08, -1.4259054790631518e-08],
+      "convolution_ieee_observed_tensor_max_abs": [1.430511474609375e-06, 2.2649765014648438e-06, 2.2649765014648438e-06, 7.152557373046875e-06, 6.616115570068359e-06],
+      "control_same_layout_variant_native_f32_max_abs_delta": {
+        "matmul_ieee": {"old_single": 0.0, "old_bank": 0.0, "new_single": 0.0, "new_bank": 0.0, "new_feedback": 0.0},
+        "matmul_tf32": {"old_single": 0.0032129287719726562, "old_bank": 0.002253413200378418, "new_single": 0.0035784542560577393, "new_bank": 0.003684401512145996, "new_feedback": 0.003684401512145996},
+        "cudnn_conv_ieee": {"old_single": 0.0039904117584228516, "old_bank": 0.003990054130554199, "new_single": 0.004999518394470215, "new_bank": 0.005000889301300049, "new_feedback": 0.005000889301300049},
+        "cudnn_deterministic": {"old_single": 0.0, "old_bank": 0.0, "new_single": 0.0, "new_bank": 0.0, "new_feedback": 0.0},
+        "repeat": {"old_single": 0.0, "old_bank": 0.0, "new_single": 0.0, "new_bank": 0.0, "new_feedback": 0.0}
+      },
+      "wrapper_native_tensor_and_f32_f64_metric_max_abs_all_settings": 0.0,
+      "reduction_native_f32_max_abs_all_settings": 0.0,
+      "reduction_native_f64_and_tensor_max_abs_all_settings": 0.0
+    },
+    "dinowm": {
+      "hashes": {
+        "archive_sha256": "4c84faef80b1557a9edfd836cea163c9304326268965ce9a6e05664d0d47c7ea",
+        "backup_sha256": "9a4daf647284570a066a33757e89d1b73a8146b2c7aaa1e49bc36b75acdd4f9d",
+        "restore_marker_sha256": "03575fac03b6cd671cd9e57822aa962051193ed6bdcf839eef414cc3b01ccf09",
+        "report.json": "0b0ca5e17aebb0a962d5d18138f2bc96eb74027ee337fd97f1b34715376e15b6",
+        "selection.json": "d1ebf14878edfa399cc40dbbbb1b4289aeff9d78a2c0411c99180c9409dbc386",
+        "records.csv": "612377e8bbc9ea31d2697b7c88de867daf1ae3a30c75069f615dce32aa0386f9",
+        "independently_recomputed_summaries_sha256": "63b9198a93e984bc8417af50e6653fb614d18099fe591cd8db349e5ffa5c7a2e"
+      },
+      "baseline_native_f32": {
+        "observed_paths": [0.7851116406964138, 0.7851160908467136, 0.0015323162078857422, 0.00013467256212607026, 4.450150299817324e-06],
+        "encoding_at_single": [0.7851116406964138, 0.7851161489961669, 0.0015227794647216797, 0.00013456749729812145, 4.508299753069878e-06],
+        "encoding_at_bank": [0.785111591918394, 0.7851160926511511, 0.0015250444412231445, 0.00013460649643093348, 4.500732757151127e-06],
+        "rollout_at_old_encoding": [0.7851116406964138, 0.785111591918394, 7.271766662597656e-06, 1.6728881746530533e-07, -4.877801984548569e-08],
+        "rollout_at_new_encoding": [0.7851161489961669, 0.7851160926511511, 9.5367431640625e-06, 1.9872095435857773e-07, -5.634501576423645e-08],
+        "feedback_vs_public": [0.7851160926511511, 0.7851160926511511, 0.0, 0.0, 0.0],
+        "metric_reduction_only": [0.7851160926511511, 0.7851160908467136, 1.1920928955078125e-07, 1.8451828509569168e-08, -1.8044374883174896e-09]
+      },
+      "baseline_observed_native_f64": [0.7851116658562238, 0.7851161073936291, 0.0015322117916647393, 0.0001346627945158828, 4.441537405280209e-06],
+      "baseline_observed_persistence_f32": [0.776592584789183, 0.7765933211853487, 0.0006515979766845703, 0.00013326253110304472, 7.363961656846091e-07],
+      "baseline_observed_tensor_max_abs": [0.05785655975341797, 0.08691835403442383, 0.08493518829345703, 0.09344768524169922, 0.09344768524169922],
+      "convolution_ieee_observed_native_f32": [0.7850889347610064, 0.7850889582186937, 6.4373016357421875e-06, 6.157788448035717e-07, 2.3457687348127365e-08],
+      "convolution_ieee_observed_native_f64": [0.7850889535913869, 0.7850889670689665, 6.551067218252271e-06, 6.127631583588682e-07, 1.3477579610720117e-08],
+      "convolution_ieee_observed_persistence_f32": [0.7765277266800831, 0.7765275733034098, 3.4570693969726562e-06, 5.18922427162103e-07, -1.5337667321664865e-07],
+      "convolution_ieee_observed_tensor_max_abs": [0.0003032684326171875, 0.0005788803100585938, 0.0004458427429199219, 0.00029659271240234375, 0.00029659271240234375],
+      "control_same_layout_variant_native_f32_max_abs_delta": {
+        "matmul_ieee": {"old_single": 0.0, "old_bank": 0.0, "new_single": 0.0, "new_bank": 0.0, "new_feedback": 0.0},
+        "matmul_tf32": {"old_single": 0.0020917654037475586, "old_bank": 0.005935311317443848, "new_single": 0.006821393966674805, "new_bank": 0.005001187324523926, "new_feedback": 0.0050013065338134766},
+        "cudnn_conv_ieee": {"old_single": 0.0007531642913818359, "old_bank": 0.0007523298263549805, "new_single": 0.0018557310104370117, "new_bank": 0.0018651485443115234, "new_feedback": 0.0018649101257324219},
+        "cudnn_deterministic": {"old_single": 0.0, "old_bank": 0.0, "new_single": 0.0, "new_bank": 0.0, "new_feedback": 0.0},
+        "repeat": {"old_single": 0.0, "old_bank": 0.0, "new_single": 0.0, "new_bank": 0.0, "new_feedback": 0.0}
+      },
+      "wrapper_native_tensor_and_f32_f64_metric_max_abs_all_settings": 0.0,
+      "reduction_native_f32_max_abs_by_setting": {"baseline": 1.1920928955078125e-07, "matmul_ieee": 1.1920928955078125e-07, "matmul_tf32": 2.384185791015625e-07, "cudnn_conv_ieee": 2.384185791015625e-07, "cudnn_deterministic": 1.1920928955078125e-07},
+      "reduction_native_f64_and_tensor_max_abs_all_settings": 0.0
+    }
+  },
+  "warnings": [
+    "lewm: archived overall tracker completed=false/state=running; numerical stage completed with exit_code=0",
+    "dinowm: archived overall tracker completed=false/state=running; numerical stage completed with exit_code=0",
+    "RESTORE completed_roots={} is not a numerical-study failure: the 65-file explicit tracked-stage inventories include the report/records/selection; generic pilot root-completion discovery does not classify these new stages.",
+    "Legacy getter unavailability during matmul_tf32 and convolution IEEE controls is explicitly recorded; it is not a dropped control or failed computation."
+  ],
+  "conclusions": [
+    "For these fixed eight roots and this host state, encoding layout dominates baseline old/new native MSE disagreement; public single-vs-bank rollout layout contributes smaller nonzero differences.",
+    "Feedback/public outputs are identical for both models under all executed settings. LeWM reduction is unchanged; DINO scalar-vs-row-batched float32 reduction differs slightly while captured tensors and common float64 metrics are unchanged.",
+    "Changing only the convolution fp32 precision permission from tf32 to ieee sharply reduces measured old/new disagreement for both models, while also shifting individual same-layout outputs and encoded targets relative to baseline. This is a causal sensitivity result for this control on this sample, not kernel-level localization or evidence of improved physical accuracy.",
+    "Incoming matmul precision is inherited none with recorded legacy highest/allow_tf32=false; explicit ieee executes but produces no observed change. Explicit matmul tf32 changes encodings and rollouts. Deterministic cuDNN produces no observed change; benchmark-off is skipped because already false.",
+    "Independent unchanged-state same-layout repeats are exactly identical in all retained record metrics and tensor deltas, with matching archived tensor hashes; this does not establish invariance across fresh processes, caches, workloads or historical hosts.",
+    "Historical maximum differences LeWM 0.028922 and DINO 0.013884 cannot be conclusively attributed by this eight-root sample. No generalization, significance, cross-model raw-MSE ranking or scientific claim reversal follows."
+  ],
+  "limits": [
+    "No full latent tensors are archived. This verification independently reaggregates every tensor and f32/f64 metric summary from records; it cannot reconstruct per-record tensor deltas or raw-tensor MSE independently.",
+    "Model-state and final backend-restoration receipts are checked against plans and all suites; no model is loaded and host backend state is not reexecuted locally.",
+    "Only first-eight selected payloads are authenticated, not the remaining 120 pilot roots; original appearance and common target horizons 1/4/8, prediction horizon 8.",
+    "Backend flags specify permissions; no kernel telemetry establishes a particular cuDNN/GEMM/SDPA implementation or historical precision state.",
+    "Archive hashes establish integrity against supplied receipts, not a separate externally signed provenance chain.",
+    "Independent-summary hashes cover sorted group-key summaries encoded with sorted JSON keys, compact separators and math.fsum means; all 60 summaries, not only the compact numbers retained here."
+  ]
+}

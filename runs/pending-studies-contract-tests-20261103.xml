@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="182" time="96.386" timestamp="2026-11-03T12:33:13.692370+05:30" hostname="SHASHANKs-MacBook-Air.local"><testcase classname="tests.test_execution_layout" name="test_observed_exact_frame_batches_actions_candidates_and_history_strides" time="0.264" /><testcase classname="tests.test_execution_layout" name="test_crossed_controls_isolate_encoding_rollout_recurrence_and_reduction" time="0.233" /><testcase classname="tests.test_execution_layout" name="test_deterministic_inputs_public_native_parity_and_no_model_rng_mutation[TinyLeWM]" time="0.401" /><testcase classname="tests.test_execution_layout" name="test_deterministic_inputs_public_native_parity_and_no_model_rng_mutation[MarkerDino]" time="8.308" /><testcase classname="tests.test_execution_layout" name="test_first_repeat_is_independent_reexecution_not_cached_or_rng_reset" time="0.527" /><testcase classname="tests.test_execution_layout" name="test_native_prediction_never_reads_future_padding_or_goal_pixels" time="0.540" /><testcase classname="tests.test_execution_layout" name="test_identity_matching_is_order_independent_and_rejects_missing_or_wrong_candidate" time="0.093" /><testcase classname="tests.test_execution_layout" name="test_actual_tensor_comparisons_fail_closed[shape]" time="0.002" /><testcase classname="tests.test_execution_layout" name="test_actual_tensor_comparisons_fail_closed[dtype]" time="0.001" /><testcase classname="tests.test_execution_layout" name="test_actual_tensor_comparisons_fail_closed[nan]" time="0.002" /><testcase classname="tests.test_execution_layout" name="test_actual_tensor_comparisons_fail_closed[empty]" time="0.001" /><testcase classname="tests.test_execution_layout" name="test_tensor_and_metric_max_mean_do_not_hide_cancelling_record_drift" time="0.100" /><testcase classname="tests.test_execution_layout" name="test_metrics_are_measured_from_actual_captured_tensors_not_hashes_or_pooled_features" time="1.039" /><testcase classname="tests.test_execution_layout" name="test_hashes_include_scalar_bfloat16_aliases_and_nonpersistent_buffers" time="0.035" /><testcase classname="tests.test_execution_layout" name="test_changed_research_layout_configuration_is_not_silently_accepted[horizon-7]" time="0.011" /><testcase classname="tests.test_execution_layout" name="test_changed_research_layout_configuration_is_not_silently_accepted[candidates-7]" time="0.009" /><testcase classname="tests.test_execution_layout" name="test_changed_research_layout_configuration_is_not_silently_accepted[horizons-value2]" time="0.020" /><testcase classname="tests.test_execution_layout" name="test_changed_research_layout_configuration_is_not_silently_accepted[horizons-value3]" time="0.005" /><testcase classname="tests.test_execution_layout" name="test_changed_research_layout_configuration_is_not_silently_accepted[batch_size-32]" time="0.005" /><testcase classname="tests.test_execution_layout" name="test_changed_research_layout_configuration_is_not_silently_accepted[batch_size-True]" time="0.007" /><testcase classname="tests.test_execution_layout" name="test_followup_encoder_batch_is_observed_not_arbitrary[4]" time="0.004" /><testcase classname="tests.test_execution_layout" name="test_followup_encoder_batch_is_observed_not_arbitrary[True]" time="0.007" /><testcase classname="tests.test_execution_layout" name="test_followup_encoder_batch_is_observed_not_arbitrary[32.0]" time="0.007" /><testcase classname="tests.test_execution_layout" name="test_followup_encoder_batch_is_observed_not_arbitrary[0]" time="0.006" /><testcase classname="tests.test_execution_layout" name="test_first_eight_manifest_order_not_lexical_or_outcome_selected" time="0.040" /><testcase classname="tests.test_execution_layout" name="test_input_authentication_and_manifest_validation_fail_closed[manifest]" time="0.036" /><testcase classname="tests.test_execution_layout" name="test_input_authentication_and_manifest_validation_fail_closed[payload]" time="0.044" /><testcase classname="tests.test_execution_layout" name="test_input_authentication_and_manifest_validation_fail_closed[config]" time="0.044" /><testcase classname="tests.test_execution_layout" name="test_input_authentication_and_manifest_validation_fail_closed[short]" time="0.074" /><testcase classname="tests.test_execution_layout" name="test_input_authentication_and_manifest_validation_fail_closed[duplicate]" time="0.048" /><testcase classname="tests.test_execution_layout" name="test_input_authentication_and_manifest_validation_fail_closed[traversal]" time="0.059" /><testcase classname="tests.test_execution_layout" name="test_input_authentication_and_manifest_validation_fail_closed[symlink]" time="0.034" /><testcase classname="tests.test_execution_layout" name="test_source_pins_match_inspected_current_files_and_fail_closed" time="0.062" /><testcase classname="tests.test_execution_layout" name="test_backend_default_has_no_setters_and_control_changes_only_one_property" time="0.003" /><testcase classname="tests.test_execution_layout" name="test_actual_pytorch_controls_restore_cpu_host_flags_even_on_failure[False]" time="0.027" /><testcase classname="tests.test_execution_layout" name="test_actual_pytorch_controls_restore_cpu_host_flags_even_on_failure[True]" time="0.018" /><testcase classname="tests.test_execution_layout" name="test_backend_control_setup_failure_restores_partially_set_property" time="0.008" /><testcase classname="tests.test_execution_layout" name="test_backend_plan_exposes_noops_unavailable_and_disabled_not_fake_controls" time="0.003" /><testcase classname="tests.test_execution_layout" name="test_legacy_precision_getter_failure_is_exposed_not_a_control_failure" time="0.014" /><testcase classname="tests.test_execution_layout" name="test_publication_compact_matching_csv_provenance_repeat_and_exclusive_output" time="6.508" /><testcase classname="tests.test_execution_layout" name="test_backend_matrix_is_matched_to_baseline_with_actual_settings_and_immutable_plan" time="6.938" /><testcase classname="tests.test_execution_layout" name="test_mutation_or_failure_forbids_completion_and_restores_modes_backend[parameter]" time="0.206" /><testcase classname="tests.test_execution_layout" name="test_mutation_or_failure_forbids_completion_and_restores_modes_backend[buffer]" time="0.361" /><testcase classname="tests.test_execution_layout" name="test_mutation_or_failure_forbids_completion_and_restores_modes_backend[input]" time="0.959" /><testcase classname="tests.test_execution_layout" name="test_mutation_or_failure_forbids_completion_and_restores_modes_backend[metadata]" time="0.474" /><testcase classname="tests.test_execution_layout" name="test_mutation_or_failure_forbids_completion_and_restores_modes_backend[failure]" time="0.144" /><testcase classname="tests.test_execution_layout" name="test_final_reauthentication_detects_changed_config_or_source" time="4.876" /><testcase classname="tests.test_execution_layout" name="test_capture_restores_instance_methods_and_class_methods_on_error" time="0.008" /><testcase classname="tests.test_execution_layout" name="test_cli_cannot_execute_local_real_model_or_fall_back[cpu]" time="0.023" /><testcase classname="tests.test_execution_layout" name="test_cli_cannot_execute_local_real_model_or_fall_back[mps]" time="0.007" /><testcase classname="tests.test_execution_layout" name="test_cli_cannot_execute_local_real_model_or_fall_back[cuda]" time="0.011" /><testcase classname="tests.test_execution_layout" name="test_cli_cannot_execute_local_real_model_or_fall_back[not-a-device]" time="0.009" /><testcase classname="tests.test_execution_layout" name="test_cli_trust_required_before_file_access_or_checkpoint_load" time="0.009" /><testcase classname="tests.test_execution_layout" name="test_cli_existing_or_dangling_output_rejected_before_cuda_or_io[False]" time="0.010" /><testcase classname="tests.test_execution_layout" name="test_cli_existing_or_dangling_output_rejected_before_cuda_or_io[True]" time="0.009" /><testcase classname="tests.test_execution_layout" name="test_cli_parser_defaults_gpu_controls_and_no_root_or_candidate_selection" time="0.009" /><testcase classname="tests.test_execution_layout" name="test_cli_forwards_config_cache_data_device_and_trust_without_local_model_execution" time="0.012" /><testcase classname="tests.test_execution_layout" name="test_cli_refuses_implicit_dinov2_downloads" time="0.013" /><testcase classname="tests.test_replication" name="test_shared_config_schema_exact_fixed_budget_and_inert_fit_settings" time="0.005" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[seed-3]" time="0.007" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[bootstrap_resamples-5000]" time="0.010" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[horizon-9]" time="0.007" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[candidates-9]" time="0.004" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[batch_size-32]" time="0.006" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[horizons-value5]" time="0.008" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[steps-0]" time="0.006" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[name-changed]" time="0.006" /><testcase classname="tests.test_replication" name="test_research_config_cannot_be_tuned[seed-True]" time="0.006" /><testcase classname="tests.test_replication" name="test_every_split_count_is_fixed[editor]" time="0.007" /><testcase classname="tests.test_replication" name="test_every_split_count_is_fixed[scorer]" time="0.006" /><testcase classname="tests.test_replication" name="test_every_split_count_is_fixed[validation]" time="0.005" /><testcase classname="tests.test_replication" name="test_every_split_count_is_fixed[pilot]" time="0.006" /><testcase classname="tests.test_replication" name="test_every_split_count_is_fixed[confirmation]" time="0.004" /><testcase classname="tests.test_replication" name="test_json_duplicate_keys_and_nonfinite_constants_are_rejected[{&quot;x&quot;: 1, &quot;x&quot;: 2}]" time="0.005" /><testcase classname="tests.test_replication" name="test_json_duplicate_keys_and_nonfinite_constants_are_rejected[{&quot;x&quot;: NaN}]" time="0.005" /><testcase classname="tests.test_replication" name="test_json_duplicate_keys_and_nonfinite_constants_are_rejected[{&quot;x&quot;: Infinity}]" time="0.004" /><testcase classname="tests.test_replication" name="test_json_duplicate_keys_and_nonfinite_constants_are_rejected[{&quot;x&quot;: -Infinity}]" time="0.006" /><testcase classname="tests.test_replication" name="test_source_pins_capture_executed_source_and_all_protocol_inputs" time="0.027" /><testcase classname="tests.test_replication" name="test_changed_core_source_rejected_before_publication" time="0.001" /><testcase classname="tests.test_replication" name="test_new_128_roots_independent_derivation_and_full_historical_exclusion" time="0.093" /><testcase classname="tests.test_replication" name="test_no_root_or_environment_overlap_can_be_hidden_by_new_filename[False-root_id]" time="0.066" /><testcase classname="tests.test_replication" name="test_no_root_or_environment_overlap_can_be_hidden_by_new_filename[False-root_seed]" time="0.064" /><testcase classname="tests.test_replication" name="test_no_root_or_environment_overlap_can_be_hidden_by_new_filename[False-environment_seed]" time="0.061" /><testcase classname="tests.test_replication" name="test_no_root_or_environment_overlap_can_be_hidden_by_new_filename[True-root_id]" time="0.059" /><testcase classname="tests.test_replication" name="test_no_root_or_environment_overlap_can_be_hidden_by_new_filename[True-root_seed]" time="0.054" /><testcase classname="tests.test_replication" name="test_no_root_or_environment_overlap_can_be_hidden_by_new_filename[True-environment_seed]" time="0.054" /><testcase classname="tests.test_replication" name="test_split_seed_cannot_reuse_an_old_namespace" time="0.003" /><testcase classname="tests.test_replication" name="test_complete_original_roster_including_editor_is_validated" time="0.542" /><testcase classname="tests.test_replication" name="test_original_manifest_authentication_cannot_be_replaced_by_similar_config" time="0.002" /><testcase classname="tests.test_replication" name="test_original_authenticator_complete_fixture_under_explicit_test_pin" time="0.130" /><testcase classname="tests.test_replication" name="test_manifest_contracts_reject_partial_or_escaping_rosters[missing_split]" time="0.001" /><testcase classname="tests.test_replication" name="test_manifest_contracts_reject_partial_or_escaping_rosters[count]" time="0.001" /><testcase classname="tests.test_replication" name="test_manifest_contracts_reject_partial_or_escaping_rosters[config]" time="0.001" /><testcase classname="tests.test_replication" name="test_manifest_contracts_reject_partial_or_escaping_rosters[traversal]" time="0.001" /><testcase classname="tests.test_replication" name="test_manifest_contracts_reject_partial_or_escaping_rosters[nested]" time="0.002" /><testcase classname="tests.test_replication" name="test_manifest_contracts_reject_partial_or_escaping_rosters[absolute]" time="0.002" /><testcase classname="tests.test_replication" name="test_manifest_contracts_reject_partial_or_escaping_rosters[hash]" time="0.001" /><testcase classname="tests.test_replication" name="test_extra_or_nested_archives_fail_instead_of_being_ignored" time="0.464" /><testcase classname="tests.test_replication" name="test_full_archive_scan_rejects_changed_distribution_or_identity[hash]" time="0.077" /><testcase classname="tests.test_replication" name="test_full_archive_scan_rejects_changed_distribution_or_identity[filename]" time="0.091" /><testcase classname="tests.test_replication" name="test_full_archive_scan_rejects_changed_distribution_or_identity[supplied]" time="0.097" /><testcase classname="tests.test_replication" name="test_full_archive_scan_rejects_changed_distribution_or_identity[prefix]" time="0.085" /><testcase classname="tests.test_replication" name="test_full_archive_scan_rejects_changed_distribution_or_identity[split]" time="0.095" /><testcase classname="tests.test_replication" name="test_full_archive_scan_rejects_changed_distribution_or_identity[sparse]" time="0.124" /><testcase classname="tests.test_replication" name="test_additional_historical_rosters_validate_all_npzs_and_capture_real_hashes" time="0.090" /><testcase classname="tests.test_replication" name="test_empty_additional_roster_is_not_silently_accepted" time="0.002" /><testcase classname="tests.test_replication" name="test_exclusive_copy_never_overwrites_or_follows_symlinks[file]" time="0.004" /><testcase classname="tests.test_replication" name="test_exclusive_copy_never_overwrites_or_follows_symlinks[directory]" time="0.003" /><testcase classname="tests.test_replication" name="test_exclusive_copy_never_overwrites_or_follows_symlinks[dangling_symlink]" time="0.003" /><testcase classname="tests.test_replication" name="test_copied_bytes_are_independent_not_mutable_hardlinks" time="0.005" /><testcase classname="tests.test_replication" name="test_pilot_only_generation_reuses_exact_original_scorer_validation" time="0.350" /><testcase classname="tests.test_replication" name="test_generation_failure_does_not_replace_roots_or_publish_completion" time="0.010" /><testcase classname="tests.test_replication" name="test_exact_10000_shared_resamples_and_all_five_bonferroni_intervals" time="46.637"><failure message="assert -800.23263978564 == -800.2326397856405 ± 1.0e-13&#10;  &#10;  comparison failed&#10;  Obtained: -800.23263978564&#10;  Expected: -800.2326397856405 ± 1.0e-13">fixed_statistics = (['pilot-000000-985df840a47926e496fccafe8cb15000', 'pilot-000001-73ae9acdf0cbb56fb6e8f98a43e63db3', 'pilot-000002-c0a0..., 'fwer_alpha': 0.05, 'method': 'Bonferroni two-sided percentile bootstrap', 'individual_confidence': 0.99, ...}, ...})
+
+    def test_exact_10000_shared_resamples_and_all_five_bonferroni_intervals(fixed_statistics):
+        ids, reports, indices, result = fixed_statistics
+        expected_indices = np.random.default_rng(20261102).integers(128, size=(10000, 128), dtype=np.int64)
+        np.testing.assert_array_equal(indices, expected_indices)
+        family = result["primary_family"]
+        assert family["size"] == 5 and family["fwer_alpha"] == .05
+        assert family["individual_confidence"] == .99 and family["quantiles"] == [.005, .995]
+        assert family["shared_resamples_across_models_and_metrics"] is True
+        assert [(row["model"], row["metric"]) for row in family["claims"]] == list(r.PRIMARY)
+        for claim in family["claims"]:
+            rows = [row for row in reports[claim["model"]]["records"]
+                    if row["appearance"] == "original" and row["horizon"] == 8]
+            values = np.asarray([np.mean([row["metrics"][claim["metric"]] for row in rows if row["cluster"] == root]) for root in ids])
+            independent = values[expected_indices].mean(1)
+&gt;           assert claim["estimate"] == pytest.approx(values.mean(), abs=1e-13)
+E           assert -800.23263978564 == -800.2326397856405 ± 1.0e-13
+E             
+E             comparison failed
+E             Obtained: -800.23263978564
+E             Expected: -800.2326397856405 ± 1.0e-13
+
+tests/test_replication.py:461: AssertionError</failure></testcase><testcase classname="tests.test_replication" name="test_every_secondary_slice_metric_gain_and_zero_coverage_root_is_retained" time="0.023" /><testcase classname="tests.test_replication" name="test_root_aggregation_is_order_invariant_and_equal_branch_weight" time="0.019" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[short]" time="0.011" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[duplicate]" time="0.018" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[root]" time="0.012" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[appearance]" time="0.011" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[branch_bool]" time="0.009" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[horizon_float]" time="0.010" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[nan]" time="0.010" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[bool_metric]" time="0.010" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[missing_metric]" time="0.010" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[extra_metric]" time="0.014" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[missing_candidate]" time="0.010" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[candidate_count]" time="0.010" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[candidate_bool]" time="0.012" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[candidate_mean]" time="0.011" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[negative_matrix]" time="0.012" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[wrong_matrix]" time="0.014" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[wrong_effect]" time="0.012" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[bad_cost]" time="0.011" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[wrong_ranking]" time="0.012" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[chosen_bool]" time="0.011" /><testcase classname="tests.test_replication" name="test_incomplete_or_corrupt_records_never_trigger_filtering[tie_rule]" time="0.025" /><testcase classname="tests.test_replication" name="test_strict_directional_decisions_do_not_call_touching_zero_a_pass[ci0-supports_prespecified_negative_direction]" time="0.004" /><testcase classname="tests.test_replication" name="test_strict_directional_decisions_do_not_call_touching_zero_a_pass[ci1-opposite_direction]" time="0.001" /><testcase classname="tests.test_replication" name="test_strict_directional_decisions_do_not_call_touching_zero_a_pass[ci2-inconclusive]" time="0.001" /><testcase classname="tests.test_replication" name="test_strict_directional_decisions_do_not_call_touching_zero_a_pass[ci3-inconclusive]" time="0.001" /><testcase classname="tests.test_replication" name="test_strict_directional_decisions_do_not_call_touching_zero_a_pass[ci4-inconclusive]" time="0.001" /><testcase classname="tests.test_replication" name="test_strict_directional_decisions_do_not_call_touching_zero_a_pass[ci5-inconclusive]" time="0.004" /><testcase classname="tests.test_replication" name="test_bootstrap_roster_and_integer_contracts[ids0-0-10]" time="0.001" /><testcase classname="tests.test_replication" name="test_bootstrap_roster_and_integer_contracts[ids1-0-10]" time="0.001" /><testcase classname="tests.test_replication" name="test_bootstrap_roster_and_integer_contracts[ids2-0-10]" time="0.001" /><testcase classname="tests.test_replication" name="test_bootstrap_roster_and_integer_contracts[ids3-True-10]" time="0.002" /><testcase classname="tests.test_replication" name="test_bootstrap_roster_and_integer_contracts[ids4-0-True]" time="0.003" /><testcase classname="tests.test_replication" name="test_bootstrap_roster_and_integer_contracts[ids5-0-0]" time="0.001" /><testcase classname="tests.test_replication" name="test_bootstrap_roster_and_integer_contracts[ids6-0-10]" time="0.001" /><testcase classname="tests.test_replication" name="test_primary_analysis_requires_both_models_full_roots_and_exact_resamples[missing_model]" time="0.001" /><testcase classname="tests.test_replication" name="test_primary_analysis_requires_both_models_full_roots_and_exact_resamples[partial_roots]" time="0.001" /><testcase classname="tests.test_replication" name="test_primary_analysis_requires_both_models_full_roots_and_exact_resamples[wrong_seed]" time="0.054" /><testcase classname="tests.test_replication" name="test_primary_analysis_requires_both_models_full_roots_and_exact_resamples[fewer_draws]" time="0.222" /><testcase classname="tests.test_replication" name="test_primary_analysis_requires_both_models_full_roots_and_exact_resamples[float_indices]" time="0.032" /><testcase classname="tests.test_replication" name="test_gain_keeps_zero_energy_roots_and_reports_undefined_resamples[True]" time="0.091"><failure message="ValueError: Incomplete dynamics record roster.">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x135d85280&gt;
+zero_energy = True
+
+    @pytest.mark.parametrize("zero_energy", [True, False])
+    def test_gain_keeps_zero_energy_roots_and_reports_undefined_resamples(monkeypatch, zero_energy):
+        monkeypatch.setattr(r, "ROOTS", 2)
+        monkeypatch.setattr(r, "HORIZON", 1)
+        monkeypatch.setattr(r, "CANDIDATES", 2)
+        ids = ["a", "b"]
+        indices = r.bootstrap_indices(ids)
+        reports = {name: {"records": synthetic_records(name, ids, horizon=1, candidates=2, zero_energy=zero_energy)} for name in r.MODELS}
+&gt;       result = r.analyze_reports(reports, ids, indices)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_replication.py:597: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/run_replication.py:448: in analyze_reports
+    groups = aggregate_records(reports[name]["records"], name, root_ids)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+records = [{'cluster': 'a', 'branch': 0, 'horizon': 1, 'metrics': {'free_none': 0.010000000000000002, 'actual_none': 0.0004, 'in...e': 0.010000000000000002, 'actual_none': 0.0004, 'initial_persistence': 0.0, 'local_persistence': 0.0, ...}, ...}, ...]
+name = 'lewm', root_ids = ['a', 'b'], horizon = 8, candidates = 8
+
+    def aggregate_records(records, name, root_ids, *, horizon=HORIZON, candidates=CANDIDATES):
+        """Validate complete banks, then average candidates (in bank) and TWO branches.
+    
+        Return one vector per metric/slice, always in the SAME sorted root order.
+        Missing/duplicated cells, metrics, candidates or zero-effect banks cannot be
+        repaired by dropping rows. The compact root vectors make weighting auditable.
+        """
+        if name not in MODELS or root_ids != sorted(set(root_ids)) or not root_ids:
+            raise ValueError("Invalid model or root roster.")
+        if not isinstance(records, list) or len(records) != len(root_ids) * len(APPEARANCES) * 2 * horizon:
+&gt;           raise ValueError("Incomplete dynamics record roster.")
+E           ValueError: Incomplete dynamics record roster.
+
+scripts/run_replication.py:363: ValueError</failure></testcase><testcase classname="tests.test_replication" name="test_gain_keeps_zero_energy_roots_and_reports_undefined_resamples[False]" time="0.047"><failure message="ValueError: Incomplete dynamics record roster.">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x135d85400&gt;
+zero_energy = False
+
+    @pytest.mark.parametrize("zero_energy", [True, False])
+    def test_gain_keeps_zero_energy_roots_and_reports_undefined_resamples(monkeypatch, zero_energy):
+        monkeypatch.setattr(r, "ROOTS", 2)
+        monkeypatch.setattr(r, "HORIZON", 1)
+        monkeypatch.setattr(r, "CANDIDATES", 2)
+        ids = ["a", "b"]
+        indices = r.bootstrap_indices(ids)
+        reports = {name: {"records": synthetic_records(name, ids, horizon=1, candidates=2, zero_energy=zero_energy)} for name in r.MODELS}
+&gt;       result = r.analyze_reports(reports, ids, indices)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_replication.py:597: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/run_replication.py:448: in analyze_reports
+    groups = aggregate_records(reports[name]["records"], name, root_ids)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+records = [{'cluster': 'a', 'branch': 0, 'horizon': 1, 'metrics': {'free_none': 0.010000000000000002, 'actual_none': 0.0004, 'in...e': 0.010000000000000002, 'actual_none': 0.0004, 'initial_persistence': 0.0, 'local_persistence': 0.0, ...}, ...}, ...]
+name = 'lewm', root_ids = ['a', 'b'], horizon = 8, candidates = 8
+
+    def aggregate_records(records, name, root_ids, *, horizon=HORIZON, candidates=CANDIDATES):
+        """Validate complete banks, then average candidates (in bank) and TWO branches.
+    
+        Return one vector per metric/slice, always in the SAME sorted root order.
+        Missing/duplicated cells, metrics, candidates or zero-effect banks cannot be
+        repaired by dropping rows. The compact root vectors make weighting auditable.
+        """
+        if name not in MODELS or root_ids != sorted(set(root_ids)) or not root_ids:
+            raise ValueError("Invalid model or root roster.")
+        if not isinstance(records, list) or len(records) != len(root_ids) * len(APPEARANCES) * 2 * horizon:
+&gt;           raise ValueError("Incomplete dynamics record roster.")
+E           ValueError: Incomplete dynamics record roster.
+
+scripts/run_replication.py:363: ValueError</failure></testcase><testcase classname="tests.test_replication" name="test_existing_output_fails_before_reading_sources_or_loading_models[file]" time="0.013" /><testcase classname="tests.test_replication" name="test_existing_output_fails_before_reading_sources_or_loading_models[directory]" time="0.006" /><testcase classname="tests.test_replication" name="test_existing_output_fails_before_reading_sources_or_loading_models[symlink]" time="0.011" /><testcase classname="tests.test_replication" name="test_plan_only_does_not_create_outputs_generate_or_load" time="0.181" /><testcase classname="tests.test_replication" name="test_cli_has_no_local_research_tuning_partial_model_or_resume_escape[options0]" time="0.005" /><testcase classname="tests.test_replication" name="test_cli_has_no_local_research_tuning_partial_model_or_resume_escape[options1]" time="0.007" /><testcase classname="tests.test_replication" name="test_cli_has_no_local_research_tuning_partial_model_or_resume_escape[options2]" time="0.007" /><testcase classname="tests.test_replication" name="test_cli_has_no_local_research_tuning_partial_model_or_resume_escape[options3]" time="0.005" /><testcase classname="tests.test_replication" name="test_cli_has_no_local_research_tuning_partial_model_or_resume_escape[options4]" time="0.006" /><testcase classname="tests.test_replication" name="test_cli_has_no_local_research_tuning_partial_model_or_resume_escape[options5]" time="0.007" /><testcase classname="tests.test_replication" name="test_cli_has_no_local_research_tuning_partial_model_or_resume_escape[options6]" time="0.007" /><testcase classname="tests.test_replication" name="test_research_preflight_never_falls_back_to_cpu[darwin]" time="0.002" /><testcase classname="tests.test_replication" name="test_research_preflight_never_falls_back_to_cpu[linux]" time="0.004" /><testcase classname="tests.test_replication" name="test_research_preflight_requires_literal_checkpoint_consent_before_io" time="0.002" /><testcase classname="tests.test_replication" name="test_full_pipeline_cpu_test_doubles_data_then_both_existing_qualified_dynamics" time="0.136"><failure message="ValueError: Authenticated input/source changed: /private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/SYNTHETIC-original0/manifest-development.json">original_fixture = {'path': '/private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/SYNTHETIC-original0',...69796773c39a', 'root_index': 1, 'root_seed': 168622760440890877127410593321056453530, 'split_seed': 40577, ...}], ...}}
+tmp_path = PosixPath('/private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/test_full_pipeline_cpu_test_do0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x1359e8710&gt;
+
+    def test_full_pipeline_cpu_test_doubles_data_then_both_existing_qualified_dynamics(original_fixture, tmp_path, monkeypatch):
+        args, generation_calls, model_calls = setup_synthetic_execution(monkeypatch, tmp_path, original_fixture)
+        plan_seen, original_generate = [], data.generate_splits
+    
+        def assert_preoutcome_publication(*a, **kw):
+            assert (args.output / "plan.json").is_file()
+            assert (args.output / "bootstrap-indices.npy").is_file()
+            assert not (args.output / "dynamics").exists()
+            plan_seen.append(True)
+            return original_generate(*a, **kw)
+    
+        monkeypatch.setattr(data, "generate_splits", assert_preoutcome_publication)
+&gt;       result = r.execute(args)
+                 ^^^^^^^^^^^^^^^
+
+tests/test_replication.py:695: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/run_replication.py:577: in execute
+    copy_exclusive(Path(original["path"]) / "manifest-development.json", original_manifest, MANIFEST_SHA256)
+scripts/run_replication.py:114: in copy_exclusive
+    verify_hashes({str(source): expected})
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hashes = {'/private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/SYNTHETIC-original0/manifest-development.json': 'fc759e41bd66c48954f3d41568a9e48893ece47ae0a9719229109d08a8086485'}
+
+    def verify_hashes(hashes):
+        for path, expected in hashes.items():
+            if not _sha(expected) or digest(_ordinary(path)) != expected:
+&gt;               raise ValueError(f"Authenticated input/source changed: {path}")
+E               ValueError: Authenticated input/source changed: /private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/SYNTHETIC-original0/manifest-development.json
+
+scripts/run_replication.py:108: ValueError</failure></testcase><testcase classname="tests.test_replication" name="test_midrun_input_change_blocks_joint_results_and_completion[original]" time="0.797"><failure message="AssertionError: assert [] == ['lewm']&#10;  &#10;  Right contains one more item: #x1B[0m#x1B[33m'#x1B[39;49;00m#x1B[33mlewm#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m#x1B[90m#x1B[39;49;00m&#10;  Use -v to get more diff">tmp_path = PosixPath('/private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/test_midrun_input_change_block0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x166565f10&gt;
+changed = 'original'
+
+    @pytest.mark.parametrize("changed", ["original", "generated", "source_snapshot"])
+    def test_midrun_input_change_blocks_joint_results_and_completion(tmp_path, monkeypatch, changed):
+        original = write_fixture(tmp_path / "old", tiny_config())
+        args, _, model_calls = setup_synthetic_execution(monkeypatch, tmp_path, original)
+        original_dynamics = f.dynamics_followup
+    
+        def mutate(*a, **kw):
+            result = original_dynamics(*a, **kw)
+            path = ({"original": next((Path(original["path"]) / "validation").glob("*.npz")),
+                     "generated": next((args.output / "data/pilot").glob("*.npz")),
+                     "source_snapshot": args.output / "sources/scripts/run_replication.py"})[changed]
+            with path.open("ab") as stream:
+                stream.write(b"SYNTHETIC mutation after first model")
+            return result
+    
+        monkeypatch.setattr(f, "dynamics_followup", mutate)
+        with pytest.raises(ValueError, match="changed"):
+            r.execute(args)
+&gt;       assert model_calls == ["lewm"]
+E       AssertionError: assert [] == ['lewm']
+E         
+E         Right contains one more item: #x1B[0m#x1B[33m'#x1B[39;49;00m#x1B[33mlewm#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m#x1B[90m#x1B[39;49;00m
+E         Use -v to get more diff
+
+tests/test_replication.py:742: AssertionError</failure></testcase><testcase classname="tests.test_replication" name="test_midrun_input_change_blocks_joint_results_and_completion[generated]" time="0.633"><failure message="AssertionError: assert [] == ['lewm']&#10;  &#10;  Right contains one more item: #x1B[0m#x1B[33m'#x1B[39;49;00m#x1B[33mlewm#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m#x1B[90m#x1B[39;49;00m&#10;  Use -v to get more diff">tmp_path = PosixPath('/private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/test_midrun_input_change_block1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x166541af0&gt;
+changed = 'generated'
+
+    @pytest.mark.parametrize("changed", ["original", "generated", "source_snapshot"])
+    def test_midrun_input_change_blocks_joint_results_and_completion(tmp_path, monkeypatch, changed):
+        original = write_fixture(tmp_path / "old", tiny_config())
+        args, _, model_calls = setup_synthetic_execution(monkeypatch, tmp_path, original)
+        original_dynamics = f.dynamics_followup
+    
+        def mutate(*a, **kw):
+            result = original_dynamics(*a, **kw)
+            path = ({"original": next((Path(original["path"]) / "validation").glob("*.npz")),
+                     "generated": next((args.output / "data/pilot").glob("*.npz")),
+                     "source_snapshot": args.output / "sources/scripts/run_replication.py"})[changed]
+            with path.open("ab") as stream:
+                stream.write(b"SYNTHETIC mutation after first model")
+            return result
+    
+        monkeypatch.setattr(f, "dynamics_followup", mutate)
+        with pytest.raises(ValueError, match="changed"):
+            r.execute(args)
+&gt;       assert model_calls == ["lewm"]
+E       AssertionError: assert [] == ['lewm']
+E         
+E         Right contains one more item: #x1B[0m#x1B[33m'#x1B[39;49;00m#x1B[33mlewm#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m#x1B[90m#x1B[39;49;00m
+E         Use -v to get more diff
+
+tests/test_replication.py:742: AssertionError</failure></testcase><testcase classname="tests.test_replication" name="test_midrun_input_change_blocks_joint_results_and_completion[source_snapshot]" time="1.249"><failure message="AssertionError: assert [] == ['lewm']&#10;  &#10;  Right contains one more item: #x1B[0m#x1B[33m'#x1B[39;49;00m#x1B[33mlewm#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m#x1B[90m#x1B[39;49;00m&#10;  Use -v to get more diff">tmp_path = PosixPath('/private/var/folders/f8/7sf7r7k52r7bswn0061d7jgc0000gn/T/pytest-of-shashank/pytest-111/test_midrun_input_change_block2')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x135061fa0&gt;
+changed = 'source_snapshot'
+
+    @pytest.mark.parametrize("changed", ["original", "generated", "source_snapshot"])
+    def test_midrun_input_change_blocks_joint_results_and_completion(tmp_path, monkeypatch, changed):
+        original = write_fixture(tmp_path / "old", tiny_config())
+        args, _, model_calls = setup_synthetic_execution(monkeypatch, tmp_path, original)
+        original_dynamics = f.dynamics_followup
+    
+        def mutate(*a, **kw):
+            result = original_dynamics(*a, **kw)
+            path = ({"original": next((Path(original["path"]) / "validation").glob("*.npz")),
+                     "generated": next((args.output / "data/pilot").glob("*.npz")),
+                     "source_snapshot": args.output / "sources/scripts/run_replication.py"})[changed]
+            with path.open("ab") as stream:
+                stream.write(b"SYNTHETIC mutation after first model")
+            return result
+    
+        monkeypatch.setattr(f, "dynamics_followup", mutate)
+        with pytest.raises(ValueError, match="changed"):
+            r.execute(args)
+&gt;       assert model_calls == ["lewm"]
+E       AssertionError: assert [] == ['lewm']
+E         
+E         Right contains one more item: #x1B[0m#x1B[33m'#x1B[39;49;00m#x1B[33mlewm#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m#x1B[90m#x1B[39;49;00m
+E         Use -v to get more diff
+
+tests/test_replication.py:742: AssertionError</failure></testcase><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[kind]" time="0.006" /><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[config]" time="0.003" /><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[spec]" time="0.004" /><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[code_sha256]" time="0.004" /><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[input_sha256]" time="0.003" /><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[model]" time="0.004" /><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[parameter_buffer_sha256]" time="0.002" /><testcase classname="tests.test_replication" name="test_report_must_bind_actual_data_models_sources_and_spec[protocol]" time="0.195" /></testsuite></testsuites>

@@ -1,8 +1,8 @@
 # From latent prediction to physical claims: a diagnostic audit of frozen PushT world models
 
-**Working manuscript — exploratory results, not submission-ready.**
-Updated 2026-11-02 after retrieval and full inventory verification of all six
-follow-up reports. This draft preserves negative results and does not claim that
+**Working manuscript — exploratory discovery plus fixed fresh-root replication; not submission-ready.**
+Updated 2026-11-03 after tracked numerical audits and fresh-root replication,
+authenticated download and independent recomputation. This draft preserves negative results and does not claim that
 the originally proposed physical-editor hypothesis has been established.
 
 ## Abstract
@@ -20,8 +20,13 @@ generalization tests. These findings do not support the original physical-editor
 qualification claim. Complementary follow-ups find that the tested nonlinear
 probes do not rescue measurement, both models exhibit latent action-effect
 fidelity, and DINO's generated oracle-history prediction has no clear advantage
-over local persistence. DINO's forecast-based candidate ranking outperforms its
-true-endpoint ranking, despite inadequate physical qualification. The contribution currently supported
+over local persistence. A fixed 128-fresh-root replication supports action-effect
+fidelity and specificity for both checkpoints using a five-contrast family of
+99% intervals. DINO's exploratory forecast-over-endpoint ranking advantage is
+inconclusive under independent primary-family inference. A bounded eight-root
+numerical audit finds encoding-layout sensitivity strongly reduced by a
+convolution-precision control, without establishing the cause of all historical
+drift. The contribution currently supported
 is a reproducible checkpoint-specific diagnostic case study, not a new general
 theory of physical representation.
 
@@ -194,10 +199,51 @@ measurement, action fidelity, and decision-score mismatch, not a confirmed
 physical-editor transfer result. New mechanisms and generalizations require
 fresh-root replication rather than further tuning on this pilot.
 
-## 5. Limitations and defensible claims
+## 5. Fresh-root replication and numerical qualification
+
+The [dated replication protocol](REPLICATION_PROTOCOL_20261102.md) fixed 128 new
+pilot roots, seed 2026110201, before generation. It preserves the discovery
+distribution and candidate bank, excludes original/reserved root identities,
+and performs no fitting, filtering or seed search. The primary family contains
+action-effect error minus zero and matched-minus-all-wrong assignment for each
+model, plus DINO forecast-minus-endpoint native-goal regret. Equal-root clustered
+bootstrap uses 10,000 shared draws and two-sided 99% Bonferroni intervals.
+This is a prospective local design after discovery, not external registration.
+
+| Primary contrast | LeWM estimate [99% CI] | DINO estimate [99% CI] |
+|---|---|---|
+| Effect error minus zero | −0.375268 [−0.452880, −0.303452] | −0.236408 [−0.288885, −0.183415] |
+| Matched minus all wrong | −0.517972 [−0.584175, −0.454432] | −0.560457 [−0.596832, −0.524494] |
+| Forecast minus endpoint regret | Not primary | −0.007112 [−0.018928, 0.005073] |
+
+Four primary contrasts support the prespecified direction. **DINO's ranking
+advantage remains inconclusive**, so the discovery observation is not promoted
+to a replicated decision claim. Half the fresh banks lack positive coverage
+(129/256); zero regret is not control success. F2 secondary intervals preserve
+LeWM's useful local prediction and DINO's inconclusive local-persistence contrast.
+F1 and recorded feedback were not independently repeated.
+
+The [bounded numerical audit](NUMERICAL_AUDIT_PROTOCOL_20261102.md) compares both
+observed execution paths, crossed encoding/rollout layouts, identical repeats,
+wrapper/reduction contrasts and four distinct backend interventions on eight
+preselected original roots. Baseline maximum native-MSE differences are
+0.00489527 / 0.00153232 (LeWM/DINO), largely aligned with encoding-layout changes.
+Convolution IEEE permission reduces these to 0.000002563 / 0.000006437; it also
+changes forecasts and encoded references, so this is not physical-accuracy
+improvement. Feedback/public tensors agree; unchanged same-process repeats are
+exact. The historical larger maxima and portability across devices remain
+unresolved. Parameters, nonpersistent buffers and backend state were checked.
+
+All numerical CSV summaries and the replication's five primary plus all
+secondary intervals were independently recomputed. See the
+[complete tracked-results report](PAPER_STUDIES_RESULTS_20261103.md) for
+full-precision receipts, all controls, source pins, timings and archive hashes.
+
+## 6. Limitations and defensible claims
 
 This is one environment, two frozen releases, a finite generated candidate bank,
-and an exploratory pilot inspected before follow-up design. Recorded performance
+an exploratory pilot inspected before follow-up design, and a fixed fresh sample
+on the same distribution. Recorded performance
 is not held-out evidence. Teacher forcing uses privileged observations and is
 not a deployable forecast. Good actual-image decoding cannot qualify edited or
 predicted states. A zero-regret bank with no positive coverage is not task success.
@@ -213,12 +259,13 @@ or justify a universal claim about world models.
 
 Batching differs between old and new inference. Aggregate native/persistence
 errors change by at most 0.000146, without changing conclusions, but some
-individual native errors differ by up to 0.028922. Batching/backend numerics have
-not been experimentally isolated as the cause. The runtime adapter-parity checks
+individual native errors differ by up to 0.028922. The eight-root audit now
+isolates sensitivity to encoding layout and a convolution-precision intervention
+on that sample, but cannot establish the historical cause. The runtime adapter-parity checks
 and immutable parameter/buffer checks support implementation consistency, not
 bitwise replication across execution layouts.
 
-## 6. Reproducibility and work remaining
+## 7. Reproducibility and work remaining
 
 The six-prerequisite archive contains 120 hash-inventoried files; its SHA256 and
 source pins appear in the diagnostic report. Original pilot inputs remain in a
@@ -227,7 +274,7 @@ use fresh output directories. Code tests establish implementation invariants,
 not scientific success.
 
 Before submission: adapt the verified summary figure to the venue and add secondary-slice figures; identify any
-missing evidence rather than tune on pilot outcomes; choose a fresh-root
-replication protocol if warranted; audit the related-work discussion against
+missing evidence rather than tune on pilot outcomes; integrate the completed
+fixed replication without broadening its claims; audit the related-work discussion against
 primary sources in [LITERATURE.md](LITERATURE.md); add checked bibliographic
 citations, checkpoint details, and venue-compliant reproducibility materials.
