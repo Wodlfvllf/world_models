@@ -1,5 +1,12 @@
 # From latent prediction to physical claims: a diagnostic audit of frozen PushT world models
 
+**The complete ICML-style LaTeX v0 is now the paper-first checkpoint:**
+[PDF](paper/checkpoints/v0/paper.pdf), [editable LaTeX](paper/main.tex),
+[checkpoint ledger](PAPER_CHECKPOINTS.md), and
+[future-hypothesis roadmap](paper/HYPOTHESIS_ROADMAP.md).
+This Markdown draft is retained as an earlier narrative record, not the
+authoritative typeset manuscript.
+
 **Working manuscript — exploratory discovery plus fixed fresh-root replication; not submission-ready.**
 Updated 2026-11-03 after tracked numerical audits and fresh-root replication,
 authenticated download and independent recomputation. This draft preserves negative results and does not claim that

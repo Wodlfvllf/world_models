@@ -1,0 +1,30 @@
+{
+  "schema": "wm_audit.paper_checkpoint.v1",
+  "version": "v0",
+  "utc": "2026-11-03T09:20:08.126983+00:00",
+  "status": "Complete working ICML-style paper; not submitted, accepted, or venue-certified",
+  "source_commit": "9c67ec9324853f94d37247f743e28740b24e8d22",
+  "main_pages": 6,
+  "total_pages": 12,
+  "sources_in_bundle": 26,
+  "files": {
+    "build-receipt.json": {
+      "sha256": "56da1207075a969c97c63d64513b1965522e026f6becd21fd22955987fca79ec",
+      "size_bytes": 3057
+    },
+    "manuscript-tests.xml": {
+      "sha256": "f34d1dbea691e2b29bcf2e0101675a9059deeb23aafcbb8735dedb6af29b7216",
+      "size_bytes": 2686
+    },
+    "paper.pdf": {
+      "sha256": "49de2f5a863edd94b257b8949d191894f0eb787297087714450701978395e0b4",
+      "size_bytes": 281948
+    },
+    "source.zip": {
+      "sha256": "4cebf63a4bad5ee1ec52ead0d32ad7cbb5f5c04941807de3c6c6ebc41294d0aa",
+      "size_bytes": 546977
+    }
+  },
+  "claim_boundary": "four primary latent-action contrasts supported; DINO ranking inconclusive; physical editor unqualified",
+  "future_hypotheses": "H01-H04 are roadmap items, not completed experiments"
+}

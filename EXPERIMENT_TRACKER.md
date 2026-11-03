@@ -78,6 +78,14 @@ verified. [Results, all primary outcomes and archive ledger](PAPER_STUDIES_RESUL
 No prescribed pending study remains unrun. Publication-readiness and broader
 scientific questions are separate tasks; completion is not paper acceptance.
 
+## Paper-first evidence checkpoint
+
+The completed studies now have a [full ICML-style v0 manuscript](paper/checkpoints/v0/paper.pdf),
+[editable LaTeX source](paper/main.tex), [immutable checkpoint ledger](PAPER_CHECKPOINTS.md)
+and [hypothesis extension roadmap](paper/HYPOTHESIS_ROADMAP.md). No new experiments
+were launched while writing it. Future H01–H04 ideas are not completed studies;
+they require separately specified protocols and fresh evidence.
+
 ## Current recovery entry point
 
 [Restored session receipt and paths](RESTORED_SESSION_20261103.md).
