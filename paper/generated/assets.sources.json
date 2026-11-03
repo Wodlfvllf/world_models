@@ -1,0 +1,1912 @@
+{
+  "schema": "wm_audit.paper_assets.v1",
+  "source_reports": {
+    "probes/runs/followup-probes-20261102-01/lewm/probes/report.json": {
+      "archive": "runs/molab-20261102-retrieved/followup-probes-20261102-verified.zip",
+      "archive_sha256": "678ed416c59dfb383b0b64b92de234a82d99b872187bb2ac3514f37d74eb1fe7",
+      "member": "runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "sha256": "e84ea75abf99149c53f5ad3b4cef8bf3e3205697f7a0a9085611543dac26f4e1"
+    },
+    "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json": {
+      "archive": "runs/molab-20261102-retrieved/followup-probes-20261102-verified.zip",
+      "archive_sha256": "678ed416c59dfb383b0b64b92de234a82d99b872187bb2ac3514f37d74eb1fe7",
+      "member": "runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "sha256": "61f98f7e3c2f1f2da1946b96b75de054e4c40de8b62b7eaa9003f673558419ba"
+    },
+    "dynamics/runs/dynamics-20261102-01/lewm/dynamics/report.json": {
+      "archive": "runs/molab-20261102-retrieved/dynamics-20261102-verified.zip",
+      "archive_sha256": "538e62131fcf4f4139cfb86fa8abea4817297e18a9e02d76bbb08805208482d9",
+      "member": "runs/dynamics-20261102-01/lewm/dynamics/report.json",
+      "sha256": "fe56cbe42206cb72c6715d19cc647b48c79ecf922c98a79a15a1b1e7b253f21b"
+    },
+    "dynamics/runs/dynamics-20261102-01/dinowm/dynamics/report.json": {
+      "archive": "runs/molab-20261102-retrieved/dynamics-20261102-verified.zip",
+      "archive_sha256": "538e62131fcf4f4139cfb86fa8abea4817297e18a9e02d76bbb08805208482d9",
+      "member": "runs/dynamics-20261102-01/dinowm/dynamics/report.json",
+      "sha256": "2dc1dca27822943abef2ea426ad0c428632ae9aa268610fef199133ede278cc2"
+    },
+    "recorded-feedback/runs/recorded-feedback-20261102-01/lewm/recorded-feedback/report.json": {
+      "archive": "runs/molab-20261102-retrieved/recorded-feedback-20261102-verified.zip",
+      "archive_sha256": "71892b690d0d365f2e56483af28bd6e97a24fcee9deb0db0b6166c09a9f1f227",
+      "member": "runs/recorded-feedback-20261102-01/lewm/recorded-feedback/report.json",
+      "sha256": "7cd6bc73aee1a8289f777f6b28c5d31b7e2959251f08d802d46b558efab00c08"
+    },
+    "recorded-feedback/runs/recorded-feedback-20261102-01/dinowm/recorded-feedback/report.json": {
+      "archive": "runs/molab-20261102-retrieved/recorded-feedback-20261102-verified.zip",
+      "archive_sha256": "71892b690d0d365f2e56483af28bd6e97a24fcee9deb0db0b6166c09a9f1f227",
+      "member": "runs/recorded-feedback-20261102-01/dinowm/recorded-feedback/report.json",
+      "sha256": "3aacf2b104af78b747fbcbc1000f8b5cb9a8fae4c0558b9e0bd7e03c81117e99"
+    },
+    "numerical-lewm/numerical-lewm/report.json": {
+      "archive": "runs/paper-studies-20261103-retrieved/numerical-lewm.zip",
+      "archive_sha256": "d244e69da1a693725b94491612e798bf3091ae8acbb230aa92eed610fafb98ee",
+      "member": "numerical-lewm/report.json",
+      "sha256": "eea9afca749865d8a89af3391f2de18870f376f935e08d70a95798f058380826"
+    },
+    "numerical-dinowm/numerical-dinowm/report.json": {
+      "archive": "runs/paper-studies-20261103-retrieved/numerical-dinowm.zip",
+      "archive_sha256": "4c84faef80b1557a9edfd836cea163c9304326268965ce9a6e05664d0d47c7ea",
+      "member": "numerical-dinowm/report.json",
+      "sha256": "0b0ca5e17aebb0a962d5d18138f2bc96eb74027ee337fd97f1b34715376e15b6"
+    },
+    "replication/replication/replication-results.json": {
+      "archive": "runs/paper-studies-20261103-retrieved/replication.zip",
+      "archive_sha256": "7e4ffb90d484e7fc5f736715d23ebb22e0af9da0ce83d38494a79748a557e27d",
+      "member": "replication/replication-results.json",
+      "sha256": "a9f77137c2480c07420ce2d75458af86b076f8934cb44ad91e4bff2f0e987fbc"
+    }
+  },
+  "displayed_statistics": [
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/83/metrics/block_distance",
+      "estimate": 29.317179098263576,
+      "ci95": [
+        27.235288039166043,
+        31.580420216456805
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/83/metrics/angle_mae_deg",
+      "estimate": 20.04554046371449,
+      "ci95": [
+        18.115454880719163,
+        22.11325532019544
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/83/metrics/paired_angle_effect_mae_deg",
+      "estimate": 14.69023867161549,
+      "ci95": [
+        12.76850319278085,
+        16.692784750611917
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/65/metrics/block_distance",
+      "estimate": 40.6694675203627,
+      "ci95": [
+        37.83620607370252,
+        43.802576645249594
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/65/metrics/angle_mae_deg",
+      "estimate": 18.91855560029834,
+      "ci95": [
+        17.22882555024851,
+        20.73359500633379
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/65/metrics/paired_angle_effect_mae_deg",
+      "estimate": 13.978364435417475,
+      "ci95": [
+        12.228690509360389,
+        16.012939696830042
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/71/metrics/block_distance",
+      "estimate": 39.64242672088135,
+      "ci95": [
+        37.089048739181216,
+        42.368141504845916
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/71/metrics/angle_mae_deg",
+      "estimate": 18.735087955368357,
+      "ci95": [
+        17.067521615778073,
+        20.590280308672085
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/71/metrics/paired_angle_effect_mae_deg",
+      "estimate": 14.024248637290484,
+      "ci95": [
+        12.313899542932681,
+        15.868286110348482
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/77/metrics/block_distance",
+      "estimate": 38.57125157002331,
+      "ci95": [
+        35.75057460647256,
+        41.461442941167505
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/77/metrics/angle_mae_deg",
+      "estimate": 19.217585576337804,
+      "ci95": [
+        17.466166889650637,
+        21.14069412932079
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/77/metrics/paired_angle_effect_mae_deg",
+      "estimate": 14.596663662947165,
+      "ci95": [
+        12.708150046254437,
+        16.749001529150725
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/83/metrics/block_distance",
+      "estimate": 32.15810234742142,
+      "ci95": [
+        29.85957903114812,
+        34.42005052797242
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/83/metrics/angle_mae_deg",
+      "estimate": 34.832208490963815,
+      "ci95": [
+        31.05959697574628,
+        38.818402985727154
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/83/metrics/paired_angle_effect_mae_deg",
+      "estimate": 22.650206761948816,
+      "ci95": [
+        19.815237111953845,
+        25.639757267674387
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/65/metrics/block_distance",
+      "estimate": 56.90408548463888,
+      "ci95": [
+        53.99623300590868,
+        59.92023016259497
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/65/metrics/angle_mae_deg",
+      "estimate": 38.60906501062753,
+      "ci95": [
+        34.08891203804368,
+        43.34170984106306
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/65/metrics/paired_angle_effect_mae_deg",
+      "estimate": 24.988648190731162,
+      "ci95": [
+        21.68176640792718,
+        28.405714913861797
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/71/metrics/block_distance",
+      "estimate": 60.28927215949341,
+      "ci95": [
+        57.291413884529256,
+        63.26665886757547
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/71/metrics/angle_mae_deg",
+      "estimate": 37.37489233796596,
+      "ci95": [
+        33.09153946013034,
+        41.734981953889225
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/71/metrics/paired_angle_effect_mae_deg",
+      "estimate": 24.9041054201816,
+      "ci95": [
+        21.72761912859973,
+        28.161550324300187
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/77/metrics/block_distance",
+      "estimate": 55.2715816693363,
+      "ci95": [
+        52.38233806890905,
+        58.159323050111844
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/77/metrics/angle_mae_deg",
+      "estimate": 37.82104336241889,
+      "ci95": [
+        33.635445011481806,
+        42.2667603871032
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/dinowm/probes/report.json",
+      "pointer": "/summary/77/metrics/paired_angle_effect_mae_deg",
+      "estimate": 23.76897668157917,
+      "ci95": [
+        20.603216252110172,
+        27.108162807175155
+      ]
+    },
+    {
+      "source": "probes/runs/followup-probes-20261102-01/lewm/probes/report.json",
+      "pointer": "/summary/89/metrics/paired_angle_effect_mae_deg",
+      "estimate": 11.732754404949294,
+      "ci95": [
+        9.775485475848432,
+        13.796834008125549
+      ]
+    },
+    {
+      "source": "dynamics/runs/dynamics-20261102-01/lewm/dynamics/report.json",
+      "pointer": "/summary/23/metrics/actual_none_minus_baseline",
+      "estimate": -0.009385259549731018,
+      "ci95": [
+        -0.013505550834184987,
+        -0.005713610113491542
+      ]
+    },
+    {
+      "source": "dynamics/runs/dynamics-20261102-01/dinowm/dynamics/report.json",
+      "pointer": "/summary/23/metrics/actual_recurrent_minus_baseline",
+      "estimate": -0.002819842367898673,
+      "ci95": [
+        -0.01308388694255882,
+        0.00715717415023391
+      ]
+    },
+    {
+      "source": "recorded-feedback/runs/recorded-feedback-20261102-01/lewm/recorded-feedback/report.json",
+      "pointer": "/summary/7/metrics/actual_none_minus_baseline",
+      "estimate": -0.20056558245960332,
+      "ci95": [
+        -0.2391795669345811,
+        -0.16491906223059236
+      ]
+    },
+    {
+      "source": "recorded-feedback/runs/recorded-feedback-20261102-01/dinowm/recorded-feedback/report.json",
+      "pointer": "/summary/7/metrics/actual_recurrent_minus_baseline",
+      "estimate": -0.2185326126491418,
+      "ci95": [
+        -0.2427583479195164,
+        -0.19542187315273624
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/actual_none_minus_baseline",
+      "estimate": -0.011180050862435564,
+      "ci95": [
+        -0.014787620237322585,
+        -0.007809830791404695
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/actual_recurrent_minus_baseline",
+      "estimate": 0.002896316456826753,
+      "ci95": [
+        -0.006992535821427737,
+        0.012992398903270438
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/primary_family/claims/0",
+      "estimate": -0.37526837215577646,
+      "ci99": [
+        -0.4528803614217845,
+        -0.3034523179510995
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/primary_family/claims/1",
+      "estimate": -0.5179723033434288,
+      "ci99": [
+        -0.5841746909663905,
+        -0.45443216076825804
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/primary_family/claims/2",
+      "estimate": -0.23640823066581088,
+      "ci99": [
+        -0.28888531245482346,
+        -0.1834152477486305
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/primary_family/claims/3",
+      "estimate": -0.5604572096861947,
+      "ci99": [
+        -0.5968324330464346,
+        -0.5244943112989223
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/primary_family/claims/4",
+      "estimate": -0.007112282905893754,
+      "ci99": [
+        -0.018927620163624048,
+        0.005073283269251032
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/endpoint_regret",
+      "estimate": 0.020088207995126017,
+      "ci95": [
+        0.012195112006946613,
+        0.029049616268953738
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/forecast_regret",
+      "estimate": 0.03041180956711822,
+      "ci95": [
+        0.019181760168233697,
+        0.04309528210951241
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/forecast_minus_hold",
+      "estimate": 0.0034021180753686193,
+      "ci95": [
+        -0.004686726716083019,
+        0.01156600242722894
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/best_coverage",
+      "estimate": 0.112458133462445,
+      "ci95": [
+        0.08661590789866724,
+        0.14045819025742692
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/endpoint_regret",
+      "estimate": 0.030806480865929797,
+      "ci95": [
+        0.020406726795211754,
+        0.04232706571097682
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/forecast_regret",
+      "estimate": 0.023694197960036047,
+      "ci95": [
+        0.014613085497617442,
+        0.03410722439614495
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/forecast_minus_hold",
+      "estimate": -0.0033154935317135556,
+      "ci95": [
+        -0.012676135707023315,
+        0.0045828051031576115
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/best_coverage",
+      "estimate": 0.112458133462445,
+      "ci95": [
+        0.08661590789866724,
+        0.14045819025742692
+      ]
+    },
+    {
+      "source": "numerical-lewm/numerical-lewm/report.json",
+      "pointer": "/summary/0/metrics/native_f32/max_abs_delta",
+      "value": 0.004895269870758057
+    },
+    {
+      "source": "numerical-dinowm/numerical-dinowm/report.json",
+      "pointer": "/summary/0/metrics/native_f32/max_abs_delta",
+      "value": 0.0015323162078857422
+    },
+    {
+      "source": "numerical-lewm/numerical-lewm/report.json",
+      "pointer": "/summary/1/metrics/native_f32/max_abs_delta",
+      "value": 0.004892706871032715
+    },
+    {
+      "source": "numerical-dinowm/numerical-dinowm/report.json",
+      "pointer": "/summary/1/metrics/native_f32/max_abs_delta",
+      "value": 0.0015227794647216797
+    },
+    {
+      "source": "numerical-lewm/numerical-lewm/report.json",
+      "pointer": "/summary/4/metrics/native_f32/max_abs_delta",
+      "value": 2.562999725341797e-06
+    },
+    {
+      "source": "numerical-dinowm/numerical-dinowm/report.json",
+      "pointer": "/summary/4/metrics/native_f32/max_abs_delta",
+      "value": 9.5367431640625e-06
+    },
+    {
+      "source": "numerical-lewm/numerical-lewm/report.json",
+      "pointer": "/summary/5/metrics/native_f32/max_abs_delta",
+      "value": 0.0
+    },
+    {
+      "source": "numerical-dinowm/numerical-dinowm/report.json",
+      "pointer": "/summary/5/metrics/native_f32/max_abs_delta",
+      "value": 0.0
+    },
+    {
+      "source": "numerical-lewm/numerical-lewm/report.json",
+      "pointer": "/summary/6/metrics/native_f32/max_abs_delta",
+      "value": 0.0
+    },
+    {
+      "source": "numerical-dinowm/numerical-dinowm/report.json",
+      "pointer": "/summary/6/metrics/native_f32/max_abs_delta",
+      "value": 1.1920928955078125e-07
+    },
+    {
+      "source": "numerical-lewm/numerical-lewm/report.json",
+      "pointer": "/summary/36/metrics/native_f32/max_abs_delta",
+      "value": 2.562999725341797e-06
+    },
+    {
+      "source": "numerical-dinowm/numerical-dinowm/report.json",
+      "pointer": "/summary/36/metrics/native_f32/max_abs_delta",
+      "value": 6.4373016357421875e-06
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/0/metrics/effect_error_minus_zero",
+      "estimate": -0.06446018309961503,
+      "ci95": [
+        -0.0762441676995292,
+        -0.053888364764984084
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/1/metrics/effect_error_minus_zero",
+      "estimate": -0.29890050168857973,
+      "ci95": [
+        -0.3357613917903063,
+        -0.2652072421657121
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/2/metrics/effect_error_minus_zero",
+      "estimate": -0.4710736126316445,
+      "ci95": [
+        -0.51945654527512,
+        -0.4257130983144732
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/3/metrics/effect_error_minus_zero",
+      "estimate": -0.5162450520684086,
+      "ci95": [
+        -0.5714515706085308,
+        -0.4639039579892214
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/4/metrics/effect_error_minus_zero",
+      "estimate": -0.5079632328360276,
+      "ci95": [
+        -0.5653692250485689,
+        -0.4534114567595471
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/5/metrics/effect_error_minus_zero",
+      "estimate": -0.47054563675736943,
+      "ci95": [
+        -0.5272526734949715,
+        -0.4167944824042284
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/6/metrics/effect_error_minus_zero",
+      "estimate": -0.4247280762406,
+      "ci95": [
+        -0.48219418485069954,
+        -0.37067544855046675
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/effect_error_minus_zero",
+      "estimate": -0.37526837215577646,
+      "ci95": [
+        -0.43288661803242595,
+        -0.3220822103844952
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/0/metrics/matched_minus_all_wrong",
+      "estimate": -0.0675703319037709,
+      "ci95": [
+        -0.07917934868189488,
+        -0.05724953096032493
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/1/metrics/matched_minus_all_wrong",
+      "estimate": -0.3251285524772533,
+      "ci95": [
+        -0.36126899292694203,
+        -0.29148961354290875
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/2/metrics/matched_minus_all_wrong",
+      "estimate": -0.5435500906900521,
+      "ci95": [
+        -0.5899611172396152,
+        -0.49870862150447026
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/3/metrics/matched_minus_all_wrong",
+      "estimate": -0.6171983744841579,
+      "ci95": [
+        -0.6668016738784631,
+        -0.5684946428914258
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/4/metrics/matched_minus_all_wrong",
+      "estimate": -0.6194944705229216,
+      "ci95": [
+        -0.6703041991510246,
+        -0.570403195653801
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/5/metrics/matched_minus_all_wrong",
+      "estimate": -0.5971292877189711,
+      "ci95": [
+        -0.6473096433498873,
+        -0.5481308030957408
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/6/metrics/matched_minus_all_wrong",
+      "estimate": -0.5610993561306178,
+      "ci95": [
+        -0.6116478595545527,
+        -0.5123066679817946
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/matched_minus_all_wrong",
+      "estimate": -0.5179723033434288,
+      "ci95": [
+        -0.5681059618574006,
+        -0.4693465068671022
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/8/metrics/effect_error_minus_zero",
+      "estimate": -0.04930866000633334,
+      "ci95": [
+        -0.06176526773577741,
+        -0.037745835747729044
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/9/metrics/effect_error_minus_zero",
+      "estimate": -0.242037562751502,
+      "ci95": [
+        -0.28232152485233675,
+        -0.20357394163523315
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/10/metrics/effect_error_minus_zero",
+      "estimate": -0.38136677468802227,
+      "ci95": [
+        -0.4362411001757199,
+        -0.3277596825429509
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/11/metrics/effect_error_minus_zero",
+      "estimate": -0.40574612897356144,
+      "ci95": [
+        -0.46949834366110355,
+        -0.3440844349140078
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/12/metrics/effect_error_minus_zero",
+      "estimate": -0.3829362562560387,
+      "ci95": [
+        -0.4489298174619627,
+        -0.3173944363556892
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/13/metrics/effect_error_minus_zero",
+      "estimate": -0.33799792006135543,
+      "ci95": [
+        -0.4027312267000777,
+        -0.2733335758066942
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/14/metrics/effect_error_minus_zero",
+      "estimate": -0.2875038076316568,
+      "ci95": [
+        -0.3537089584232556,
+        -0.22246600183648294
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/15/metrics/effect_error_minus_zero",
+      "estimate": -0.2333225446763863,
+      "ci95": [
+        -0.2996365962546027,
+        -0.16708969782142874
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/8/metrics/matched_minus_all_wrong",
+      "estimate": -0.06165765449623386,
+      "ci95": [
+        -0.07261040416197816,
+        -0.05169811288978303
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/9/metrics/matched_minus_all_wrong",
+      "estimate": -0.2954792849600988,
+      "ci95": [
+        -0.33084452319651775,
+        -0.26161248363359546
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/10/metrics/matched_minus_all_wrong",
+      "estimate": -0.4838321002842285,
+      "ci95": [
+        -0.5313748126567155,
+        -0.43757449850208896
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/11/metrics/matched_minus_all_wrong",
+      "estimate": -0.5399656859388048,
+      "ci95": [
+        -0.5934306368368641,
+        -0.4880143404001348
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/12/metrics/matched_minus_all_wrong",
+      "estimate": -0.5342287180666708,
+      "ci95": [
+        -0.5881464139566963,
+        -0.4808715045121147
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/13/metrics/matched_minus_all_wrong",
+      "estimate": -0.5121149212918372,
+      "ci95": [
+        -0.5649234933845856,
+        -0.4600297842566174
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/14/metrics/matched_minus_all_wrong",
+      "estimate": -0.478794515542899,
+      "ci95": [
+        -0.5316184685774057,
+        -0.42744214146847176
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/15/metrics/matched_minus_all_wrong",
+      "estimate": -0.4392894417859317,
+      "ci95": [
+        -0.49107527853715416,
+        -0.3895506787472007
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/16/metrics/effect_error_minus_zero",
+      "estimate": -0.05659683839679106,
+      "ci95": [
+        -0.06885023690416081,
+        -0.04568265255879409
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/17/metrics/effect_error_minus_zero",
+      "estimate": -0.2596947466622761,
+      "ci95": [
+        -0.29703589018218307,
+        -0.22477160782677535
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/18/metrics/effect_error_minus_zero",
+      "estimate": -0.4008844993799714,
+      "ci95": [
+        -0.4510936044500057,
+        -0.35335541868876047
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/19/metrics/effect_error_minus_zero",
+      "estimate": -0.43735223964616676,
+      "ci95": [
+        -0.49428658838371126,
+        -0.3825382086447955
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/20/metrics/effect_error_minus_zero",
+      "estimate": -0.42612556620472114,
+      "ci95": [
+        -0.4852979955701264,
+        -0.3684226418940151
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/21/metrics/effect_error_minus_zero",
+      "estimate": -0.3874455144227857,
+      "ci95": [
+        -0.446501924961404,
+        -0.32948811977179066
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/22/metrics/effect_error_minus_zero",
+      "estimate": -0.3407322337594643,
+      "ci95": [
+        -0.40116830364295686,
+        -0.2818511906118698
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/23/metrics/effect_error_minus_zero",
+      "estimate": -0.2919520484572925,
+      "ci95": [
+        -0.3531485239138296,
+        -0.2334208747166063
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/16/metrics/matched_minus_all_wrong",
+      "estimate": -0.06224904720591274,
+      "ci95": [
+        -0.07316358502331682,
+        -0.052353992259110665
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/17/metrics/matched_minus_all_wrong",
+      "estimate": -0.29782069036594283,
+      "ci95": [
+        -0.33422662410899634,
+        -0.2636061191976131
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/18/metrics/matched_minus_all_wrong",
+      "estimate": -0.4890168349842025,
+      "ci95": [
+        -0.5377367289648207,
+        -0.44142938381930125
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/19/metrics/matched_minus_all_wrong",
+      "estimate": -0.5504891468931221,
+      "ci95": [
+        -0.6051704889313101,
+        -0.4975453828880536
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/20/metrics/matched_minus_all_wrong",
+      "estimate": -0.5528770769835587,
+      "ci95": [
+        -0.6080526505462476,
+        -0.4988901920078301
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/21/metrics/matched_minus_all_wrong",
+      "estimate": -0.5316750955448623,
+      "ci95": [
+        -0.5866478409116705,
+        -0.4782405040854541
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/22/metrics/matched_minus_all_wrong",
+      "estimate": -0.4979508062835501,
+      "ci95": [
+        -0.5518113928482782,
+        -0.4451990668514218
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/23/metrics/matched_minus_all_wrong",
+      "estimate": -0.45838015251481407,
+      "ci95": [
+        -0.5109196623471162,
+        -0.40705488708472126
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/0/metrics/effect_error_minus_zero",
+      "estimate": -0.14496010415449556,
+      "ci95": [
+        -0.1592400489927069,
+        -0.13010594264019903
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/1/metrics/effect_error_minus_zero",
+      "estimate": -0.24426702226980065,
+      "ci95": [
+        -0.2709297990910735,
+        -0.21638765210157737
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/2/metrics/effect_error_minus_zero",
+      "estimate": -0.2992972752973274,
+      "ci95": [
+        -0.3311308941317412,
+        -0.2660759121977045
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/3/metrics/effect_error_minus_zero",
+      "estimate": -0.29532846029144716,
+      "ci95": [
+        -0.33194520576313913,
+        -0.25783353485941224
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/4/metrics/effect_error_minus_zero",
+      "estimate": -0.2755222513299455,
+      "ci95": [
+        -0.3131816020059161,
+        -0.2365039717838666
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/5/metrics/effect_error_minus_zero",
+      "estimate": -0.2627778392007095,
+      "ci95": [
+        -0.3028816730216003,
+        -0.2219186171673341
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/6/metrics/effect_error_minus_zero",
+      "estimate": -0.2480029967333062,
+      "ci95": [
+        -0.2886942350446436,
+        -0.20689211132924207
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/effect_error_minus_zero",
+      "estimate": -0.23640823066581088,
+      "ci95": [
+        -0.2762967808991463,
+        -0.19608330833766835
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/0/metrics/matched_minus_all_wrong",
+      "estimate": -0.1627499599807803,
+      "ci95": [
+        -0.17163697322789698,
+        -0.15405061435896916
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/1/metrics/matched_minus_all_wrong",
+      "estimate": -0.3532310513536915,
+      "ci95": [
+        -0.3711115835664421,
+        -0.33599607652549357
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/2/metrics/matched_minus_all_wrong",
+      "estimate": -0.4778972998937095,
+      "ci95": [
+        -0.4989191125878316,
+        -0.45635933004810314
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/3/metrics/matched_minus_all_wrong",
+      "estimate": -0.5049264455263448,
+      "ci95": [
+        -0.5293024713289856,
+        -0.48021042076675136
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/4/metrics/matched_minus_all_wrong",
+      "estimate": -0.5059109821029624,
+      "ci95": [
+        -0.5318768293855286,
+        -0.4801022295319453
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/5/metrics/matched_minus_all_wrong",
+      "estimate": -0.5254942085277473,
+      "ci95": [
+        -0.55377729497329,
+        -0.4974034294818902
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/6/metrics/matched_minus_all_wrong",
+      "estimate": -0.5419852967538554,
+      "ci95": [
+        -0.5706442650291319,
+        -0.5129593818621424
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/matched_minus_all_wrong",
+      "estimate": -0.5604572096861947,
+      "ci95": [
+        -0.5878620996532453,
+        -0.5325329083258649
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/8/metrics/effect_error_minus_zero",
+      "estimate": -0.14249095846813342,
+      "ci95": [
+        -0.1566826269571696,
+        -0.1276289251514373
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/9/metrics/effect_error_minus_zero",
+      "estimate": -0.23707961907211722,
+      "ci95": [
+        -0.26398158433736896,
+        -0.20896903479928503
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/10/metrics/effect_error_minus_zero",
+      "estimate": -0.28384505425953516,
+      "ci95": [
+        -0.31632455543772825,
+        -0.25002264740390634
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/11/metrics/effect_error_minus_zero",
+      "estimate": -0.2787389738086277,
+      "ci95": [
+        -0.3157651300625079,
+        -0.24087603657761983
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/12/metrics/effect_error_minus_zero",
+      "estimate": -0.25890931568357534,
+      "ci95": [
+        -0.2971537469316195,
+        -0.21933161516808428
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/13/metrics/effect_error_minus_zero",
+      "estimate": -0.24664004410915435,
+      "ci95": [
+        -0.28718068732233715,
+        -0.20574256341307995
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/14/metrics/effect_error_minus_zero",
+      "estimate": -0.23097842414276687,
+      "ci95": [
+        -0.27173673050827174,
+        -0.18948212588138305
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/15/metrics/effect_error_minus_zero",
+      "estimate": -0.22016604806151469,
+      "ci95": [
+        -0.26031620109729964,
+        -0.17929906578664784
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/8/metrics/matched_minus_all_wrong",
+      "estimate": -0.1612366302230057,
+      "ci95": [
+        -0.16998428262660373,
+        -0.1526376679356652
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/9/metrics/matched_minus_all_wrong",
+      "estimate": -0.3481453839879766,
+      "ci95": [
+        -0.3657017712948531,
+        -0.33139488578579646
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/10/metrics/matched_minus_all_wrong",
+      "estimate": -0.46718202962716426,
+      "ci95": [
+        -0.48804121902530745,
+        -0.44592976436966797
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/11/metrics/matched_minus_all_wrong",
+      "estimate": -0.49261198462292216,
+      "ci95": [
+        -0.5170548892981299,
+        -0.46799206940164384
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/12/metrics/matched_minus_all_wrong",
+      "estimate": -0.49452850773114015,
+      "ci95": [
+        -0.5202956826896266,
+        -0.4686304988124412
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/13/metrics/matched_minus_all_wrong",
+      "estimate": -0.5145082340823183,
+      "ci95": [
+        -0.5429155549715123,
+        -0.48620046339755174
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/14/metrics/matched_minus_all_wrong",
+      "estimate": -0.5306718142585446,
+      "ci95": [
+        -0.559152196330657,
+        -0.5016053342084758
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/15/metrics/matched_minus_all_wrong",
+      "estimate": -0.5497742555787047,
+      "ci95": [
+        -0.5772531882243148,
+        -0.5219763368911402
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/16/metrics/effect_error_minus_zero",
+      "estimate": -0.1389266655708303,
+      "ci95": [
+        -0.15274850354553793,
+        -0.12450337426171428
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/17/metrics/effect_error_minus_zero",
+      "estimate": -0.23179470037109767,
+      "ci95": [
+        -0.2579496194317175,
+        -0.20480215063532634
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/18/metrics/effect_error_minus_zero",
+      "estimate": -0.2874338350646556,
+      "ci95": [
+        -0.3188436951439722,
+        -0.2548060717816871
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/19/metrics/effect_error_minus_zero",
+      "estimate": -0.2836969445755443,
+      "ci95": [
+        -0.3199719417677347,
+        -0.24667373490145683
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/20/metrics/effect_error_minus_zero",
+      "estimate": -0.2650526707967944,
+      "ci95": [
+        -0.3027913175577388,
+        -0.22642440106988343
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/21/metrics/effect_error_minus_zero",
+      "estimate": -0.25290086542387363,
+      "ci95": [
+        -0.2926073183791681,
+        -0.21278275116335504
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/22/metrics/effect_error_minus_zero",
+      "estimate": -0.24101361863836054,
+      "ci95": [
+        -0.2816783978299954,
+        -0.2001861196029601
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/23/metrics/effect_error_minus_zero",
+      "estimate": -0.2288815994776878,
+      "ci95": [
+        -0.2690664384490852,
+        -0.18863116007205974
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/16/metrics/matched_minus_all_wrong",
+      "estimate": -0.15976444166701453,
+      "ci95": [
+        -0.16864744711507948,
+        -0.15112053386360572
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/17/metrics/matched_minus_all_wrong",
+      "estimate": -0.34902295900804853,
+      "ci95": [
+        -0.366945399168772,
+        -0.3318439275620724
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/18/metrics/matched_minus_all_wrong",
+      "estimate": -0.47501644399296494,
+      "ci95": [
+        -0.4962431269581544,
+        -0.4533184471840826
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/19/metrics/matched_minus_all_wrong",
+      "estimate": -0.5032536675012651,
+      "ci95": [
+        -0.5279228443536756,
+        -0.47863391475517225
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/20/metrics/matched_minus_all_wrong",
+      "estimate": -0.5052214321887082,
+      "ci95": [
+        -0.5311056802369108,
+        -0.4792367857956579
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/21/metrics/matched_minus_all_wrong",
+      "estimate": -0.5243076603652749,
+      "ci95": [
+        -0.5520576165342724,
+        -0.49618099939839116
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/22/metrics/matched_minus_all_wrong",
+      "estimate": -0.5416581528473827,
+      "ci95": [
+        -0.5701520203539655,
+        -0.5125951195639968
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/23/metrics/matched_minus_all_wrong",
+      "estimate": -0.5591048930735958,
+      "ci95": [
+        -0.5866355783576022,
+        -0.5313682294308787
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/0/metrics/actual_none_minus_baseline",
+      "estimate": -0.05292548616023396,
+      "ci95": [
+        -0.06334339051382472,
+        -0.04354148429607108
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/0/metrics/effect_error_minus_zero",
+      "estimate": -0.06446018309961503,
+      "ci95": [
+        -0.0762441676995292,
+        -0.053888364764984084
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/0/metrics/forecast_minus_hold",
+      "estimate": -0.0007665379198765962,
+      "ci95": [
+        -0.0037928519686873793,
+        0.0022449269471543805
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/3/metrics/actual_none_minus_baseline",
+      "estimate": -0.057245116085709924,
+      "ci95": [
+        -0.06934917991016079,
+        -0.046269710450532395
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/3/metrics/effect_error_minus_zero",
+      "estimate": -0.5162450520684086,
+      "ci95": [
+        -0.5714515706085308,
+        -0.4639039579892214
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/3/metrics/forecast_minus_hold",
+      "estimate": 0.006313227307551156,
+      "ci95": [
+        -0.0001044892978616578,
+        0.013258007972334356
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/actual_none_minus_baseline",
+      "estimate": -0.011180050862435564,
+      "ci95": [
+        -0.014787620237322585,
+        -0.007809830791404695
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/effect_error_minus_zero",
+      "estimate": -0.37526837215577646,
+      "ci95": [
+        -0.43288661803242595,
+        -0.3220822103844952
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/7/metrics/forecast_minus_hold",
+      "estimate": 0.0034021180753686193,
+      "ci95": [
+        -0.004686726716083019,
+        0.01156600242722894
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/8/metrics/actual_none_minus_baseline",
+      "estimate": -0.03885857309023777,
+      "ci95": [
+        -0.05013301416267666,
+        -0.028469224078079954
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/8/metrics/effect_error_minus_zero",
+      "estimate": -0.04930866000633334,
+      "ci95": [
+        -0.06176526773577741,
+        -0.037745835747729044
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/8/metrics/forecast_minus_hold",
+      "estimate": -0.0010014099493297268,
+      "ci95": [
+        -0.003826673692743769,
+        0.001827924039285565
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/11/metrics/actual_none_minus_baseline",
+      "estimate": -0.042952704938613806,
+      "ci95": [
+        -0.05590207248064445,
+        -0.031226216361979205
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/11/metrics/effect_error_minus_zero",
+      "estimate": -0.40574612897356144,
+      "ci95": [
+        -0.46949834366110355,
+        -0.3440844349140078
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/11/metrics/forecast_minus_hold",
+      "estimate": 0.007254430208973455,
+      "ci95": [
+        -0.001180234117077573,
+        0.01639214443720799
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/15/metrics/actual_none_minus_baseline",
+      "estimate": 0.0038105642954633367,
+      "ci95": [
+        -0.0018121269467570756,
+        0.009825667816514281
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/15/metrics/effect_error_minus_zero",
+      "estimate": -0.2333225446763863,
+      "ci95": [
+        -0.2996365962546027,
+        -0.16708969782142874
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/15/metrics/forecast_minus_hold",
+      "estimate": 0.005099919794383996,
+      "ci95": [
+        -0.0019408738078594537,
+        0.012287974073021325
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/16/metrics/actual_none_minus_baseline",
+      "estimate": -0.04592983600707612,
+      "ci95": [
+        -0.05675402870944026,
+        -0.03628488539679325
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/16/metrics/effect_error_minus_zero",
+      "estimate": -0.05659683839679106,
+      "ci95": [
+        -0.06885023690416081,
+        -0.04568265255879409
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/16/metrics/forecast_minus_hold",
+      "estimate": -0.00018944430170718006,
+      "ci95": [
+        -0.0032712309043280725,
+        0.002759739934768871
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/19/metrics/actual_none_minus_baseline",
+      "estimate": -0.05315472278107336,
+      "ci95": [
+        -0.06538866983786704,
+        -0.042033232292479294
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/19/metrics/effect_error_minus_zero",
+      "estimate": -0.43735223964616676,
+      "ci95": [
+        -0.49428658838371126,
+        -0.3825382086447955
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/19/metrics/forecast_minus_hold",
+      "estimate": 0.007554264907166835,
+      "ci95": [
+        -0.0005962141343142548,
+        0.016348317552867846
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/23/metrics/actual_none_minus_baseline",
+      "estimate": -0.00693846063336423,
+      "ci95": [
+        -0.010863103737528945,
+        -0.0031592020517678078
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/23/metrics/effect_error_minus_zero",
+      "estimate": -0.2919520484572925,
+      "ci95": [
+        -0.3531485239138296,
+        -0.2334208747166063
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/lewm/23/metrics/forecast_minus_hold",
+      "estimate": 0.008524112530472146,
+      "ci95": [
+        6.40586328620593e-05,
+        0.017836199051428542
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/0/metrics/actual_recurrent_minus_baseline",
+      "estimate": -0.06250433493187302,
+      "ci95": [
+        -0.0783952639006202,
+        -0.0459295350849061
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/0/metrics/effect_error_minus_zero",
+      "estimate": -0.14496010415449556,
+      "ci95": [
+        -0.1592400489927069,
+        -0.13010594264019903
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/0/metrics/forecast_minus_hold",
+      "estimate": -0.0016149008767998487,
+      "ci95": [
+        -0.004197472340477309,
+        0.0004272191708131648
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/3/metrics/actual_recurrent_minus_baseline",
+      "estimate": -0.0015352450600403245,
+      "ci95": [
+        -0.015115384026285029,
+        0.011620315911591204
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/3/metrics/effect_error_minus_zero",
+      "estimate": -0.29532846029144716,
+      "ci95": [
+        -0.33194520576313913,
+        -0.25783353485941224
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/3/metrics/forecast_minus_hold",
+      "estimate": -0.007930955699532434,
+      "ci95": [
+        -0.015438272848304086,
+        -0.001775317275717659
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/actual_recurrent_minus_baseline",
+      "estimate": 0.002896316456826753,
+      "ci95": [
+        -0.006992535821427737,
+        0.012992398903270438
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/effect_error_minus_zero",
+      "estimate": -0.23640823066581088,
+      "ci95": [
+        -0.2762967808991463,
+        -0.19608330833766835
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/7/metrics/forecast_minus_hold",
+      "estimate": -0.0033154935317135556,
+      "ci95": [
+        -0.012676135707023315,
+        0.0045828051031576115
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/8/metrics/actual_recurrent_minus_baseline",
+      "estimate": -0.05751911697916512,
+      "ci95": [
+        -0.07381003862333273,
+        -0.040625852634502746
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/8/metrics/effect_error_minus_zero",
+      "estimate": -0.14249095846813342,
+      "ci95": [
+        -0.1566826269571696,
+        -0.1276289251514373
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/8/metrics/forecast_minus_hold",
+      "estimate": -0.0006995531810092639,
+      "ci95": [
+        -0.0032064641790280155,
+        0.0013724741785459643
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/11/metrics/actual_recurrent_minus_baseline",
+      "estimate": 0.004867212343015126,
+      "ci95": [
+        -0.008145813477108277,
+        0.017514230110532474
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/11/metrics/effect_error_minus_zero",
+      "estimate": -0.2787389738086277,
+      "ci95": [
+        -0.3157651300625079,
+        -0.24087603657761983
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/11/metrics/forecast_minus_hold",
+      "estimate": -0.007995548197145659,
+      "ci95": [
+        -0.015463270784069668,
+        -0.00199268531562273
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/15/metrics/actual_recurrent_minus_baseline",
+      "estimate": 0.003613475269958144,
+      "ci95": [
+        -0.006037488271067559,
+        0.01350891747206333
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/15/metrics/effect_error_minus_zero",
+      "estimate": -0.22016604806151469,
+      "ci95": [
+        -0.26031620109729964,
+        -0.17929906578664784
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/15/metrics/forecast_minus_hold",
+      "estimate": -0.003989189044652771,
+      "ci95": [
+        -0.013449999632029188,
+        0.004000918173142307
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/16/metrics/actual_recurrent_minus_baseline",
+      "estimate": -0.03171636604020023,
+      "ci95": [
+        -0.04793370450265684,
+        -0.014847493682873393
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/16/metrics/effect_error_minus_zero",
+      "estimate": -0.1389266655708303,
+      "ci95": [
+        -0.15274850354553793,
+        -0.12450337426171428
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/16/metrics/forecast_minus_hold",
+      "estimate": -0.0012051371692162094,
+      "ci95": [
+        -0.003309281320683523,
+        0.0005277636253774244
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/19/metrics/actual_recurrent_minus_baseline",
+      "estimate": 0.03226883542629366,
+      "ci95": [
+        0.018622802060463073,
+        0.045872938797310775
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/19/metrics/effect_error_minus_zero",
+      "estimate": -0.2836969445755443,
+      "ci95": [
+        -0.3199719417677347,
+        -0.24667373490145683
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/19/metrics/forecast_minus_hold",
+      "estimate": -0.006816824803760408,
+      "ci95": [
+        -0.0140030250922324,
+        -0.001140300993668404
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/23/metrics/actual_recurrent_minus_baseline",
+      "estimate": 0.032974948358969414,
+      "ci95": [
+        0.022623118706769675,
+        0.04362063117009711
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/23/metrics/effect_error_minus_zero",
+      "estimate": -0.2288815994776878,
+      "ci95": [
+        -0.2690664384490852,
+        -0.18863116007205974
+      ]
+    },
+    {
+      "source": "replication/replication/replication-results.json",
+      "pointer": "/exploratory_pointwise95/dinowm/23/metrics/forecast_minus_hold",
+      "estimate": -0.005380083510893855,
+      "ci95": [
+        -0.015466768521651788,
+        0.003035937859227361
+      ]
+    }
+  ],
+  "no_model_execution": true,
+  "primary_confidence": 0.99,
+  "secondary_confidence": 0.95,
+  "all_mlp_seeds": [
+    11,
+    29,
+    47
+  ],
+  "primary_family": [
+    [
+      "lewm",
+      "effect_error_minus_zero"
+    ],
+    [
+      "lewm",
+      "matched_minus_all_wrong"
+    ],
+    [
+      "dinowm",
+      "effect_error_minus_zero"
+    ],
+    [
+      "dinowm",
+      "matched_minus_all_wrong"
+    ],
+    [
+      "dinowm",
+      "forecast_minus_endpoint_regret"
+    ]
+  ],
+  "prior_figure_sha256": "deaccd94a300aa3e5adb6d88edfd3fc0709d4fe85b0e85e56a02b7964d815284",
+  "prior_figure_manifest_sha256": "3f7164f5de4dfe48dd9cc757dd6d14b3c7c6dc4c8d289b6432fe2e93d26e1991",
+  "output_sha256": {
+    "discovery_summary.pdf": "deaccd94a300aa3e5adb6d88edfd3fc0709d4fe85b0e85e56a02b7964d815284",
+    "feedback_rows.tex": "50523c3610106d262298bede14a3261dcfe4f62f20cf2c761be16f8d27a45099",
+    "numerical_rows.tex": "794b7b7dff0b3a97d6ff85ec7892d3643d9225aaa2a16dae26d8ae5e9336395b",
+    "primary_rows.tex": "2c0d43355721a45503b3df6ac612be4db8883ef3c2f08ab3c9b85e09fb89cbab",
+    "probes_rows.tex": "e60065306c50b56981bb9686ff95c406510f6c192388bc1e0852bc8cc08b3573",
+    "ranking_rows.tex": "199f82820bc130c4ad3b13034e8ee9afe628915867b05b74824e338a0ba15b24",
+    "replication_primary.pdf": "b563cff31b158e09ecac696778f629d0940368e6c9a2d190df0797a7e98f783f",
+    "replication_primary.png": "68ec0624d9a2db60e4378c77630ef31eab5e64f4c6436e527efa4a4fd36e7711",
+    "replication_slices.pdf": "0bfe7bcc4bc7bf00f7ed863402a874566f932f908dacfbdcf542432e9aacf63a",
+    "replication_slices.png": "a48d81b0fba50644fa00bf3a29636420e301937eb3a2b7a690fd963633dd6aff",
+    "slice_rows.tex": "aa5f06e142f65a3d8b8e75532c401af438ca165b81cf1ca752a6c0ea3d5beb76"
+  }
+}

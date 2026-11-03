@@ -1,0 +1,458 @@
+\section{Introduction}
+\label{sec:intro}
+
+Latent world models support planning without reconstructing every pixel, but the
+meaning of a successful prediction depends on the evaluation. A representation
+may distinguish actions without recovering small physical changes; a forecast
+may have low latent error without selecting a useful control. Joint-embedding
+models and planning systems motivate these questions
+\citep{maes2026lewm,zhou2025dinowm}, while prior work already distinguishes
+physical grounding, intervention validity and decision alignment
+\citep{vakalis2026interventiongap,subramanian2026counterfactual,liu2026djepa}.
+We apply those distinctions to an empirical audit rather than introduce them as
+a new framework.
+
+Our starting experiment asked whether physical latent edits transfer across
+appearance changes. That claim requires a reliable measuring instrument and an
+editor whose effects can be interpreted on the evaluated feature surface.
+Neither prerequisite was established. We therefore retain the unsuccessful
+qualification rather than reinterpret latent prediction accuracy as proof that
+the edited states are physically correct. This motivates three concrete
+questions: can bounded actual-image probes resolve physical state and paired
+changes; do predictions match executed action consequences beyond simple
+controls; and does the unchanged goal metric select useful candidates?
+
+The audit evaluates the released LeWM projected-token model and an RGB
+DINO-WM release supplied by the Point-LeWM authors. The latter uses dummy
+proprioceptive input and is not a claim about every DINO-WM implementation.
+We first run discovery diagnostics on 128 simulator roots and 128 recorded
+episode windows. Follow-ups use the inspected simulator sample and are explicitly
+exploratory. We then specify a fixed five-contrast family and generate 128 fresh
+roots without changing the task distribution or selecting favorable seeds.
+
+The independent sample supports action-effect fidelity and matched-action
+specificity for both checkpoints, but not the DINO forecast-over-endpoint ranking
+claim under its prescribed interval. Approximately half of the fresh
+root--branch candidate banks have no positive goal coverage, limiting decision
+interpretation. A separate, bounded numerical audit distinguishes encoding
+layout, rollout layout, recurrence-wrapper and metric-reduction changes.
+
+\paragraph{Contributions and boundary.}
+We provide (i) a preserved qualification failure with actual-image, probe-capacity
+and observability controls; (ii) a fixed fresh-root replication of four
+checkpoint-specific latent action contrasts, together with an inconclusive
+ranking result; and (iii) a controlled numerical audit and authenticated
+operational record. We do not establish absence of physical information,
+successful physical editing, a causal mechanism for ranking behavior, or
+closed-loop improvement. The novelty sought is this bounded empirical evidence,
+not priority for its component evaluation ideas.
+
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Predictive representations and physical grounding.}
+LeWM learns joint-embedding dynamics from pixels, whereas DINO-WM predicts
+pretrained visual features \citep{maes2026lewm,zhou2025dinowm,oquab2023dinov2}.
+The Point-LeWM study compares observation interfaces and supplies the specific
+RGB release audited here \citep{oberweger2026pointlewm}. Physics probing and
+physical-state grounding are established directions
+\citep{joseph2026interpretingphysics,yan2026psgjepa}. A probe's failure can
+reflect its capacity, observation ambiguity or distribution mismatch, not
+information absence. Intervention Gap and counterfactual action evaluation
+explicitly qualify measurement and observation bottlenecks before physical
+interpretation \citep{vakalis2026interventiongap,subramanian2026counterfactual}.
+Our negative probe findings adopt, rather than originate, that logic.
+
+\paragraph{Internal interventions.}
+Causal abstractions and temporal intervention supervision provide foundational
+tests of correspondences between neural and high-level variables
+\citep{geiger2021causalabstractions,lippe2022citris}. Recent world-model studies
+use native counterfactual references, low-rank carriers and persistent internal
+corrections \citep{liu2026latentcarriers,yao2026rolloutfaith}; geometric editable
+representations address appearance-consistent semantics
+\citep{huang2026geocosavi}. Divergent neural interventions can invalidate simple
+probe interpretations \citep{grant2025divergent}. We report an unqualified
+initial editor study, not an editor that improves upon these methods.
+
+\paragraph{Action effects and decision quality.}
+Delta-JEPA and Do-JEPA explicitly target action-sensitive representations and
+interventional effects \citep{zhang2026deltajepa,resani2026dojepa}. Our
+matched-action analysis is instead a diagnostic of frozen releases, with no
+action-effect training. Prediction--control objective mismatch is longstanding
+\citep{lambert2020objectivemismatch}; D-JEPA studies decision alignment from
+predictions, realized costs and outcomes \citep{liu2026djepa}. Comparing rankings
+from actual encoded endpoints and forecasts is not itself a new decision
+alignment method. The broader interpretability agenda likewise distinguishes
+decoding, dynamics, causal verification and action
+\citep{wang2026worldmodelinterpretability}. We contribute a replicated case
+study within that agenda, with unsuccessful and inconclusive outcomes retained.
+
+\section{Experimental Design}
+\label{sec:design}
+
+\subsection{Frozen Checkpoints and Interfaces}
+LeWM exposes a 192-dimensional projected CLS representation. The audited DINO
+release exposes 196 DINOv2 ViT-S/14 patch tokens, each 384-dimensional, with
+auxiliary channels handled by its native recurrence. We score visual features,
+not a decoded RGB forecast. Images are resized to $224\times224$ and each
+released normalization is applied once. DINO then natively resizes the normalized
+224-pixel image to 196 pixels before its 14-pixel patch encoder, producing
+$14\times14=196$ tokens; the audit RGB surface and encoder input are distinct.
+Models remain frozen and in evaluation
+mode; inference is float32 on an RTX PRO 6000 Blackwell GPU with PyTorch
+2.10.0+cu128. Source, weight and normalization hashes are fixed (Appendix
+\ref{app:artifacts}). Raw latent magnitudes across these spaces are not model
+rankings.
+
+\subsection{Paired Simulator and Recorded Data}
+\label{sec:data}
+PushT follows the released simulator lineage
+\citep{chi2023diffusionpolicy,maes2026stableworldmodel,oberweger2026pointlewm}.
+A simulator root defines a factual and counterfactual initial-condition branch,
+with position or orientation intervention applied before the observation
+history. Both branches execute the same eight action candidates and are
+rerendered with original, color-only and background-only appearances, without
+changing their physics. The 512-unit arena and angular labels provide native
+physical ground truth; these units are not resized-image pixels.
+
+Three history frames occur after primitive controls 0, 5 and 10. Each action
+chunk packs five ordered XY controls; two chunks connect the history, followed
+by eight future chunks. Thus horizon 8 ends after 50 primitive controls,
+including the ten-control prefix. Candidate 0 is hold; the bank also contains
+approach, away and fixed-seed smooth random/biased controls. Trajectories are
+not shortened upon native success. Apart from the original initial-geometry
+rejection rule, no outcome-based rejection or replacement is allowed.
+
+The original sample has 256 editor, 128 scorer, 64 validation and 128 pilot roots.
+Actual-image probes fit scorer roots and select only on validation roots. All
+seeds and pilot candidates are retained. The recorded diagnostics use 128
+authenticated episode/start windows from the released PushT expert-training
+dataset, identical for both models. Finite terminal action labels and finite
+nonterminal controls outside the native unit box are preserved without clipping;
+terminal rows never become outgoing transitions. This is a
+\emph{pretraining-distribution diagnostic}, not held-out generalization.
+
+\subsection{Discovery, Replication and Experimental Unit}
+\label{sec:uncertainty}
+Discovery diagnostics and follow-ups use the same 128 inspected pilot roots.
+Their 5,000-draw intervals are pointwise 95\% root/episode bootstrap intervals,
+not simultaneous confirmation. The follow-up protocol was fixed after earlier
+results but before its execution. It is not retrospective preregistration.
+
+The subsequent replication fixes pilot seed 2026110201 and root indices 0--127
+before generation. Identities are disjoint from every original split, the
+originally reserved 3,384-root roster and a software-preflight root. Original
+scorer/validation files are copied byte-identically but are not fitted or
+encoded in this dynamics-only pass. The unchanged generator produces exactly
+128 fresh roots. Both models evaluate every branch, candidate, appearance and
+future step, yielding 6,144 bank/horizon records per model.
+
+The primary slice is original appearance, horizon 8. Each bank first averages
+its candidate contrasts, then the two branches are averaged within a root,
+and roots receive equal weight. Candidates, branches, frames and appearances
+are not independent experimental units. The five primary contrasts share
+10,000 PCG64 bootstrap draws with seed 20261102. Two-sided percentile 99\%
+intervals apply Bonferroni correction to a nominal 0.05 familywise level;
+bootstrap coverage is asymptotic, not a finite-sample guarantee. A prescribed
+negative direction is supported only if the whole interval is below zero.
+All other slices and metrics remain pointwise exploratory 95\% results.
+
+\section{Diagnostic Estimands and Controls}
+\label{sec:estimands}
+
+\subsection{Physical Measurement}
+\label{sec:measurementmethods}
+Actual-image probes predict pusher XY, block XY and sine/cosine angle labels.
+Ridge candidates use fixed spatial pooling and regularization grids; a 64-unit
+SiLU MLP uses seeds 11, 29 and 47, two weight decays and checkpoints at 50,
+100 and 200 epochs. MLP feature normalization and target means are estimated
+only from scorer data; target scales are fixed, not estimated. Target-group
+selections use validation losses with separate fixed reporting scales (Appendix
+\ref{app:probes}). Choices and weights are
+published before pilot evaluation. All MLP seeds are reported, not a best seed.
+The follow-up includes all candidates, unlike the earlier selected-candidate
+mixed-time readout summary (Appendix \ref{app:probes}).
+
+State distances and circular angular errors are paired with effect-error
+controls. A training-mean readout implies zero change between factual and
+counterfactual branches. The 4-unit/2.5-degree follow-up resolution targets are
+diagnostic commitments motivated after discovery, not externally established
+task tolerances. We do not reinterpret a relative improvement over a weak
+baseline as adequate absolute resolution.
+
+\subsection{Prediction and Feedback}
+Let $A_{rbk,h}$ be an actual encoded future for root $r$, branch $b$, candidate
+$k$, horizon $h$, and $P_{rbk,h}$ its autonomous forecast. Within a model, use
+$d(x,y)=D^{-1}\lVert x-y\rVert^2$ over every audited visual coordinate.
+Autonomous prediction is compared with persistence of the final initial-history
+feature, and with a native zero-future-action rollout preserving the prefix.
+
+Oracle-history predictions receive actual aligned observations at each step.
+Their control is \emph{local persistence}, the immediately preceding actual
+feature, not persistence of the initial frame. Otherwise oracle improvement
+would conflate useful local dynamics with a much easier prediction problem.
+DINO crosses free/actual visual history with recurrent/encoded-zero auxiliary
+history. Reset means the native encoder applied to zero proprioception, not
+literal zero channels; recurrent patch-varying outputs are retained. Oracle
+observations are privileged and not a deployable forecasting improvement.
+
+\subsection{Action-Effect Fidelity and Specificity}
+\label{sec:action}
+For $k>0$, define hold-relative effects
+$\Delta P_k=P_k-P_0$ and $\Delta A_k=A_k-A_0$ within a bank. The fidelity contrast is
+\begin{equation}
+ F_{rb}=\frac{1}{K-1}\sum_{k=1}^{K-1}
+ \left[d(\Delta P_k,\Delta A_k)-d(0,\Delta A_k)\right].
+ \label{eq:fidelity}
+\end{equation}
+Negative favors the forecast over predicting no effect. Zero-effect cases
+remain without denominator floors or exclusions. Specificity compares each
+prediction with its corresponding actual endpoint and \emph{every} wrong
+assignment:
+\begin{equation}
+ S_{rb}=\frac{1}{K}\sum_{k=0}^{K-1}
+ \left[d(P_k,A_k)-\frac{1}{K-1}\sum_{j\ne k}d(P_k,A_j)\right].
+ \label{eq:specificity}
+\end{equation}
+The complete $K\times K$ assignment matrix is retained; a selected shuffle is
+not the control. Aggregate signed effect gain is the ratio of equal-root mean
+dot product to mean true-effect energy, not the mean of unstable rootwise
+ratios. Undefined bootstrap denominators are reported. These metrics establish
+latent correspondence, not block-specific physical correctness.
+
+\subsection{Finite-Bank Decisions}
+\label{sec:ranking}
+For each bank, apply the checkpoint's unchanged native goal score to either
+actual encoded endpoints or forecasts. LeWM uses summed squared feature error
+and DINO uses mean squared feature error; multiplying a within-model score by a
+positive constant does not change its ranking. Ties select the smallest index.
+Evaluate the chosen candidate using the saved native coverage cost
+$c_k\in[0,1]$:
+\begin{equation}
+ R(q)=c_{\arg\min_k q_k}-\min_k c_k.
+ \label{eq:regret}
+\end{equation}
+Hold regret is $c_0-\min_k c_k$ and expected uniform regret is
+$K^{-1}\sum_k c_k-\min_k c_k$. We retain absolute best coverage and the rate
+at which every candidate has zero coverage. Zero regret on such a bank is
+uninformative about success. Forecast-minus-endpoint regret is primary only for
+DINO; both action contrasts are primary for each model. No closed-loop task
+success is asserted.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{The Physical-Editor Interpretation Remains Unqualified}
+\label{sec:measurement}
+The original editor pilot used a scorer fitted on mixed actual/predicted
+surfaces. Original-appearance losses were 71.6784 for LeWM and 520.6246 for
+DINO, against a draft scaled-loss tolerance of 0.05. Selected MLP-minus-identity
+effect losses were positive (+1.0984/+7.7819) with intervals above zero.
+Transport interaction intervals crossed zero. These scores under
+\emph{unqualified measurement} neither demonstrate physically harmful edits nor
+establish appearance-invariant editing. They are not directly comparable with
+the later actual-image-only probe experiment.
+
+\begin{table}[t]
+\caption{Discovery actual-image follow-up, original appearance/horizon 8.
+Block errors are native distance units; angles are degrees. All MLP seeds are
+retained. Paired angular-effect error is worse than zero change for every fitted
+method. Probe failures do not prove absence of physical information.}
+\label{tab:probes}
+\centering
+\small
+\input{generated/probes_rows}
+\end{table}
+
+The bounded actual-image follow-up does not rescue physical resolution
+(Table \ref{tab:probes}). Ridge block errors are approximately 29--32 units;
+all six MLP-minus-ridge block-error intervals are positive. Every fitted
+method has greater paired angular-effect error than zero angular change.
+Relative improvements in other quantities therefore do not qualify small
+physical edits. The result is bounded to this probe family and data surface,
+not an impossibility theorem.
+
+Observation limitations are substantive: 280 exact resized-RGB hash groups have
+different state labels, covering 630 of 6,912 original-appearance samples.
+The empirical single-image scaled-MSE lower bound is 3.6240. This is a bound
+for the finite labeled observation sample and that scaled loss, not a population,
+angular-distance or full-history bound. At horizon 8, 650/2,048 pusher circles
+are wholly outside the canvas. Fully-in-canvas ridge pusher errors still average
+87.20/70.93 units (LeWM/DINO). No samples are removed from primary results.
+
+\subsection{Oracle Feedback Requires an Aligned Baseline}
+\label{sec:feedbackresults}
+In discovery generated trajectories, replacing autonomous feedback with actual
+history reduces MSE from 0.3364 to 0.0279 for LeWM and from 0.7900 to 0.1555
+for DINO. Those large reductions alone do not establish useful local prediction.
+Table \ref{tab:feedback} compares oracle forecasts with local persistence.
+LeWM has a negative contrast; DINO's generated contrast remains inconclusive
+in both discovery and the fresh sample. The fresh-sample view is exploratory,
+not an additional primary-family claim.
+
+\begin{table}[t]
+\caption{Actual-history prediction minus aligned local persistence at horizon
+8. Negative favors prediction; intervals are pointwise exploratory 95\%.
+Recorded sequences overlap the pretraining distribution.}
+\label{tab:feedback}
+\centering\small
+\input{generated/feedback_rows}
+\end{table}
+
+Both models have clear local advantages on recorded training-distribution
+windows, but this does not establish generated-task or unseen-distribution
+generalization. DINO auxiliary reset changes are tiny (discovery autonomous
+reset-minus-recurrent MSE about $2.05\times10^{-5}$), and do not rescue its
+generated local-persistence contrast. We preserve the full visual/auxiliary
+control rather than attribute the gap solely to autoregressive error.
+
+\subsection{Latent Action Fidelity Replicates}
+\label{sec:replication}
+Discovery effect-error-minus-zero intervals were negative for both models,
+as were matched-minus-all-wrong assignment intervals. The fresh-root experiment
+supports all four action contrasts with the prespecified 99\% intervals
+(Table \ref{tab:primary}; Figure \ref{fig:primary}). Neither model is trained,
+selected or refitted on the fresh roots.
+
+\begin{table*}[t]
+\caption{All five primary fresh-root contrasts, original appearance/horizon 8.
+Equal-root estimates and two-sided 99\% bootstrap intervals form the fixed
+five-member family. Negative directions support the corresponding contrast.
+The DINO ranking result is inconclusive, not a successful replication.}
+\label{tab:primary}
+\centering
+\input{generated/primary_rows}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{generated/replication_primary.pdf}
+\caption{Fresh-root primary results. Both action contrasts are supported for
+each model; DINO forecast-minus-endpoint regret spans zero. Separate latent
+axes are intentional: raw magnitudes do not rank the models. All 128 roots,
+both branches and all candidates contribute; no outcome-based filtering.}
+\label{fig:primary}
+\end{figure*}
+
+Fresh-sample signed gains are 0.7649 for LeWM and 0.6644 for DINO, with
+pointwise 95\% intervals below one and no undefined bootstrap denominators.
+These ratios do not imply simply insufficient amplitude: discovery predicted/
+true effect-energy ratios were approximately 1.017/1.089. Directional and
+off-axis errors can coexist with similar total energy. More importantly,
+neither a negative fidelity contrast nor a positive signed gain identifies
+which physical component is accurately represented.
+
+\subsection{Ranking Evidence Is Limited by Both Uncertainty and Coverage}
+\label{sec:decisionresults}
+The discovery DINO forecast-minus-endpoint regret was $-0.01356$ with a
+pointwise 95\% interval below zero. The fresh estimate is $-0.00711$, but its
+primary 99\% interval spans zero. Therefore the discovery observation is not
+promoted to independently supported decision evidence. This change is not
+proof that the underlying effect is exactly zero; both sample variation and
+the stronger prespecified interval matter. We do not extend the sample or
+search for a seed that reproduces the discovery interval.
+
+\begin{table}[t]
+\caption{Fresh-root finite-bank rankings, original appearance/horizon 8.
+Regrets are native coverage-cost units. The paired forecast-minus-hold contrast
+has a pointwise exploratory 95\% interval; neither interval is wholly negative.}
+\label{tab:ranking}
+\centering\small
+\begingroup
+\setlength{\tabcolsep}{3pt}
+\input{generated/ranking_rows}
+\endgroup
+\end{table}
+
+Expected uniform regret is 0.05083 and hold regret is 0.02701 on the fresh
+banks. Forecast rankings show advantages relative to expected uniform choice,
+but neither establishes a forecast-over-hold gain under the paired interval.
+All 129/256 zero-coverage banks remain, compared with 127/256 in discovery.
+Their weak candidate support limits discrimination among decision rules. A
+redesigned reachable/contact-rich bank would change the estimand and needs a
+new prospective study, not retrospective removal of misses.
+
+\subsection{Execution Layout Has a Measurable Numerical Effect}
+\label{sec:numerics}
+The old diagnostics encoded context in batches of four then two frames and
+rolled out one candidate at a time. The follow-up encoded all six context frames
+together, future frames in batches of 32, and eight-candidate banks. Historical
+individual native errors differed by up to 0.028922/0.013884; aggregate
+native/persistence changes were at most 0.000146. We retain this discrepancy.
+
+The numerical audit fixes the first eight original manifest entries and crosses
+the observed encoding and rollout layouts, retaining actual wrapper and public
+parity calls. Each model produces 7,680 comparison rows. Unchanged same-process
+repeats are exact. Encoding differences dominate baseline observed-path changes;
+rollout-layout effects are much smaller (Table \ref{tab:numerics}). Public and
+feedback-wrapper outputs agree exactly. Metric reduction alone is zero for
+LeWM and near float32 rounding scale for DINO.
+
+\begin{table}[t]
+\caption{Maximum absolute change in horizon-8 native MSE on the fixed eight-root
+numerical sample. These are arithmetic/layout contrasts, not physical accuracy.
+Convolution IEEE is a controlled precision permission, not a new selected model.}
+\label{tab:numerics}
+\centering\small
+\input{generated/numerical_rows}
+\end{table}
+
+Changing convolution precision permission from TF32 to IEEE reduces maximum
+observed-path MSE disagreement by about 1,910-fold/238-fold. Matmul IEEE and
+cuDNN deterministic controls produce no observed change; explicit matmul TF32
+does. Benchmark-off is already set and is explicitly skipped rather than
+presented as an executed intervention. Parameters, all buffers including
+nonpersistent masks, and restored backend properties are checked. This
+establishes controlled numerical sensitivity on the bounded sample, not the
+cause of every historical maximum or improved physical prediction. Both
+forecast and encoded reference tensors can shift.
+
+\section{Discussion and Limitations}
+\label{sec:discussion}
+\paragraph{What survives the original hypothesis.}
+The physical editor-transfer claim remains unsupported because its measuring
+instrument and edited feature surface were not qualified. The independent
+positive findings concern latent action correspondence. Their coexistence with
+poor physical readouts is an empirical observation, not a theorem that latent
+fidelity precludes or guarantees physical understanding. A qualified history-
+based readout could change the interpretation without invalidating the archived
+negative result for the original single-image probes.
+
+\paragraph{Scope of decision evidence.}
+We neither prove a causal decomposition of ranking error nor demonstrate
+closed-loop control. Actual-endpoint ranking is a privileged diagnostic, not a
+deployable policy, and the limited bank may fail to offer a useful action.
+The fresh DINO ranking interval is inconclusive. Broader reachable-bank or
+closed-loop gains require a new design and cannot be inferred from latent
+effect fidelity alone.
+
+\paragraph{Generalization and multiplicity.}
+There is one environment, two specific unmatched releases, one generated bank
+distribution and a recorded pretraining-distribution sample. We cannot attribute
+differences causally to architecture or rank models using their raw latent
+errors. Follow-ups reuse inspected discovery data; only the fixed five fresh-root
+contrasts receive primary-family inference. The 99\% bootstrap intervals offer
+nominal/asymptotic multiplicity control, not guaranteed finite-sample coverage.
+All other results, including fresh feedback and appearance/horizon curves, are
+exploratory. The bounded probe search does not reproduce every original paper's
+probing protocol.
+
+\paragraph{Numerical and verification boundary.}
+Same-process repeatability does not establish portability across devices,
+caches, drivers or historical concurrent workloads. Raw latent tensors were not
+archived. Independent verification recomputes every CSV summary, candidate-
+level algebra, ranking choice, bootstrap interval and recorded physical/coverage
+quantity from saved data; it cannot regenerate all latent measurements without
+rerunning the models. Hash integrity is not a substitute for scientific validity.
+
+\section{Conclusion}
+\label{sec:conclusion}
+On two frozen PushT releases, action-effect fidelity and matched-action
+specificity replicate on a fixed independent sample, while physical-edit
+interpretation remains unqualified and a discovery ranking advantage does not
+receive independent primary-family support. A bounded backend audit further
+shows that numerical layout must be controlled even with immutable checkpoints.
+The resulting case study argues for reporting the precise level of evidence
+earned by an experiment, including failed prerequisites and inconclusive
+decisions, rather than turning predictive success into broader physical or
+control claims.

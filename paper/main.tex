@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\usepackage{icml2026}
+% Working-paper notice only: retain official margins/fonts and anonymous layout,
+% but do not falsely state that this document is under conference review.
+\makeatletter
+\renewcommand{\Notice@String}{Working draft, November 2026. ICML-style evidence
+checkpoint; not submitted or accepted.}
+\makeatother
+\usepackage{array}
+\usepackage{xurl}
+\hypersetup{pdfauthor={},pdftitle={Action Fidelity Without Physical Qualification},
+  pdfsubject={Working empirical audit manuscript; not a submitted or accepted paper},
+  pdfkeywords={world models, physical grounding, action fidelity, replication}}
+\newcommand{\DINO}{DINO (Point)}
+\newcommand{\MSE}{\operatorname{MSE}}
+\newcommand{\E}{\mathbb{E}}
+\icmltitlerunning{Action Fidelity Without Physical Qualification}
+
+\begin{document}
+\twocolumn[
+\icmltitle{Action Fidelity Without Physical Qualification:\\
+A Replicated Diagnostic Audit of Frozen PushT World Models}
+\begin{icmlauthorlist}
+\icmlauthor{Anonymous Authors}{anon}
+\end{icmlauthorlist}
+\icmlaffiliation{anon}{Anonymous affiliation}
+\icmlcorrespondingauthor{Anonymous Author}{anonymous@example.invalid}
+\icmlkeywords{world models, physical grounding, diagnostic evaluation, replication}
+\vskip 0.3in
+]
+\printAffiliationsAndNotice{}
+
+\begin{abstract}
+Action-conditioned latent predictions are often evaluated as evidence for
+physical understanding and planning, but these interpretations require different
+measurement and decision controls. We audit two frozen RGB PushT releases using
+paired simulator trajectories, actual-image probes, persistence and action
+controls, native-goal ranking, and recorded pretraining-distribution sequences.
+Bounded ridge and nonlinear probes do not achieve the physical resolution needed
+to interpret the original latent-editing experiment, while oracle-history
+prediction does not clearly outperform aligned local persistence for the audited
+DINO release on generated trajectories. A prospectively specified replication
+on 128 fresh roots supports latent action-effect fidelity and specificity for
+both checkpoints: four contrasts have negative 99\% intervals in a fixed
+five-member primary family, whereas a discovery-stage DINO ranking advantage is
+inconclusive. An eight-root numerical audit finds that encoding-layout
+disagreement is strongly reduced by a convolution-precision control, without
+establishing the cause of all historical numerical drift. These results provide
+a checkpoint-specific empirical case study in which replicated action fidelity
+coexists with unqualified physical interpretation and limited decision
+evidence, rather than a new general theory or demonstrated closed-loop gain.
+\end{abstract}
+
+\input{sections/body}
+\label{maintextend}
+
+\section*{Impact Statement}
+This work concerns evaluation methodology for simulated manipulation and frozen
+world models. Its intended benefit is more careful separation of predictive,
+physical and decision claims. Misinterpreting small latent errors or finite-bank
+regret as safe physical control could encourage unreliable deployment; our
+results do not justify deployment on real robots. We use released model and
+simulation artifacts, not human-subject data. Redistribution of checkpoints,
+datasets and upstream code remains subject to their respective terms. Scientific
+and attribution checks, author approval, applicable AI-assistance disclosure and
+the actual target venue's requirements are necessary before submission.
+
+\bibliography{references}
+\bibliographystyle{icml2026}
+\clearpage
+\appendix
+\onecolumn
+\input{sections/appendix}
+\end{document}
